@@ -19,6 +19,9 @@ const Swap = db.define('swap', {
   },
   responderServiceId: {
     type: Sequelize.INTEGER
+  },
+  location: {
+    type: Sequelize.TEXT
   }
 })
 
