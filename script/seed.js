@@ -11,6 +11,7 @@ const {
   Swap,
   Review
 } = require('../server/db/models')
+const {fakeUsers, fakeServices, fakeUserInterests} = require('./seedGenerator')
 
 async function seed() {
   await db.sync({force: true})
@@ -72,6 +73,8 @@ async function seed() {
       overallRating: Math.random() * Math.floor(5)
     })
   ])
+
+  await User.bulkCreate(fakeUsers)
 
   await Promise.all([
     ServiceCategory.create({
@@ -148,6 +151,8 @@ async function seed() {
       photo: 'algorithm.jpg'
     })
   ])
+
+  await Service.bulkCreate(fakeServices)
 
   await Promise.all([
     Swap.create({
@@ -359,6 +364,8 @@ async function seed() {
       interestId: 12
     })
   ])
+
+  await UserInterest.bulkCreate(fakeUserInterests)
 
   console.log(`seeded successfully`)
 }
