@@ -4,6 +4,7 @@ const Message = require('./message')
 const Review = require('./review')
 const Service = require('./service')
 const Swap = require('./swap')
+const UserInterest = require('./userInterest')
 const ServiceCategory = require('./serviceCategory')
 
 User.belongsToMany(User, {
@@ -19,11 +20,14 @@ User.belongsToMany(User, {
   otherId: 'swapId'
 })
 
+Message.belongsTo(User)
+User.hasMany(Message)
+
 Message.belongsTo(Swap)
 Swap.hasMany(Message)
 
-User.belongsToMany(Interest, {through: 'userInterests'})
-Interest.belongsToMany(User, {through: 'userInterests'})
+User.belongsToMany(Interest, {through: UserInterest})
+Interest.belongsToMany(User, {through: UserInterest})
 
 Service.belongsTo(User)
 User.hasMany(Service)
@@ -54,5 +58,6 @@ module.exports = {
   Review,
   Service,
   ServiceCategory,
-  Swap
+  Swap,
+  UserInterest
 }

@@ -11,10 +11,19 @@ const Service = db.define('service', {
   },
   proficiency: {
     type: Sequelize.INTEGER,
-    validate: {min: 0, max: 5}
+    validate: {
+      min: 0,
+      max: 5
+    }
   },
   remote: {
     type: Sequelize.BOOLEAN
+  },
+  imageUrl: {
+    type: Sequelize.STRING
+  },
+  videoUrl: {
+    type: Sequelize.STRING
   }
 })
 

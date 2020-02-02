@@ -24,15 +24,15 @@ const User = db.define('user', {
     type: Sequelize.INTEGER
   },
   distancePrefWeight: {
-    type: Sequelize.INTEGER,
+    type: Sequelize.FLOAT,
     defaultValue: 20
     //unit of measure = miles
   },
   sharedInterestWeight: {
-    type: Sequelize.INTEGER,
-    defaultValue: 5,
-    validate: {min: 0, max: 10}
-    //out of 10? we can change this
+    type: Sequelize.FLOAT,
+    defaultValue: 0.5,
+    validate: {min: 0, max: 1}
+    //we can change this
   },
   email: {
     type: Sequelize.STRING,
