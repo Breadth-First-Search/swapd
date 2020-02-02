@@ -56,4 +56,11 @@ const fakeUsers = generateUsers(totalUsersToFake)
 const fakeServices = generateServices(totalUsersToFake)
 const fakeUserInterests = generateUserInterests(totalUsersToFake)
 
-module.exports = {fakeUsers, fakeServices, fakeUserInterests}
+module.exports = {
+  fakeUsers,
+  fakeServices,
+  fakeUserInterests,
+  generateUsers,
+  generateServices,
+  generateUserInterests
+}
