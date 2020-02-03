@@ -78,7 +78,6 @@ const interestsList = [
   'Putting my savings in Bitcoin',
   'being cool',
   'Being Aggressive',
-  'Having a girlfriend',
   'Chewing Tobacco',
   'Skoal',
   'Razor Scooters',

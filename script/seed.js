@@ -45,6 +45,7 @@ function interestJoinTableHelper(users) {
 }
 
 async function seed() {
+  //why is there another db force true here
   await db.sync({force: true})
   console.log('db synced!')
 
