@@ -74,6 +74,19 @@ User.beforeCreate(function(user) {
   }
 })
 
+//same function above but for bulkCreate
+User.beforeBulkCreate(function(user) {
+  user.forEach(eachUser => {
+    if (eachUser.dataValues.zipCode) {
+      const zip = zipcodes.lookup(eachUser.dataValues.zipCode)
+      if (zip) {
+        eachUser.dataValues.latitude = zip.latitude
+        eachUser.dataValues.longitude = zip.longitude
+      }
+    }
+  })
+})
+
 module.exports = User
 
 /**
