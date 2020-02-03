@@ -28,10 +28,10 @@ const User = db.define('user', {
     }
   },
   latitude: {
-    type: Sequelize.INTEGER
+    type: Sequelize.FLOAT
   },
   longitude: {
-    type: Sequelize.INTEGER
+    type: Sequelize.FLOAT
   },
   distancePrefWeight: {
     type: Sequelize.FLOAT,

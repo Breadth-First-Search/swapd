@@ -11,7 +11,38 @@ const {
   Swap,
   Review
 } = require('../server/db/models')
-const {fakeUsers, fakeServices, fakeUserInterests} = require('./seedGenerator')
+const {fakeUsers, fakeServices} = require('./seedGenerator')
+const {interestsList} = require('../server/algorithm')
+
+//returns an array of objects to bulkCreate interests
+function interestHelper(interests) {
+  return interests.map(interest => {
+    return {name: interest}
+  })
+}
+
+//returns an array of objects to bulkCreate userInterests
+function interestJoinTableHelper(users) {
+  const allJoins = []
+  for (let j = 1; j <= users.length; j++) {
+    let seenInterests = new Set()
+    for (
+      let i = 0;
+      i < Math.floor(Math.random() * interestsList.length / 3);
+      i++
+    ) {
+      let interestId = 1 + Math.floor(Math.random() * interestsList.length)
+      if (!seenInterests.has(interestId)) {
+        allJoins.push({
+          userId: j,
+          interestId: interestId
+        })
+      }
+      seenInterests.add(interestId)
+    }
+  }
+  return allJoins
+}
 
 async function seed() {
   await db.sync({force: true})
@@ -27,8 +58,6 @@ async function seed() {
       password: '123',
       bio: 'Always be coding and dancing. Looking for a dance instructor.',
       zipCode: 10013,
-      distancePrefWeight: Math.random() * Math.floor(50),
-      sharedInterestWeight: Math.random() * Math.floor(1),
       overallRating: Math.random() * Math.floor(5)
     }),
     User.create({
@@ -41,8 +70,6 @@ async function seed() {
       bio:
         'Loves to do algo problems. Can solve them in my sleep. Looking for expert algo partner.',
       zipCode: 11210,
-      distancePrefWeight: Math.random() * Math.floor(50),
-      sharedInterestWeight: Math.random() * Math.floor(1),
       overallRating: Math.random() * Math.floor(5)
     }),
     User.create({
@@ -54,8 +81,6 @@ async function seed() {
       password: '123',
       bio: 'Unsure of how to grow out my hair. Looking for stylist.',
       zipCode: 10016,
-      distancePrefWeight: Math.random() * Math.floor(50),
-      sharedInterestWeight: Math.random() * Math.floor(1),
       overallRating: Math.random() * Math.floor(5)
     }),
     User.create({
@@ -68,13 +93,11 @@ async function seed() {
       bio:
         'A husband and father taking on the challenge of bootcamp to learn to code. Looking for experts to teach me more about Javascript.',
       zipCode: 11231,
-      distancePrefWeight: Math.random() * Math.floor(50),
-      sharedInterestWeight: Math.random() * Math.floor(1),
       overallRating: Math.random() * Math.floor(5)
     })
   ])
 
-  await User.bulkCreate(fakeUsers)
+  const users = await User.bulkCreate(fakeUsers)
 
   await Promise.all([
     ServiceCategory.create({
@@ -259,113 +282,8 @@ async function seed() {
     })
   ])
 
-  await Promise.all([
-    Interest.create({
-      id: 1,
-      name: 'Coding'
-    }),
-    Interest.create({
-      id: 2,
-      name: 'Dancing'
-    }),
-    Interest.create({
-      id: 3,
-      name: 'Rock Climbing'
-    }),
-    Interest.create({
-      id: 4,
-      name: 'Driving'
-    }),
-    Interest.create({
-      id: 5,
-      name: 'Learning'
-    }),
-    Interest.create({
-      id: 6,
-      name: 'Traveling'
-    }),
-    Interest.create({
-      id: 7,
-      name: 'Design'
-    }),
-    Interest.create({
-      id: 8,
-      name: 'Video Game'
-    }),
-    Interest.create({
-      id: 9,
-      name: 'Singing'
-    }),
-    Interest.create({
-      id: 10,
-      name: 'Swimming'
-    }),
-    Interest.create({
-      id: 11,
-      name: 'Machine Learning'
-    }),
-    Interest.create({
-      id: 12,
-      name: 'Painting'
-    }),
-    Interest.create({
-      id: 13,
-      name: 'Dating'
-    })
-  ])
-
-  await Promise.all([
-    UserInterest.create({
-      userId: 1,
-      interestId: 1
-    }),
-    UserInterest.create({
-      userId: 1,
-      interestId: 2
-    }),
-    UserInterest.create({
-      userId: 1,
-      interestId: 6
-    }),
-    UserInterest.create({
-      userId: 2,
-      interestId: 1
-    }),
-    UserInterest.create({
-      userId: 2,
-      interestId: 8
-    }),
-    UserInterest.create({
-      userId: 2,
-      interestId: 11
-    }),
-    UserInterest.create({
-      userId: 3,
-      interestId: 1
-    }),
-    UserInterest.create({
-      userId: 3,
-      interestId: 11
-    }),
-    UserInterest.create({
-      userId: 3,
-      interestId: 13
-    }),
-    UserInterest.create({
-      userId: 4,
-      interestId: 1
-    }),
-    UserInterest.create({
-      userId: 4,
-      interestId: 9
-    }),
-    UserInterest.create({
-      userId: 4,
-      interestId: 12
-    })
-  ])
-
-  await UserInterest.bulkCreate(fakeUserInterests)
+  await Interest.bulkCreate(interestHelper(interestsList))
+  await UserInterest.bulkCreate(interestJoinTableHelper(users))
 
   console.log(`seeded successfully`)
 }

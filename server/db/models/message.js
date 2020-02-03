@@ -10,12 +10,12 @@ const Message = db.define('message', {
   },
   responderId: {
     type: Sequelize.INTEGER
-  },
-  time: {
-    type: 'TIMESTAMP',
-    defaultValue: Sequelize.literal('CURRENT-TIMESTAMP'),
-    allowNull: false
   }
+  // time: {
+  //   type: 'TIMESTAMP',
+  //   defaultValue: Sequelize.literal('CURRENT-TIMESTAMP'),
+  //   allowNull: false
+  // }
 })
 
 module.exports = Message
