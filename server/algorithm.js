@@ -281,7 +281,7 @@ function getScoreFromSkillRating(skillRating) {
 
 // rewards users for having a rating above 4 and penalizes them for having a rating below 2
 function getScoreFromOverallRating(overallRating) {
-  if (overallRating <= 2) return -1 * overallRating
+  if (overallRating <= 2) return overallRating - 2.3
   if (overallRating >= 4) return overallRating * 1.5
   return overallRating
 }
@@ -320,6 +320,7 @@ let exampleUser = userValues[0]
 // The custom sort is expecting an integer. if the number is negative,
 // the sort will put the first argument (userA) first, else it will
 // put the second argument first
+
 
 // console.log(`==========================> Before sorting: ${util.inspect(exampleUser, {showHidden: false, depth: null})} <=======================`);
 
