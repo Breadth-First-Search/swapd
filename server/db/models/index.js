@@ -42,6 +42,12 @@ Service.hasMany(Review)
 Exchange.belongsTo(Swap)
 Swap.hasMany(Exchange)
 
+Review.beforeCreate(async (review, options) => {
+  //before adding the review. calculate the new average for the specific skill
+  //rating. then calculate the new average for the overall rating. then update on
+  //the user model and the service model.
+  // await User.findByPk()
+})
 /**
  * If we had any associations to make, this would be a great place to put them!
  * ex. if we had another model called BlogPost, we might say:
