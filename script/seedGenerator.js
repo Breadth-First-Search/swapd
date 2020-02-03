@@ -16,7 +16,7 @@ function generateUsers(num) {
       phoneNumber: casual.phone,
       password: '123',
       bio: casual.sentences(2),
-      zipCode: casual.zip(5),
+      zipCode: Number(casual.zip(5)),
       overallRating: 5 * Math.random()
     })
   }
