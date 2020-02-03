@@ -1,6 +1,6 @@
 const util = require('util')
 
-const interestsList = (interests = [
+const interestsList = [
   'Baseball',
   'Cooking',
   'Pottery',
@@ -97,14 +97,12 @@ const interestsList = (interests = [
   'Glassblowing',
   'Mowing the lawn',
   'Taking out the trash',
-  'The NRA',
   'Drawing',
   'Living In The Darkness(Shadows)',
   'Teleworking',
   'The American Flag',
   'Philanthropy',
   'Acrobatics',
-  'Wanting to be a teacher',
   'Building Furniture',
   'Having a trust fund',
   'Shopping',
@@ -133,7 +131,6 @@ const interestsList = (interests = [
   'Kung Fu-Movies',
   'Psychology',
   'Comedy',
-  'Soccer',
   'History',
   'WW2',
   'The American Civil War',
@@ -162,7 +159,6 @@ const interestsList = (interests = [
   'Gossiping',
   'Vibing',
   'White Noise',
-  'Political Correctness',
   'Chilling',
   'Hanging out',
   'Listening to music',
@@ -185,6 +181,9 @@ const interestsList = (interests = [
   'Body Building',
   'Science Experiments',
   'Learning languages',
+  'Boxing',
+  'Choir',
+  'Soccer',
   'Checking stocks and having no insight',
   'Owning a Start-Up',
   'Debating',
@@ -198,8 +197,6 @@ const interestsList = (interests = [
   'Drinking coffee',
   'Making coffee',
   'Selling used goods',
-  'Pro Life',
-  'Pro Choice',
   'Politics',
   'Banking',
   'Doing my taxes',
@@ -218,7 +215,7 @@ const interestsList = (interests = [
   'Working on my resume',
   'Leaving work early',
   'Non-matching socks'
-])
+]
 
 function generateRandomUsers(interests = interestsList) {
   const allUsers = []
@@ -324,12 +321,8 @@ let exampleUser = userValues[0]
 // the sort will put the first argument (userA) first, else it will
 // put the second argument first
 
-console.log(
-  `==========================> Before sorting: ${util.inspect(exampleUser, {
-    showHidden: false,
-    depth: null
-  })} <=======================`
-)
+
+// console.log(`==========================> Before sorting: ${util.inspect(exampleUser, {showHidden: false, depth: null})} <=======================`);
 
 userValues.sort((userA, userB) => {
   let numIntersectionsA = getScoreFromInterests(
@@ -362,6 +355,8 @@ userValues.sort((userA, userB) => {
 // const mapVals = userValues.map(elem => {
 // 	return {interests: elem.interests, intersections: elem.intersections}
 // });
-console.log(
-  `After sorting: ${util.inspect(userValues, {showHidden: false, depth: null})}`
-)
+// console.log(`After sorting: ${util.inspect(userValues, {showHidden: false, depth: null})}`);
+
+module.exports = {
+  interestsList
+}

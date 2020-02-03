@@ -1,6 +1,7 @@
 const crypto = require('crypto')
 const Sequelize = require('sequelize')
 const db = require('../db')
+const zipcodes = require('zipcodes')
 
 const User = db.define('user', {
   firstName: {
@@ -21,18 +22,21 @@ const User = db.define('user', {
     defaultValue: 'https://www.asbmb.org/img/content-images/generic-user.jpg'
   },
   zipCode: {
-    type: Sequelize.INTEGER
+    type: Sequelize.INTEGER,
+    validate: {
+      len: [5]
+    }
+  },
+  latitude: {
+    type: Sequelize.FLOAT
+  },
+  longitude: {
+    type: Sequelize.FLOAT
   },
   distancePrefWeight: {
     type: Sequelize.FLOAT,
     defaultValue: 20
     //unit of measure = miles
-  },
-  sharedInterestWeight: {
-    type: Sequelize.FLOAT,
-    defaultValue: 0.5,
-    validate: {min: 0, max: 1}
-    //we can change this
   },
   email: {
     type: Sequelize.STRING,
@@ -57,6 +61,30 @@ const User = db.define('user', {
   googleId: {
     type: Sequelize.STRING
   }
+})
+//this sets long and lat based on zip.
+//may be a better way to make sure a correct zip was entered
+User.beforeCreate(function(user) {
+  if (user.zipCode) {
+    const zip = zipcodes.lookup(user.zipCode)
+    if (zip.latitude) {
+      user.latitude = zip.latitude
+      user.longitude = zip.longitude
+    }
+  }
+})
+
+//same function above but for bulkCreate
+User.beforeBulkCreate(function(user) {
+  user.forEach(eachUser => {
+    if (eachUser.dataValues.zipCode) {
+      const zip = zipcodes.lookup(eachUser.dataValues.zipCode)
+      if (zip) {
+        eachUser.dataValues.latitude = zip.latitude
+        eachUser.dataValues.longitude = zip.longitude
+      }
+    }
+  })
 })
 
 module.exports = User

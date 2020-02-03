@@ -5,6 +5,7 @@ const Review = require('./review')
 const Service = require('./service')
 const Swap = require('./swap')
 const UserInterest = require('./userInterest')
+const Exchange = require('./exchange')
 const ServiceCategory = require('./serviceCategory')
 
 User.belongsToMany(User, {
@@ -37,6 +38,9 @@ ServiceCategory.hasMany(Service)
 
 Review.belongsTo(Service)
 Service.hasMany(Review)
+
+Exchange.belongsTo(Swap)
+Swap.hasMany(Exchange)
 
 /**
  * If we had any associations to make, this would be a great place to put them!
