@@ -3,10 +3,40 @@ const Sequelize = require('sequelize')
 const db = require('../db')
 
 const User = db.define('user', {
+  firstName: {
+    type: Sequelize.STRING
+  },
+  lastName: {
+    type: Sequelize.STRING
+  },
+  phoneNumber: {
+    type: Sequelize.STRING
+    //we can be more specific about how we store this
+  },
+  bio: {
+    type: Sequelize.TEXT
+  },
+  photo: {
+    type: Sequelize.STRING,
+    defaultValue: 'https://www.asbmb.org/img/content-images/generic-user.jpg'
+  },
+  zipCode: {
+    type: Sequelize.INTEGER
+  },
+  distancePrefWeight: {
+    type: Sequelize.FLOAT,
+    defaultValue: 20
+    //unit of measure = miles
+  },
+  sharedInterestWeight: {
+    type: Sequelize.FLOAT,
+    defaultValue: 0.5,
+    validate: {min: 0, max: 1}
+    //we can change this
+  },
   email: {
     type: Sequelize.STRING,
-    unique: true,
-    allowNull: false
+    unique: true
   },
   password: {
     type: Sequelize.STRING,

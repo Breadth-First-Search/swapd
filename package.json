@@ -1,5 +1,5 @@
 {
-  "name": "boilermaker",
+  "name": "swapd",
   "version": "2.0.0",
   "description": "Some boilerplate code to get you started - get shakin'!",
   "engines": {
@@ -42,6 +42,7 @@
   "license": "MIT",
   "dependencies": {
     "axios": "^0.19.0",
+    "casual": "^1.6.2",
     "compression": "^1.7.3",
     "connect-session-sequelize": "^6.0.0",
     "express": "^4.16.4",
@@ -61,6 +62,8 @@
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.3.0",
     "sequelize": "^5.15.1",
+    "sinon": "^8.1.1",
+    "sinon-chai": "^3.4.0",
     "socket.io": "^2.2.0"
   },
   "devDependencies": {
