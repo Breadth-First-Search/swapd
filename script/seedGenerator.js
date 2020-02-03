@@ -17,9 +17,7 @@ function generateUsers(num) {
       password: '123',
       bio: casual.sentences(2),
       zipCode: casual.zip(5),
-      distancePrefWeight: Math.random() * Math.floor(50),
-      sharedInterestWeight: Math.random() * Math.floor(1),
-      overallRating: Math.random() * Math.floor(5)
+      overallRating: 5 * Math.random()
     })
   }
   return users
@@ -41,26 +39,12 @@ function generateServices(num) {
   return services
 }
 
-function generateUserInterests(num) {
-  const userInterests = []
-  for (let i = 5; i < num + 5; i++) {
-    userInterests.push({
-      userId: i,
-      interestId: Math.ceil(Math.random() * 13)
-    })
-  }
-  return userInterests
-}
-
 const fakeUsers = generateUsers(totalUsersToFake)
 const fakeServices = generateServices(totalUsersToFake)
-const fakeUserInterests = generateUserInterests(totalUsersToFake)
 
 module.exports = {
   fakeUsers,
   fakeServices,
-  fakeUserInterests,
   generateUsers,
-  generateServices,
-  generateUserInterests
+  generateServices
 }
