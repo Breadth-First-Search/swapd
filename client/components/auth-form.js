@@ -13,6 +13,47 @@ const AuthForm = props => {
   return (
     <div>
       <form onSubmit={handleSubmit} name={name}>
+        {name === 'signup' && (
+          <div>
+            <div>
+              <label htmlFor="firstName">
+                <small>First Name</small>
+              </label>
+              <input name="firstName" type="text" />
+            </div>
+            <div>
+              <label htmlFor="lastName">
+                <small>Last Name</small>
+              </label>
+              <input name="lastName" type="text" />
+            </div>
+            <div>
+              <label htmlFor="phoneNumber">
+                <small>Phone Number</small>
+              </label>
+              <input name="phoneNumber" type="text" />
+            </div>
+            <div>
+              <label htmlFor="bio">
+                <small>Bio</small>
+              </label>
+              <input name="bio" type="text" />
+            </div>
+            {/* photo has no functionality */}
+            <div>
+              <label htmlFor="photo">
+                <small>Photo</small>
+              </label>
+              <input name="photo" type="file" />
+            </div>
+            <div>
+              <label htmlFor="zipCode">
+                <small>zipCode</small>
+              </label>
+              <input name="zipCode" type="number" />
+            </div>
+          </div>
+        )}
         <div>
           <label htmlFor="email">
             <small>Email</small>
@@ -30,7 +71,7 @@ const AuthForm = props => {
         </div>
         {error && error.response && <div> {error.response.data} </div>}
       </form>
-      <Oauth />
+      <Oauth name={name} />
       {/* <a href="/auth/google">{displayName} with Google</a> */}
     </div>
   )
@@ -64,9 +105,19 @@ const mapDispatch = dispatch => {
     handleSubmit(evt) {
       evt.preventDefault()
       const formName = evt.target.name
-      const email = evt.target.email.value
-      const password = evt.target.password.value
-      dispatch(auth(email, password, formName))
+      const userInfo = {
+        email: evt.target.email.value,
+        password: evt.target.password.value
+      }
+
+      if (formName === 'signup') {
+        userInfo.firstName = evt.target.firstName.value
+        userInfo.lastName = evt.target.lastName.value
+        userInfo.phoneNumber = evt.target.phoneNumber.value
+        userInfo.zipCode = evt.target.zipCode.value
+        userInfo.bio = evt.target.bio.value
+      }
+      dispatch(auth(userInfo, formName))
     }
   }
 }
