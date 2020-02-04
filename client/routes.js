@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {withRouter, Route, Switch} from 'react-router-dom'
 import PropTypes from 'prop-types'
+import UserProfile from './components/user-profile'
 import {Login, Signup, UserHome, SearchResults} from './components'
 import Oauth from './components/o-auth'
 import {me} from './store'
@@ -28,6 +29,7 @@ class Routes extends Component {
           <Switch>
             {/* Routes placed here are only available after logging in */}
             <Route exact path="/home" component={UserHome} />
+            <Route exact path="/user-profile" component={UserProfile} />
             <Route
               exact
               path="/search/:serviceName"

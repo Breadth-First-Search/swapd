@@ -29,6 +29,16 @@ router.get('/', async (req, res, next) => {
   }
 })
 
+router.get('/:userId', async (req, res, next) => {
+  try {
+    const id = Number(req.params.userId)
+
+    const userWithServices = await User.findOne({
+      where: {id: id},
+      include: [{model: Service}]
+    })
+    res.json(userWithServices)
+
 router.get('/top', async (req, res, next) => {
   try {
     const topUsers = await User.findAll({
