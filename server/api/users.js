@@ -28,6 +28,20 @@ router.get('/', async (req, res, next) => {
   }
 })
 
+router.get('/:userId', async (req, res, next) => {
+  try {
+    const id = Number(req.params.userId)
+
+    const userWithServices = await User.findOne({
+      where: {id: id},
+      include: [{model: Service}]
+    })
+    res.json(userWithServices)
+  } catch (err) {
+    next(err)
+  }
+})
+
 // get all users who have a specified service, eager loading their interests
 // to be used in search page
 router.get('/services/:serviceName/', async (req, res, next) => {

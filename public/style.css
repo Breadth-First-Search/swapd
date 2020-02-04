@@ -51,3 +51,7 @@ nav a {
   border: 0px;
   margin: 0px;
 }
+
+.profilePhoto {
+  height: 180px;
+}

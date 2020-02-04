@@ -8,7 +8,7 @@ const GOT_INTERESTS = 'GOT_INTERESTS'
 const GOT_USER_INTERESTS = 'GOT_USER_INTERESTS'
 const WRITE_INTEREST = 'WRITE_INTEREST'
 const GOT_NEW_INTEREST_FROM_SERVER = 'GOT_NEW_INTEREST_FROM_SERVER'
-const ADDED_USER_INTEREST = ''
+const ADDED_USER_INTEREST = 'DDED_USER_INTEREST'
 
 /**
  * INITIAL STATE
@@ -46,7 +46,7 @@ export const postNewInterest = interest => {
   return async dispatch => {
     const {data} = await axios.post('/api/interests', interest)
     dispatch(gotNewInterestFromServer(data))
-    socket.emit('new-message', data)
+    socket.emit('new-interest', data)
   }
 }
 

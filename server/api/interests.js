@@ -14,7 +14,6 @@ router.get('/', async (req, res, next) => {
 })
 
 //route to add interests
-
 router.post('/', async (req, res, next) => {
   try {
     const newInterest = await Interest.create(req.body)
