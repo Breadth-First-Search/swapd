@@ -19,3 +19,35 @@ form div {
   margin: 1em;
   display: inline-block;
 }
+
+#navbarcontainer {
+  display: flex;
+  justify-content: space-between;
+}
+
+#logocontainer {
+  display: flex;
+}
+
+#logocontainer a {
+  display: flex;
+}
+
+#swapdlogo {
+  width: 18%;
+}
+
+nav {
+  position: sticky;
+}
+
+nav a {
+  white-space: nowrap;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  font-size: 12px;
+  padding: 0px;
+  border: 0px;
+  margin: 0px;
+}
