@@ -45,6 +45,10 @@ const User = db.define('user', {
   overallRating: {
     type: Sequelize.FLOAT
   },
+  reviewCount: {
+    type: Sequelize.INTEGER,
+    defaultValue: 0
+  },
   password: {
     type: Sequelize.STRING,
     // Making `.password` act like a func hides it when serializing to JSON.
