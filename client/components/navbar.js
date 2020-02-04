@@ -44,11 +44,7 @@ const Navbar = props => {
               <Link to="/">
                 <img id="swapdlogo" src="/swapd.png" />
               </Link>
-              <form
-                onSubmit={() =>
-                  history.push(`/search/${search}/?searcherId=${props.user.id}`)
-                }
-              >
+              <form onSubmit={() => history.push(`/search/${search}`)}>
                 <InputBase
                   placeholder="Search…"
                   className={classes.inputInput}

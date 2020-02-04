@@ -23,11 +23,16 @@ class Routes extends Component {
         <Route exact path="/login" component={Login} />
         <Route exact path="/signup" component={Signup} />
         <Route exact path="/auth/google" component={Oauth} />
-        <Route exact path="/search/:serviceName" component={SearchResults} />
+        {/* <Route exact path="/search/:serviceName" component={SearchResults} /> */}
         {isLoggedIn && (
           <Switch>
             {/* Routes placed here are only available after logging in */}
             <Route exact path="/home" component={UserHome} />
+            <Route
+              exact
+              path="/search/:serviceName"
+              component={SearchResults}
+            />
           </Switch>
         )}
         {/* Displays our Login component as a fallback */}

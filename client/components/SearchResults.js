@@ -12,12 +12,12 @@ class SearchResults extends React.Component {
   }
 
   async componentDidMount() {
-    console.log(this.props)
+    console.log(this.props.user.id)
     try {
       let results = await axios.get(
         `/api/users/services/${
           this.props.match.params.serviceName
-        }/?searcherId=4`
+        }/?searcherId=${this.props.user.id}`
       )
       this.setState({
         results: results.data
