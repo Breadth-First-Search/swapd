@@ -38,6 +38,10 @@ router.get('/:userId', async (req, res, next) => {
       include: [{model: Service}]
     })
     res.json(userWithServices)
+  } catch (err) {
+    console.error(err)
+  }
+})
 
 router.get('/top', async (req, res, next) => {
   try {
@@ -45,6 +49,7 @@ router.get('/top', async (req, res, next) => {
       limit: 10,
       order: [[Sequelize.col('overallRating'), 'DESC']]
     })
+    res.json(topUsers)
   } catch (err) {
     next(err)
   }
