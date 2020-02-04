@@ -45,12 +45,12 @@ function interestJoinTableHelper(users) {
 }
 
 async function seed() {
+  //why is there another db force true here
   await db.sync({force: true})
   console.log('db synced!')
 
   await Promise.all([
     User.create({
-      id: 1,
       firstName: 'Ming',
       lastName: 'Juan',
       email: 'ming@email.com',
@@ -61,7 +61,6 @@ async function seed() {
       overallRating: Math.random() * Math.floor(5)
     }),
     User.create({
-      id: 2,
       firstName: 'Jasen',
       lastName: 'Chan',
       email: 'jasen@email.com',
@@ -73,7 +72,6 @@ async function seed() {
       overallRating: Math.random() * Math.floor(5)
     }),
     User.create({
-      id: 3,
       firstName: 'Leo',
       lastName: 'Yoshinaga',
       email: 'leo@email.com',
@@ -84,7 +82,6 @@ async function seed() {
       overallRating: Math.random() * Math.floor(5)
     }),
     User.create({
-      id: 4,
       firstName: 'Erik',
       lastName: 'Jenson',
       email: 'erik@email.com',
@@ -132,7 +129,6 @@ async function seed() {
 
   await Promise.all([
     Service.create({
-      id: 1,
       serviceCategoryId: 2,
       userId: 1,
       name: 'Dance Lessons',
@@ -142,7 +138,6 @@ async function seed() {
       photo: 'mingdance.png'
     }),
     Service.create({
-      id: 2,
       serviceCategoryId: 1,
       userId: 2,
       name: 'Algo Practice',
@@ -152,7 +147,6 @@ async function seed() {
       photo: 'algorithm.jpg'
     }),
     Service.create({
-      id: 3,
       serviceCategoryId: 1,
       userId: 3,
       name: 'Data Structures',
@@ -163,7 +157,6 @@ async function seed() {
       photo: 'algorithm.jpg'
     }),
     Service.create({
-      id: 4,
       serviceCategoryId: 2,
       userId: 4,
       name: 'Dad Hacks',
@@ -179,7 +172,6 @@ async function seed() {
 
   await Promise.all([
     Swap.create({
-      id: 1,
       swapDate: new Date(2020, 1, 1),
       swapStatus: 'completed',
       requsterId: 1,
@@ -189,7 +181,6 @@ async function seed() {
       location: 'Fullstack Academy'
     }),
     Swap.create({
-      id: 2,
       swapDate: new Date(2020, 2, 1),
       swapStatus: 'pending',
       requsterId: 3,
@@ -202,38 +193,32 @@ async function seed() {
 
   await Promise.all([
     Message.create({
-      id: 1,
       swapId: 1,
       text: 'Hello',
       userId: 1
     }),
     Message.create({
-      id: 2,
       swapId: 1,
       text: 'Hi',
       userId: 2
     }),
     Message.create({
-      id: 3,
       swapId: 1,
       text:
         'Would love to practice on algo problems with you. Would you like to learn dancing?',
       userId: 1
     }),
     Message.create({
-      id: 4,
       swapId: 1,
       text: 'I definitely would love to.',
       userId: 2
     }),
     Message.create({
-      id: 5,
       swapId: 1,
       text: 'Cool is Feb 2nd at 3pm at Fullstack okay?',
       userId: 1
     }),
     Message.create({
-      id: 6,
       swapId: 1,
       text: 'Sounds good to me',
       userId: 2
@@ -242,40 +227,34 @@ async function seed() {
 
   await Promise.all([
     Review.create({
-      id: 1,
       rating: 5,
       comment: 'The best dance lessons ever',
       serviceId: 1
     }),
     Review.create({
-      id: 2,
       rating: 3,
       comment:
         'Eh I am okay with the service, great guy but nothing new for me.',
       serviceId: 1
     }),
     Review.create({
-      id: 3,
       rating: 1,
       comment: 'Absolutely garbage.',
       serviceId: 1
     }),
     Review.create({
-      id: 4,
       rating: 2,
       comment:
         'Too hard for me, wished the description of the service was more specific on what to expect.',
       serviceId: 2
     }),
     Review.create({
-      id: 5,
       rating: 5,
       comment:
         'Loved the experience! Jasen is incredibly good at algos and would swap with him again!',
       serviceId: 2
     }),
     Review.create({
-      id: 6,
       rating: 4,
       comment: 'Learned a lot from this swap. Wished it was longer though.',
       serviceId: 2

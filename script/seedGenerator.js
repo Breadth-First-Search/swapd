@@ -64,7 +64,6 @@ function generateUsers(num) {
     const firstName = casual.first_name
     const lastName = casual.last_name
     users.push({
-      id: i,
       firstName,
       lastName,
       email: `${firstName + lastName}@email.com`,
@@ -82,7 +81,6 @@ function generateServices(num) {
   const services = []
   for (let i = 5; i < num * 3 + 5; i++) {
     services.push({
-      id: i,
       serviceCategoryId: Math.ceil(Math.random() * 7),
       userId: 1 + Math.floor(Math.random() * (num + 4)),
       name: servicesList[Math.floor(Math.random() * servicesList.length)],
