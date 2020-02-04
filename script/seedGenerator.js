@@ -80,15 +80,16 @@ function generateUsers(num) {
 
 function generateServices(num) {
   const services = []
-  for (let i = 5; i < num + 5; i++) {
+  for (let i = 5; i < num * 3 + 5; i++) {
     services.push({
       id: i,
       serviceCategoryId: Math.ceil(Math.random() * 7),
-      userId: i,
-      name: servicesList[Math.floor(Math.random * servicesList.length)],
+      userId: 1 + Math.floor(Math.random() * (num + 4)),
+      name: servicesList[Math.floor(Math.random() * servicesList.length)],
       description: casual.text,
       proficiency: Math.ceil(Math.random() * 3),
-      remote: casual.coin_flip
+      remote: casual.coin_flip,
+      serviceRating: 5 * Math.random()
     })
   }
   return services

@@ -3,8 +3,7 @@ const db = require('../db')
 
 const Service = db.define('service', {
   name: {
-    type: Sequelize.STRING,
-    unique: true
+    type: Sequelize.STRING
   },
   description: {
     type: Sequelize.TEXT
@@ -24,6 +23,9 @@ const Service = db.define('service', {
   },
   videoUrl: {
     type: Sequelize.STRING
+  },
+  serviceRating: {
+    type: Sequelize.FLOAT
   }
 })
 
