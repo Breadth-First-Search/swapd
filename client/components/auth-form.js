@@ -2,6 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
 import {auth} from '../store'
+import Oauth from './o-auth'
 
 /**
  * COMPONENT
@@ -29,7 +30,8 @@ const AuthForm = props => {
         </div>
         {error && error.response && <div> {error.response.data} </div>}
       </form>
-      <a href="/auth/google">{displayName} with Google</a>
+      <Oauth />
+      {/* <a href="/auth/google">{displayName} with Google</a> */}
     </div>
   )
 }
