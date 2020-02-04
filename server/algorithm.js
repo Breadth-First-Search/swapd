@@ -271,6 +271,32 @@ function getScoreFromInterests(myInter, theirInter) {
   return intersection
 }
 
+function userInterestsToSet(interests) {
+  const ret = new Set()
+
+  interests.forEach(interest => {
+    ret.add(interest.dataValues.interestId)
+  })
+
+  return ret
+}
+
+function getScoreFromInterestsObject(myInterSet, theirInter) {
+  let intersection = 0
+
+  // console.log(`AJSFKDAJFDSKFJDKFKLFJDLSKJFKSFJKLSDJF ${myInterSet}`)
+  // console.log(theirInter)
+  theirInter.forEach(interestObj => {
+    intersection += myInterSet.has(interestObj.id) ? 1 : 0
+  })
+
+  intersection = 0.5 + Math.sqrt(3 * intersection)
+
+  if (intersection === 0.5) return -1.25
+
+  return intersection
+}
+
 //rewards users for having a rating of four or above, does the opposite
 //for users with a rating of two or below.
 function getScoreFromSkillRating(skillRating) {
@@ -321,7 +347,6 @@ let exampleUser = userValues[0]
 // the sort will put the first argument (userA) first, else it will
 // put the second argument first
 
-
 // console.log(`==========================> Before sorting: ${util.inspect(exampleUser, {showHidden: false, depth: null})} <=======================`);
 
 userValues.sort((userA, userB) => {
@@ -358,5 +383,12 @@ userValues.sort((userA, userB) => {
 // console.log(`After sorting: ${util.inspect(userValues, {showHidden: false, depth: null})}`);
 
 module.exports = {
-  interestsList
+  interestsList,
+  userInterestsToSet,
+  getScoreFromInterests,
+  getScoreFromOverallRating,
+  getScoreFromInterestsObject,
+  getScoreFromSkillRating,
+  getScoreFromLocation,
+  prefs
 }
