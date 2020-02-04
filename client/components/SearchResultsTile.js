@@ -9,7 +9,7 @@ export default class SearchResultsTile extends React.Component {
 
   render() {
     let result = this.props.result
-
+    console.log(result)
     return (
       <div>
         <img src={result.photo} />
