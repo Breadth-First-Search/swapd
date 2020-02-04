@@ -27,6 +27,7 @@ form div {
 
 #logocontainer {
   display: flex;
+  justify-content: flex-start;
 }
 
 #logocontainer a {

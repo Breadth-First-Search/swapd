@@ -1,4 +1,5 @@
 const router = require('express').Router()
+const Sequelize = require('sequelize')
 const {User, Interest, UserInterest, Service} = require('../db/models')
 const {
   interestsList,
@@ -37,6 +38,13 @@ router.get('/:userId', async (req, res, next) => {
       include: [{model: Service}]
     })
     res.json(userWithServices)
+
+router.get('/top', async (req, res, next) => {
+  try {
+    const topUsers = await User.findAll({
+      limit: 10,
+      order: [[Sequelize.col('overallRating'), 'DESC']]
+    })
   } catch (err) {
     next(err)
   }

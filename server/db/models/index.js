@@ -43,10 +43,40 @@ Exchange.belongsTo(Swap)
 Swap.hasMany(Exchange)
 
 Review.beforeCreate(async (review, options) => {
+  const reviewedService = await Service.findByPk(review.serviceId)
+
+  const reviewedUser = await User.findByPk(reviewedService.userId)
+  console.log('reviewed user count', reviewedUser.reviewCount)
+  await reviewedUser.increment('reviewCount', {by: 1})
+  await reviewedService.increment('reviewCount', {by: 1})
+  console.log(reviewedUser.reviewCount)
+  // await reviewedUser.update({
+  //   reviewCount: reviewedUser.reviewCount+1
+  // })
+
+  // await reviewedService.update({
+  //   reviewCount: reviewedService.reviewCount+1
+  // })
   //before adding the review. calculate the new average for the specific skill
   //rating. then calculate the new average for the overall rating. then update on
   //the user model and the service model.
   // await User.findByPk()
+})
+
+Review.beforeBulkCreate(function(reviewArray) {
+  reviewArray.forEach(async review => {
+    const reviewedService = await Service.findByPk(review.dataValues.serviceId)
+
+    const reviewedUser = await User.findOne(reviewedService.userId)
+
+    await reviewedUser.update({
+      reviewCount: reviewedUser.reviewCount + 1
+    })
+
+    await reviewedService.update({
+      reviewCount: reviewedService.reviewCount + 1
+    })
+  })
 })
 /**
  * If we had any associations to make, this would be a great place to put them!
