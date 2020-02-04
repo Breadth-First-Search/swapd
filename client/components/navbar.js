@@ -75,7 +75,9 @@ const Navbar = props => {
               <Link to="/">
                 <img id="swapdlogo" src="/swapd.png" />
               </Link>
-              <form
+
+              {/*Guest should not be able to search */}
+              {/* <form
                 onSubmit={() =>
                   history.push(`/search/${search}/?searcherId=${props.user.id}`)
                 }
@@ -87,7 +89,7 @@ const Navbar = props => {
                   value={search}
                   onChange={() => setSearch(event.target.value)}
                 />
-              </form>
+              </form> */}
             </div>
 
             <div className={classes.root}>
