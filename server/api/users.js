@@ -47,7 +47,21 @@ router.get('/top', async (req, res, next) => {
   }
 })
 
-// get services by userId and service categories
+router.put('/:userId', async (req, res, next) => {
+  try {
+    console.log('userPut', req.body)
+
+    const user = await User.findByPk(+req.params.userId)
+
+    const userEdit = await user.update(req.body)
+    res.json(userEdit)
+  } catch (err) {
+    next(err)
+  }
+})
+
+//get services by userId and service categories
+
 router.get('/:userId/services', async (req, res, next) => {
   try {
     // const id = Number(req.params.userId)

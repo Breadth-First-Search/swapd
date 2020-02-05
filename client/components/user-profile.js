@@ -1,7 +1,9 @@
 import React from 'react'
 import {connect} from 'react-redux'
+import Button from '@material-ui/core/Button'
 import {getUserInterests} from '../store/interests'
 import {getUserServices} from '../store/services'
+import {Link} from 'react-router-dom'
 
 class UserProfile extends React.Component {
   constructor() {
@@ -37,6 +39,14 @@ class UserProfile extends React.Component {
             {services.map(s => <li key={s.id}>{s.name}</li>)}
           </div>
         </div>
+        <Button
+          style={{maxHeight: '50px'}}
+          size="small"
+          variant="contained"
+          color="primary"
+        >
+          <Link to="/user-profile-edit">Edit Profile</Link>
+        </Button>
       </div>
     )
   }
