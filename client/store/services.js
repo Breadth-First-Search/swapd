@@ -20,10 +20,13 @@ const defaultService = {all: [], newService: '', userServices: []}
  */
 const gotServices = services => ({type: GOT_SERVICES, services})
 
-const gotUserServices = userServices => ({GOT_USER_SERVICES, userServices})
+const gotUserServices = userServices => ({
+  type: GOT_USER_SERVICES,
+  userServices
+})
 
 const gotNewServiceFromServer = service => ({
-  GOT_NEW_SERVICE_FROM_SERVER,
+  type: GOT_NEW_SERVICE_FROM_SERVER,
   service
 })
 
@@ -52,7 +55,7 @@ export const postNewServices = service => {
 
 export const getUserServices = id => async dispatch => {
   try {
-    const {data} = await axios.get(`/api/user/${id}`)
+    const {data} = await axios.get(`/api/users/${id}/services`)
 
     dispatch(gotUserServices(data))
   } catch (err) {
