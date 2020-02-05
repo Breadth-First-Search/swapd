@@ -20,10 +20,13 @@ const defaultInterest = {all: [], newInterest: '', userInterests: []}
  */
 const gotInterests = interests => ({type: GOT_INTERESTS, interests})
 
-const gotUserInterests = userInterests => ({GOT_USER_INTERESTS, userInterests})
+const gotUserInterests = userInterests => ({
+  type: GOT_USER_INTERESTS,
+  userInterests
+})
 
-const gotNewInterestFromServer = interest => ({
-  GOT_NEW_INTEREST_FROM_SERVER,
+export const gotNewInterestFromServer = interest => ({
+  type: GOT_NEW_INTEREST_FROM_SERVER,
   interest
 })
 
@@ -52,7 +55,7 @@ export const postNewInterest = interest => {
 
 export const getUserInterests = id => async dispatch => {
   try {
-    const {data} = await axios.get(`/api/user/${id}/interests`)
+    const {data} = await axios.get(`/api/users/${id}/interests`)
 
     dispatch(gotUserInterests(data))
   } catch (err) {

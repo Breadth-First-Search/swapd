@@ -61,6 +61,14 @@ const Navbar = props => {
                 size="small"
                 variant="contained"
                 color="primary"
+              >
+                <Link to="/user-profile">User Profile</Link>
+              </Button>
+              <Button
+                style={{maxHeight: '50px'}}
+                size="small"
+                variant="contained"
+                color="primary"
                 onClick={handleClick}
               >
                 <Link to="/">Logout</Link>

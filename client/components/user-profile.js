@@ -31,7 +31,7 @@ class UserProfile extends React.Component {
             {interests.map(i => <li key={i.id}>{i.name}</li>)}
           </div>
         </div>
-        <div userName="rightProfile">
+        <div className="rightProfile">
           <div>
             Services:
             {services.map(s => <li key={s.id}>{s.name}</li>)}

@@ -1,6 +1,12 @@
 const router = require('express').Router()
 const Sequelize = require('sequelize')
-const {User, Interest, UserInterest, Service} = require('../db/models')
+const {
+  User,
+  Interest,
+  UserInterest,
+  Service,
+  ServiceCategory
+} = require('../db/models')
 const {
   interestsList,
   userInterestsToSet,
@@ -29,20 +35,6 @@ router.get('/', async (req, res, next) => {
   }
 })
 
-router.get('/:userId', async (req, res, next) => {
-  try {
-    const id = Number(req.params.userId)
-
-    const userWithServices = await User.findOne({
-      where: {id: id},
-      include: [{model: Service}]
-    })
-    res.json(userWithServices)
-  } catch (err) {
-    console.error(err)
-  }
-})
-
 router.get('/top', async (req, res, next) => {
   try {
     const topUsers = await User.findAll({
@@ -55,6 +47,22 @@ router.get('/top', async (req, res, next) => {
   }
 })
 
+//get services by userId and service categories
+router.get('/:userId/services', async (req, res, next) => {
+  try {
+    // const id = Number(req.params.userId)
+
+    const userServices = await Service.findAll({
+      where: {userId: req.params.userId},
+      include: [{model: ServiceCategory}]
+    })
+    console.log('user w services', userServices)
+
+    res.json(userServices)
+  } catch (err) {
+    console.error(err)
+  }
+})
 // get all users who have a specified service, eager loading their interests
 // to be used in search page
 router.get('/services/:serviceName/', async (req, res, next) => {
@@ -127,20 +135,26 @@ router.get('/services/:serviceName/', async (req, res, next) => {
   }
 })
 
-// get all a user's interests
-// router.get('/:userId/interests', async (req, res, next) => {
-//   try {
-//     const interests = await User.findOne({
-//       attributes: ['id', 'firstName', 'lastName'],
-//       where: {
-//         userId: req.params.userId,
-//         include: [
-//           {model: Interest, as: 'interests', through: UserInterest}
-//         ]
-//       }
-//     })
-//     res.json(interests)
-//   } catch (err) {
-//     next(err)
-//   }
-// });
+// get all of one user's interests
+router.get('/:userId/interests', async (req, res, next) => {
+  try {
+    const interests = await Interest.findAll({
+      attributes: ['name', 'id'],
+      include: [
+        {
+          attributes: ['id'],
+          model: User,
+          as: 'users',
+          through: UserInterest,
+          where: {
+            id: req.params.userId
+          }
+        }
+      ]
+    })
+
+    res.json(interests)
+  } catch (err) {
+    next(err)
+  }
+})
