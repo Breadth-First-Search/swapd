@@ -11,7 +11,7 @@ class Interests extends React.Component {
   }
   componentDidMount() {
     this.props.getAllInterests() // gets all interests
-    this.props.getUserInterests(match.params.id) //gets singe user's interests
+    this.props.getUserInterests(this.props.user.id) //gets singe user's interests
   }
 
   handleSubmit(evt) {
