@@ -1,7 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {editUser} from '../store/user'
-// import Interests from './interests'
+import Interests from './interests'
 
 class EditUserProfile extends React.Component {
   constructor() {
@@ -66,9 +66,9 @@ class EditUserProfile extends React.Component {
               />
             </div>
           }
-          {/* <Interests /> */}
           <button type="submit">SAVE</button>
         </form>
+        <Interests />
       </div>
     )
   }

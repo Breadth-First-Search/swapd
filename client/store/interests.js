@@ -33,6 +33,11 @@ export const gotNewInterestFromServer = interest => ({
 export const writeInterest = input => {
   return {type: WRITE_INTEREST, newInterest: input}
 }
+
+const addedUserInterest = interest => {
+  return {type: ADDED_USER_INTEREST, interest}
+}
+
 /**
  * THUNK CREATORS
  */
@@ -55,6 +60,7 @@ export const postNewInterest = interest => {
 
 export const getUserInterests = id => async dispatch => {
   try {
+    console.log('in get user interest thunk--id', id)
     const {data} = await axios.get(`/api/users/${id}/interests`)
 
     dispatch(gotUserInterests(data))
@@ -62,6 +68,17 @@ export const getUserInterests = id => async dispatch => {
     console.error(err)
   }
 }
+
+
+export const addUserInterest = interest => async dispatch => {
+  try {
+    const {data} = await axios.post('add interest to user')
+    dispatch(addedUserInterest(data))
+  } catch (err) {
+    console.error(err)
+  }
+}
+
 
 /**
  * REDUCER
@@ -74,6 +91,11 @@ export default function(state = defaultInterest, action) {
       return {...state, userInterests: action.userInterests}
     case GOT_NEW_INTEREST_FROM_SERVER:
       return {...state, all: [...state.all, action.interest]}
+    case ADDED_USER_INTEREST:
+      return {
+        ...state,
+        userInterests: [...state.userInterests, action.interest]
+      }
     case WRITE_INTEREST:
       return {...state, newInterest: action.newInterest}
     default:
