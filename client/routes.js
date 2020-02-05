@@ -9,7 +9,8 @@ import {
   Signup,
   UserHome,
   SearchResults,
-  SelectedService
+  SelectedService,
+  HomePage
 } from './components'
 import Oauth from './components/o-auth'
 import {me} from './store'
@@ -52,6 +53,7 @@ class Routes extends Component {
         )}
         {/* Displays our Login component as a fallback */}
         <Route component={Login} />
+        <Route component={HomePage} />
       </Switch>
     )
   }

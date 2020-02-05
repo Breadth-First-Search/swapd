@@ -37,11 +37,30 @@ router.get('/', async (req, res, next) => {
 
 router.get('/top', async (req, res, next) => {
   try {
+    //get all users where the overallRating is greater than 4
     const topUsers = await User.findAll({
-      limit: 10,
-      order: [[Sequelize.col('overallRating'), 'DESC']]
+      where: {
+        overallRating: {
+          [Sequelize.Op.gte]: 4
+        }
+      }
     })
-    res.json(topUsers)
+    const preference = {ratingWeight: 5, reviewCountWeight: 7}
+    topUsers.sort((userA, userB) => {
+      const userAScore =
+        userA.overallRating * preference.ratingWeight +
+        userA.reviewCount * preference.reviewCountWeight
+      const userBScore =
+        userB.overallRating * preference.ratingWeight +
+        userB.reviewCount * preference.reviewCountWeight
+      return userBScore - userAScore
+    })
+    const topTen = []
+    for (let i = 0; i < 10; i++) {
+      topTen.push(topUsers[i])
+    }
+
+    res.json(topTen)
   } catch (err) {
     next(err)
   }
