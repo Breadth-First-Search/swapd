@@ -14,6 +14,7 @@ import {
 } from './components'
 import Oauth from './components/o-auth'
 import {me} from './store'
+import SwapList from './components/SwapList'
 
 /**
  * COMPONENT
@@ -38,7 +39,11 @@ class Routes extends Component {
             {/* Routes placed here are only available after logging in */}
             <Route exact path="/home" component={UserHome} />
             <Route exact path="/user-profile" component={UserProfile} />
+
+            <Route exact path="/swaps" component={SwapList} />
+
             <Route exact path="/user-profile-edit" component={EditProfile} />
+
             <Route
               exact
               path="/search/:serviceName"

@@ -58,3 +58,20 @@ nav a {
 .profilePhoto {
   height: 180px;
 }
+
+.swaplistcontainer {
+  justify-content: center;
+  /* font-family: ''; */
+}
+
+.swaplistdetails {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.swapListImage {
+  height: 104px;
+  width: 104px;
+  border-radius: 50%;
+}

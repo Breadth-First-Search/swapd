@@ -62,6 +62,7 @@ export const getUserInterests = id => async dispatch => {
     console.error(err)
   }
 }
+
 /**
  * REDUCER
  */
