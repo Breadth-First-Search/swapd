@@ -21,7 +21,16 @@ User.belongsToMany(User, {
   otherId: 'swapId'
 })
 
-Message.belongsTo(User)
+Message.belongsTo(User, {
+  as: 'requester',
+  foreignKey: 'requesterId'
+})
+
+Message.belongsTo(User, {
+  as: 'responder',
+  foreignKey: 'responderId'
+})
+
 User.hasMany(Message)
 
 Message.belongsTo(Swap)

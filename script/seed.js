@@ -174,7 +174,7 @@ async function seed() {
     Swap.create({
       swapDate: new Date(2020, 1, 1),
       swapStatus: 'completed',
-      requsterId: 1,
+      requesterId: 1,
       responderId: 2,
       requesterServiceId: 1,
       responderServiceId: 2,
@@ -183,7 +183,7 @@ async function seed() {
     Swap.create({
       swapDate: new Date(2020, 2, 1),
       swapStatus: 'pending',
-      requsterId: 3,
+      requesterId: 3,
       responderId: 4,
       requesterServiceId: 3,
       responderServiceId: 4,
@@ -195,33 +195,39 @@ async function seed() {
     Message.create({
       swapId: 1,
       text: 'Hello',
-      userId: 1
+      requesterId: 1,
+      responderId: 2
     }),
     Message.create({
       swapId: 1,
       text: 'Hi',
-      userId: 2
+      requesterId: 1,
+      responderId: 2
     }),
     Message.create({
       swapId: 1,
       text:
         'Would love to practice on algo problems with you. Would you like to learn dancing?',
-      userId: 1
+      requesterId: 1,
+      responderId: 2
     }),
     Message.create({
       swapId: 1,
       text: 'I definitely would love to.',
-      userId: 2
+      requesterId: 1,
+      responderId: 2
     }),
     Message.create({
       swapId: 1,
       text: 'Cool is Feb 2nd at 3pm at Fullstack okay?',
-      userId: 1
+      requesterId: 1,
+      responderId: 2
     }),
     Message.create({
       swapId: 1,
       text: 'Sounds good to me',
-      userId: 2
+      requesterId: 1,
+      responderId: 2
     })
   ])
 

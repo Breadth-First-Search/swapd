@@ -5,8 +5,9 @@ import {composeWithDevTools} from 'redux-devtools-extension'
 import user from './user'
 import interests from './interests'
 import services from './services'
+import swaps from './swaps'
 
-const reducer = combineReducers({user, interests, services})
+const reducer = combineReducers({user, interests, services, swaps})
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({collapsed: true}))
 )
