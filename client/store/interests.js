@@ -69,6 +69,7 @@ export const getUserInterests = id => async dispatch => {
   }
 }
 
+
 export const addUserInterest = interest => async dispatch => {
   try {
     const {data} = await axios.post('add interest to user')
@@ -77,6 +78,7 @@ export const addUserInterest = interest => async dispatch => {
     console.error(err)
   }
 }
+
 
 /**
  * REDUCER

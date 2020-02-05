@@ -101,9 +101,8 @@ const Navbar = props => {
                 size="medium"
                 variant="contained"
                 color="primary"
-                onClick={handleClick}
               >
-                <Link to="/messages">Messages</Link>
+                <Link to="/swaps">Messages</Link>
               </Button>
               <Button
                 style={{backgroundColor: '#25665C'}}
@@ -114,8 +113,8 @@ const Navbar = props => {
                 <Link to="/user-profile">User Profile</Link>
               </Button>
               <Button
-                style={{maxHeight: '50px'}}
-                size="small"
+                style={{backgroundColor: '#25665C'}}
+                size="medium"
                 variant="contained"
                 color="primary"
                 onClick={handleClick}
