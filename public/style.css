@@ -27,15 +27,18 @@ form div {
 
 #logocontainer {
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
+  align-content: center;
 }
 
 #logocontainer a {
-  display: flex;
+  width: 180px;
+  text-align: left;
+  align-self: center;
 }
 
 #swapdlogo {
-  width: 18%;
+  width: 180px;
 }
 
 nav {
@@ -45,7 +48,6 @@ nav {
 nav a {
   white-space: nowrap;
   color: white;
-  text-align: center;
   text-decoration: none;
   font-size: 12px;
   padding: 0px;
