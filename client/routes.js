@@ -4,7 +4,13 @@ import {withRouter, Route, Switch} from 'react-router-dom'
 import PropTypes from 'prop-types'
 import UserProfile from './components/user-profile'
 import EditProfile from './components/user-profile-edit'
-import {Login, Signup, UserHome, SearchResults} from './components'
+import {
+  Login,
+  Signup,
+  UserHome,
+  SearchResults,
+  SelectedService
+} from './components'
 import Oauth from './components/o-auth'
 import {me} from './store'
 
@@ -36,6 +42,11 @@ class Routes extends Component {
               exact
               path="/search/:serviceName"
               component={SearchResults}
+            />
+            <Route
+              exact
+              path="/users/:userId/services/:serviceId"
+              component={SelectedService}
             />
           </Switch>
         )}
