@@ -66,7 +66,21 @@ router.get('/top', async (req, res, next) => {
   }
 })
 
+router.put('/:userId', async (req, res, next) => {
+  try {
+    console.log('userPut', req.body)
+
+    const user = await User.findByPk(+req.params.userId)
+
+    const userEdit = await user.update(req.body)
+    res.json(userEdit)
+  } catch (err) {
+    next(err)
+  }
+})
+
 //get services by userId and service categories
+
 router.get('/:userId/services', async (req, res, next) => {
   try {
     // const id = Number(req.params.userId)
@@ -82,6 +96,55 @@ router.get('/:userId/services', async (req, res, next) => {
     console.error(err)
   }
 })
+
+// get single user data
+
+router.get('/:userId', async (req, res, next) => {
+  try {
+    const user = await User.findByPk(req.params.userId, {
+      attributes: [
+        'id',
+        'firstName',
+        'lastName',
+        'phoneNumber',
+        'bio',
+        'photo',
+        'email',
+        'overallRating',
+        'latitude',
+        'longitude'
+      ],
+      include: [
+        {
+          model: Interest,
+          attributes: ['name']
+        },
+        {
+          model: Service,
+          attributes: [
+            'id',
+            'name',
+            'proficiency',
+            'serviceRating',
+            'imageUrl',
+            'videoUrl'
+          ],
+          include: [
+            {
+              model: ServiceCategory,
+              attributes: ['name']
+            }
+          ]
+        }
+      ]
+    })
+
+    res.json(user)
+  } catch (err) {
+    console.error(err)
+  }
+})
+
 // get all users who have a specified service, eager loading their interests
 // to be used in search page
 router.get('/services/:serviceName/', async (req, res, next) => {
