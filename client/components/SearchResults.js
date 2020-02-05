@@ -12,7 +12,7 @@ class SearchResults extends React.Component {
   }
 
   async componentDidMount() {
-    console.log(this.props.user.id)
+    // console.log(this.props.user.id)
     try {
       let results = await axios.get(
         `/api/users/services/${
@@ -32,7 +32,7 @@ class SearchResults extends React.Component {
 
     return (
       <div>
-        {results.length == 0 ? (
+        {results.length === 0 ? (
           <h1>No Results</h1>
         ) : (
           results.map((result, i) => {
