@@ -4,25 +4,27 @@ import SearchResultsTile from './SearchResultsTile'
 class HomePage extends React.Component {
   constructor() {
     super()
-    this.state = []
+    this.state = {
+      topUsers: []
+    }
   }
   async componentDidMount() {
     const {data} = await axios.get('/api/users/top')
 
-    this.setState(data)
+    this.setState({
+      topUsers: data
+    })
   }
 
   render() {
+    console.log(this.state.topUsers)
     return (
       <div>
         <ul>
-          {this.state.map(user, idx => {
-            return (
-              <li key={idx}>
-                <SearchResultsTile result={user} />
-              </li>
-            )
-          })}
+          {this.state.topUsers.length &&
+            this.state.topUsers.map((user, idx) => {
+              return <li key={idx}>{user.firstName}</li>
+            })}
         </ul>
       </div>
     )
