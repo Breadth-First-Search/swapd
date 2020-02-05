@@ -14,15 +14,49 @@ const useStyles = makeStyles(theme => ({
     '& > *': {
       margin: theme.spacing(1)
     },
-    display: 'flex'
+    display: 'flex',
+    alignSelf: 'center',
+    color: 'white'
+  },
+  inputRoot: {
+    color: 'inherit'
   },
   inputInput: {
     padding: theme.spacing(1, 1, 1, 7),
     transition: theme.transitions.create('width'),
     width: '100%',
+    paddingLeft: 30,
+    margin: 0,
     [theme.breakpoints.up('md')]: {
       width: 200
     }
+  },
+  search: {
+    position: 'relative',
+    borderRadius: theme.shape.borderRadius,
+    backgroundColor: 'white',
+    '&:hover': {
+      backgroundColor: '#ecececde'
+    },
+    marginRight: theme.spacing(2),
+    marginLeft: 0,
+    margin: 0,
+    width: '100%',
+    [theme.breakpoints.up('sm')]: {
+      marginLeft: theme.spacing(3),
+      width: 'auto'
+    }
+  },
+  searchIcon: {
+    width: theme.spacing(7),
+    height: '100%',
+    top: 5,
+    position: 'absolute',
+    pointerEvents: 'none',
+    // display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    alignSelf: 'center'
   }
 }))
 
@@ -31,8 +65,6 @@ const Navbar = props => {
   const isLoggedIn = props.isLoggedIn
   const handleClick = props.handleClick
   const classes = useStyles()
-
-  console.log(props.user.id)
 
   return (
     <div>
@@ -45,20 +77,37 @@ const Navbar = props => {
                 <img id="swapdlogo" src="/swapd.png" />
               </Link>
               <form onSubmit={() => history.push(`/search/${search}`)}>
-                <InputBase
-                  placeholder="Search…"
-                  className={classes.inputInput}
-                  inputProps={{'aria-label': 'search'}}
-                  value={search}
-                  onChange={() => setSearch(event.target.value)}
-                />
+                <div className={classes.search}>
+                  <div className={classes.searchIcon}>
+                    <SearchIcon />
+                  </div>
+                  <InputBase
+                    placeholder="Search…"
+                    classes={{
+                      root: classes.inputRoot,
+                      input: classes.inputInput
+                    }}
+                    inputProps={{'aria-label': 'search'}}
+                    value={search}
+                    onChange={() => setSearch(event.target.value)}
+                  />
+                </div>
               </form>
             </div>
 
             <div className={classes.root}>
               <Button
-                style={{maxHeight: '50px'}}
-                size="small"
+                style={{backgroundColor: '#25665C'}}
+                size="medium"
+                variant="contained"
+                color="primary"
+                onClick={handleClick}
+              >
+                <Link to="/messages">Messages</Link>
+              </Button>
+              <Button
+                style={{backgroundColor: '#25665C'}}
+                size="medium"
                 variant="contained"
                 color="primary"
                 onClick={handleClick}
@@ -94,16 +143,16 @@ const Navbar = props => {
 
             <div className={classes.root}>
               <Button
-                style={{maxHeight: '50px'}}
-                size="small"
+                style={{backgroundColor: '#25665C'}}
+                size="medium"
                 variant="contained"
                 color="primary"
               >
                 <Link to="/login">Login</Link>
               </Button>
               <Button
-                style={{maxHeight: '50px'}}
-                size="small"
+                style={{backgroundColor: '#25665C'}}
+                size="medium"
                 variant="contained"
                 color="primary"
               >
