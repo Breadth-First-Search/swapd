@@ -3,7 +3,15 @@ import {connect} from 'react-redux'
 import {withRouter, Route, Switch} from 'react-router-dom'
 import PropTypes from 'prop-types'
 import UserProfile from './components/user-profile'
-import {Login, Signup, UserHome, SearchResults} from './components'
+import EditProfile from './components/user-profile-edit'
+import {
+  Login,
+  Signup,
+  UserHome,
+  SearchResults,
+  SelectedService,
+  HomePage
+} from './components'
 import Oauth from './components/o-auth'
 import {me} from './store'
 import SwapList from './components/SwapList'
@@ -31,16 +39,26 @@ class Routes extends Component {
             {/* Routes placed here are only available after logging in */}
             <Route exact path="/home" component={UserHome} />
             <Route exact path="/user-profile" component={UserProfile} />
+
             <Route exact path="/swaps" component={SwapList} />
+
+            <Route exact path="/user-profile-edit" component={EditProfile} />
+
             <Route
               exact
               path="/search/:serviceName"
               component={SearchResults}
             />
+            <Route
+              exact
+              path="/users/:userId/services/:serviceId"
+              component={SelectedService}
+            />
           </Switch>
         )}
         {/* Displays our Login component as a fallback */}
         <Route component={Login} />
+        <Route component={HomePage} />
       </Switch>
     )
   }

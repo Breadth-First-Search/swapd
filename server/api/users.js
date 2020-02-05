@@ -37,17 +37,50 @@ router.get('/', async (req, res, next) => {
 
 router.get('/top', async (req, res, next) => {
   try {
+    //get all users where the overallRating is greater than 4
     const topUsers = await User.findAll({
-      limit: 10,
-      order: [[Sequelize.col('overallRating'), 'DESC']]
+      where: {
+        overallRating: {
+          [Sequelize.Op.gte]: 4
+        }
+      }
     })
-    res.json(topUsers)
+    const preference = {ratingWeight: 5, reviewCountWeight: 7}
+    topUsers.sort((userA, userB) => {
+      const userAScore =
+        userA.overallRating * preference.ratingWeight +
+        userA.reviewCount * preference.reviewCountWeight
+      const userBScore =
+        userB.overallRating * preference.ratingWeight +
+        userB.reviewCount * preference.reviewCountWeight
+      return userBScore - userAScore
+    })
+    const topTen = []
+    for (let i = 0; i < 10; i++) {
+      topTen.push(topUsers[i])
+    }
+
+    res.json(topTen)
+  } catch (err) {
+    next(err)
+  }
+})
+
+router.put('/:userId', async (req, res, next) => {
+  try {
+    console.log('userPut', req.body)
+
+    const user = await User.findByPk(+req.params.userId)
+
+    const userEdit = await user.update(req.body)
+    res.json(userEdit)
   } catch (err) {
     next(err)
   }
 })
 
 //get services by userId and service categories
+
 router.get('/:userId/services', async (req, res, next) => {
   try {
     // const id = Number(req.params.userId)
@@ -63,6 +96,55 @@ router.get('/:userId/services', async (req, res, next) => {
     console.error(err)
   }
 })
+
+// get single user data
+
+router.get('/:userId', async (req, res, next) => {
+  try {
+    const user = await User.findByPk(req.params.userId, {
+      attributes: [
+        'id',
+        'firstName',
+        'lastName',
+        'phoneNumber',
+        'bio',
+        'photo',
+        'email',
+        'overallRating',
+        'latitude',
+        'longitude'
+      ],
+      include: [
+        {
+          model: Interest,
+          attributes: ['name']
+        },
+        {
+          model: Service,
+          attributes: [
+            'id',
+            'name',
+            'proficiency',
+            'serviceRating',
+            'imageUrl',
+            'videoUrl'
+          ],
+          include: [
+            {
+              model: ServiceCategory,
+              attributes: ['name']
+            }
+          ]
+        }
+      ]
+    })
+
+    res.json(user)
+  } catch (err) {
+    console.error(err)
+  }
+})
+
 // get all users who have a specified service, eager loading their interests
 // to be used in search page
 router.get('/services/:serviceName/', async (req, res, next) => {
