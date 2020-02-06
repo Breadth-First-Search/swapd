@@ -12,14 +12,16 @@ export default class SearchResultsTile extends React.Component {
     let result = this.props.result
     // console.log(result)
     return (
-      <div>
+      <div className="searchResultsInner">
         <NavLink to={`/users/${result.id}/services/${result.services[0].id}`}>
-          <img src={result.photo} />
-          <h3>
+          <img className="searchResultsImg" src={result.photo} />
+          <div className="searchResultsName">
             {result.firstName} {result.lastName}
-          </h3>
-          <h4>Overall Rating: {result.overallRating}</h4>
-          <h4>Service Rating: {result.services[0].serviceRating}</h4>
+          </div>
+          <div>Overall Rating: {result.overallRating.toFixed(2)}</div>
+          <div>
+            Service Rating: {result.services[0].serviceRating.toFixed(2)}
+          </div>
         </NavLink>
       </div>
     )

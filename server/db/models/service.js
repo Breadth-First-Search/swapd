@@ -19,7 +19,9 @@ const Service = db.define('service', {
     type: Sequelize.BOOLEAN
   },
   imageUrl: {
-    type: Sequelize.STRING
+    type: Sequelize.STRING,
+    defaultValue:
+      'https://images.unsplash.com/photo-1544027993-37dbfe43562a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60'
   },
   videoUrl: {
     type: Sequelize.STRING
