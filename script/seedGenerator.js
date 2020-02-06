@@ -58,6 +58,61 @@ const servicesList = [
   'Travel Guide'
 ]
 
+const reviewList = [
+  'Trash',
+  'Great',
+  'Not my style, but might be good for others',
+  'Really genuine person. Cannot wait to see them again',
+  'Too serious',
+  'Needs to wear deodorant',
+  'Amazing experience',
+  'Had lots of fun',
+  'Would definitely recommend!',
+  'Wow',
+  'Kind of an awkward person',
+  'Very skilled and also a great communicator',
+  'Overall OK',
+  'Great communication skills',
+  'Very Polite',
+  'Trustworthy',
+  'Great Swap',
+  'Good person',
+  'Bad hygiene',
+  'Great enthusiasm',
+  'Good insight',
+  'Overall satisfied with the swap',
+  'Good job!',
+  'Thanks!',
+  'Hope to see you again soon!',
+  'Would highly recommend',
+  'Would highly discourage from swapping with this person',
+  'Argumentative',
+  'Untrustworthy vibes',
+  'Bad swap',
+  'Overall OK swap',
+  'Not my vibe',
+  'Was not as good as I expected',
+  'Such a genuine person.',
+  'Has a positive energy',
+  'Has a contagious positive energy',
+  'Was very lucky to meet this person',
+  'Amazing',
+  'Good conversation'
+]
+
+const numberOfServices = 154
+function generateReviews() {
+  const reviews = []
+  for (let i = 0; i < 1000; i++) {
+    reviews.push({
+      rating: Math.ceil(Math.random() * 5) * 1.0,
+      comment: reviewList[Math.floor(Math.random() * reviewList.length)],
+      serviceId: Math.ceil(Math.random() * numberOfServices)
+    })
+  }
+  return reviews
+}
+
 function generateUsers(num) {
   const users = []
   for (let i = 5; i < num + 5; i++) {
@@ -70,8 +125,9 @@ function generateUsers(num) {
       phoneNumber: casual.phone,
       password: '123',
       bio: casual.sentences(2),
-      zipCode: Number(casual.zip(5)),
-      overallRating: 5 * Math.random()
+      zipCode: Number(casual.zip(5))
+      // overallRating: 1 + 4 * Math.random(),
+      // reviewCount: 1
     })
   }
   return users
@@ -86,8 +142,9 @@ function generateServices(num) {
       name: servicesList[Math.floor(Math.random() * servicesList.length)],
       description: casual.text,
       proficiency: Math.ceil(Math.random() * 3),
-      remote: casual.coin_flip,
-      serviceRating: 5 * Math.random()
+      remote: casual.coin_flip
+      // serviceRating: Math.floor(5 * Math.random()),
+      // reviewCount: 1
     })
   }
   return services
@@ -95,10 +152,12 @@ function generateServices(num) {
 
 const fakeUsers = generateUsers(totalUsersToFake)
 const fakeServices = generateServices(totalUsersToFake)
+const fakeReviews = generateReviews(numberOfServices)
 
 module.exports = {
   fakeUsers,
   fakeServices,
   generateUsers,
-  generateServices
+  generateServices,
+  fakeReviews
 }
