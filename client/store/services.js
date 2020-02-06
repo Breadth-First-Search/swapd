@@ -8,12 +8,18 @@ const GOT_SERVICES = 'GOT_SERVICES'
 const GOT_USER_SERVICES = 'GOT_USER_SERVICES'
 const WRITE_SERVICE = 'WRITE_SERVICE'
 const GOT_NEW_SERVICE_FROM_SERVER = 'GOT_NEW_SERVICE_FROM_SERVER'
+const GOT_SERVICE_CATEGORIES = 'GOT_SERVICE_CATEGORIES'
 const ADDED_USER_SERVICE = 'ADDED_USER_SERVICE'
 
 /**
  * INITIAL STATE
  */
-const defaultService = {all: [], newService: '', userServices: []}
+const defaultService = {
+  all: [],
+  newService: '',
+  serviceCategories: [],
+  userServices: []
+}
 
 /**
  * ACTION CREATORS
@@ -28,6 +34,10 @@ const gotUserServices = userServices => ({
 const gotNewServiceFromServer = service => ({
   type: GOT_NEW_SERVICE_FROM_SERVER,
   service
+})
+const gotServiceCategories = serviceCategories => ({
+  type: GOT_SERVICE_CATEGORIES,
+  serviceCategories
 })
 
 export const writeService = input => {
@@ -53,6 +63,15 @@ export const postNewServices = service => {
   }
 }
 
+export const getServiceCategories = () => async dispatch => {
+  try {
+    const {data} = await axios.get('/api/service-categories')
+    dispatch(gotServiceCategories(data))
+  } catch (err) {
+    console.error(err)
+  }
+}
+
 export const getUserServices = id => async dispatch => {
   try {
     const {data} = await axios.get(`/api/users/${id}/services`)
@@ -73,6 +92,8 @@ export default function(state = defaultService, action) {
       return {...state, userServices: action.userServices}
     case GOT_NEW_SERVICE_FROM_SERVER:
       return {...state, all: [...state.all, action.service]}
+    case GOT_SERVICE_CATEGORIES:
+      return {...state, serviceCategories: action.serviceCategories}
     case WRITE_SERVICE:
       return {...state, newService: action.newService}
     default:

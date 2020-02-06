@@ -8,7 +8,7 @@ const GOT_INTERESTS = 'GOT_INTERESTS'
 const GOT_USER_INTERESTS = 'GOT_USER_INTERESTS'
 const WRITE_INTEREST = 'WRITE_INTEREST'
 const GOT_NEW_INTEREST_FROM_SERVER = 'GOT_NEW_INTEREST_FROM_SERVER'
-const ADDED_USER_INTEREST = 'DDED_USER_INTEREST'
+const ADDED_USER_INTEREST = 'ADDED_USER_INTEREST'
 
 /**
  * INITIAL STATE
@@ -60,7 +60,6 @@ export const postNewInterest = interest => {
 
 export const getUserInterests = id => async dispatch => {
   try {
-    console.log('in get user interest thunk--id', id)
     const {data} = await axios.get(`/api/users/${id}/interests`)
 
     dispatch(gotUserInterests(data))
@@ -69,16 +68,15 @@ export const getUserInterests = id => async dispatch => {
   }
 }
 
-
-export const addUserInterest = interest => async dispatch => {
+export const addUserInterest = userInterest => async dispatch => {
   try {
-    const {data} = await axios.post('add interest to user')
+    const {data} = await axios.post('/api/users/userInterests', userInterest)
+    console.log('data in addUserInterest thunk', data)
     dispatch(addedUserInterest(data))
   } catch (err) {
     console.error(err)
   }
 }
-
 
 /**
  * REDUCER
