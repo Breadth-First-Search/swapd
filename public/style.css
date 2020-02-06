@@ -1,5 +1,6 @@
 body {
-  font-family: sans-serif;
+  font-family: 'Roboto,Noto,Segoe UI,Arial,sans-serif';
+  font-size: 0.95em;
 }
 
 a {
@@ -29,20 +30,29 @@ form div {
   display: flex;
   justify-content: center;
   align-content: center;
+  height: 50px;
 }
 
 #logocontainer a {
-  width: 180px;
+  width: 150px;
   text-align: left;
   align-self: center;
 }
 
+#logocontainer form {
+  height: 50px;
+}
+
 #swapdlogo {
-  width: 180px;
+  width: 150px;
 }
 
 nav {
-  position: sticky;
+  /* position: fixed;
+
+  width: 100%;
+  z-index: 1; */
+  top: 0;
 }
 
 nav a {
@@ -57,11 +67,12 @@ nav a {
 
 .profilePhoto {
   height: 180px;
+  border-radius: 50%;
+  margin: 15px;
 }
 
 .swaplistcontainer {
   justify-content: center;
-  /* font-family: ''; */
 }
 
 .swaplistdetails {
@@ -74,4 +85,56 @@ nav a {
   height: 104px;
   width: 104px;
   border-radius: 50%;
+}
+
+.searchResultsContainer {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  text-align: center;
+  flex: 0 auto;
+}
+.searchResultsImg {
+  width: 256px;
+  height: 256px;
+  border-radius: 50%;
+}
+
+.searchResultsInner {
+  padding: 30px;
+  margin: 15px;
+  /* border-radius: 10%;
+  border: 1px;
+  border: #25665C;
+  border-style: solid; */
+}
+
+.searchResultsName {
+  font-size: 20px;
+  padding: 5px;
+}
+
+#profileContainer {
+  display: flex;
+  justify-content: center;
+}
+
+.leftProfile {
+  width: 20%;
+  text-align: center;
+  border: 1px;
+  border-radius: 1px;
+  border-style: solid;
+  border-color: rgb(228, 228, 228);
+  padding: 15px;
+  margin: 15px;
+}
+
+.rightProfile {
+  width: 60%;
+  text-align: center;
+  border-color: rgb(228, 228, 228);
+  padding: 15px;
+  margin: 15px;
 }

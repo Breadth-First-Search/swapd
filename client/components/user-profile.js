@@ -21,10 +21,10 @@ class UserProfile extends React.Component {
   render() {
     const {user, interests, services} = this.props
     return (
-      <div>
+      <div id="profileContainer">
         <div className="leftProfile">
           <img src={user.photo} className="profilePhoto" />
-          <div>Overall Rating: {user.overallRating}</div>
+          <div>Overall Rating: {user.overallRating.toFixed(2)}</div>
           <div>Email: {user.email}</div>
           <div>Phone Number: {user.phoneNumber}</div>
           <div>Maximum Travel Distance: {user.distancePrefWeight}mi</div>
@@ -38,15 +38,20 @@ class UserProfile extends React.Component {
             Services:
             {services.map(s => <li key={s.id}>{s.name}</li>)}
           </div>
+          <Button
+            style={{backgroundColor: '#25665C'}}
+            size="small"
+            variant="contained"
+            color="primary"
+          >
+            <Link
+              style={{color: 'white', textDecoration: 'none'}}
+              to="/user-profile-edit"
+            >
+              Edit Profile
+            </Link>
+          </Button>
         </div>
-        <Button
-          style={{maxHeight: '50px'}}
-          size="small"
-          variant="contained"
-          color="primary"
-        >
-          <Link to="/user-profile-edit">Edit Profile</Link>
-        </Button>
       </div>
     )
   }

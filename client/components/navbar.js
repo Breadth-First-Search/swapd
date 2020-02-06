@@ -7,6 +7,7 @@ import Button from '@material-ui/core/Button'
 import {makeStyles} from '@material-ui/core/styles'
 import InputBase from '@material-ui/core/InputBase'
 import SearchIcon from '@material-ui/icons/Search'
+import ClearIcon from '@material-ui/icons/Clear'
 import history from '../history'
 
 const useStyles = makeStyles(theme => ({
@@ -25,23 +26,27 @@ const useStyles = makeStyles(theme => ({
     padding: theme.spacing(1, 1, 1, 7),
     transition: theme.transitions.create('width'),
     width: '100%',
-    paddingLeft: 30,
+    paddingLeft: 40,
+    paddingTop: 15,
+    paddingBottom: 15,
+    borderRadius: theme.shape.borderRadius,
+    backgroundColor: 'white',
+    '&:hover': {
+      backgroundColor: '#ecececde'
+    },
     margin: 0,
     [theme.breakpoints.up('md')]: {
       width: 200
     }
   },
   search: {
+    display: 'flex',
     position: 'relative',
-    borderRadius: theme.shape.borderRadius,
-    backgroundColor: 'white',
-    '&:hover': {
-      backgroundColor: '#ecececde'
-    },
     marginRight: theme.spacing(2),
     marginLeft: 0,
     margin: 0,
     width: '100%',
+    height: 50,
     [theme.breakpoints.up('sm')]: {
       marginLeft: theme.spacing(3),
       width: 'auto'
@@ -50,13 +55,21 @@ const useStyles = makeStyles(theme => ({
   searchIcon: {
     width: theme.spacing(7),
     height: '100%',
-    top: 5,
+    paddingLeft: 10,
+    top: -2.5,
     position: 'absolute',
+    alignSelf: 'center',
     pointerEvents: 'none',
-    // display: 'flex',
+    zIndex: 9,
     alignItems: 'center',
-    justifyContent: 'center',
-    alignSelf: 'center'
+    justifyContent: 'center'
+  },
+  clear: {
+    backgroundColor: 'transparent',
+    padding: 0,
+    border: 0,
+    color: 'grey',
+    outline: 'none'
   }
 }))
 
@@ -91,6 +104,15 @@ const Navbar = props => {
                     value={search}
                     onChange={() => setSearch(event.target.value)}
                   />
+                  {search ? (
+                    <button
+                      className={classes.clear}
+                      type="button"
+                      onClick={() => setSearch('')}
+                    >
+                      <ClearIcon />
+                    </button>
+                  ) : null}
                 </div>
               </form>
             </div>

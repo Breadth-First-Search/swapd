@@ -7,7 +7,8 @@ class SearchResults extends React.Component {
   constructor() {
     super()
     this.state = {
-      results: []
+      results: [],
+      isLoading: true
     }
   }
 
@@ -20,7 +21,8 @@ class SearchResults extends React.Component {
         }/?searcherId=${this.props.user.id}`
       )
       this.setState({
-        results: results.data
+        results: results.data,
+        isLoading: false
       })
     } catch (err) {
       console.log(err)
@@ -30,8 +32,8 @@ class SearchResults extends React.Component {
   render() {
     let results = this.state.results
 
-    return (
-      <div>
+    return !this.state.isLoading ? (
+      <div className="searchResultsContainer">
         {results.length === 0 ? (
           <h1>No Results</h1>
         ) : (
@@ -40,7 +42,7 @@ class SearchResults extends React.Component {
           })
         )}
       </div>
-    )
+    ) : null
   }
 }
 

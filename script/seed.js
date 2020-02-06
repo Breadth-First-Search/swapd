@@ -58,7 +58,9 @@ async function seed() {
       password: '123',
       bio: 'Always be coding and dancing. Looking for a dance instructor.',
       zipCode: 10013,
-      overallRating: Math.random() * Math.floor(5)
+      overallRating: Math.random() * 5,
+      photo:
+        'https://media-exp1.licdn.com/dms/image/C4D03AQHLPMcfEo_0cg/profile-displayphoto-shrink_200_200/0?e=1586390400&v=beta&t=6Nv1THz7yOFdWq5a_JbSc9_g1Vaf41BeaNgyGGC2lnk'
     }),
     User.create({
       firstName: 'Jasen',
@@ -69,7 +71,9 @@ async function seed() {
       bio:
         'Loves to do algo problems. Can solve them in my sleep. Looking for expert algo partner.',
       zipCode: 11210,
-      overallRating: Math.random() * Math.floor(5)
+      overallRating: Math.random() * 5,
+      photo:
+        'https://media-exp1.licdn.com/dms/image/C4E03AQHvTsT5W_L28w/profile-displayphoto-shrink_200_200/0?e=1586390400&v=beta&t=Cra3SIEwfs9MA_FlUHbV0RbdbNTnkj6viqatDvzPjOc'
     }),
     User.create({
       firstName: 'Leo',
@@ -79,7 +83,9 @@ async function seed() {
       password: '123',
       bio: 'Unsure of how to grow out my hair. Looking for stylist.',
       zipCode: 10016,
-      overallRating: Math.random() * Math.floor(5)
+      overallRating: Math.random() * 5,
+      photo:
+        'https://media-exp1.licdn.com/dms/image/C4D03AQHE15W8Q8k4rw/profile-displayphoto-shrink_200_200/0?e=1586390400&v=beta&t=x1ZcAHDTWMh6rg1OB3Nf3_gKn7F4OnpCC00CmDTkMdQ'
     }),
     User.create({
       firstName: 'Erik',
@@ -90,7 +96,9 @@ async function seed() {
       bio:
         'A husband and father taking on the challenge of bootcamp to learn to code. Looking for experts to teach me more about Javascript.',
       zipCode: 11231,
-      overallRating: Math.random() * Math.floor(5)
+      overallRating: Math.random() * 5,
+      photo:
+        'https://media-exp1.licdn.com/dms/image/C4E03AQGUKzYIpj4byw/profile-displayphoto-shrink_200_200/0?e=1586390400&v=beta&t=obQUxzS912_aIqYEhXe3iOwHb4-bN70X_nfMgBOVBxA'
     })
   ])
 
@@ -135,7 +143,8 @@ async function seed() {
       description: 'Learn the basics of dance over 2 hours.',
       proficiency: 1,
       remote: false,
-      photo: 'mingdance.png'
+      photo: 'mingdance.png',
+      serviceRating: Math.random() * 5
     }),
     Service.create({
       serviceCategoryId: 1,
@@ -144,7 +153,8 @@ async function seed() {
       description: 'Solve medium to hard algorithms over 3 hours.',
       proficiency: 3,
       remote: true,
-      photo: 'algorithm.jpg'
+      photo: 'algorithm.jpg',
+      serviceRating: Math.random() * 5
     }),
     Service.create({
       serviceCategoryId: 1,
@@ -154,7 +164,8 @@ async function seed() {
         'Understand the basics of data structures before tackling algo problems.',
       proficiency: 1,
       remote: true,
-      photo: 'algorithm.jpg'
+      photo: 'algorithm.jpg',
+      serviceRating: Math.random() * 5
     }),
     Service.create({
       serviceCategoryId: 2,
@@ -164,7 +175,8 @@ async function seed() {
         'Learn the secrets of being a great and time efficient dad. The essential guide on how to survive coding bootcamp while taking care of your family.',
       proficiency: 1,
       remote: true,
-      photo: 'algorithm.jpg'
+      photo: 'algorithm.jpg',
+      serviceRating: Math.random() * 5
     })
   ])
 

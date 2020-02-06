@@ -23,7 +23,7 @@ export default class SingleUserSnapshot extends React.Component {
         <h3>
           {user.firstName} {user.lastName}
         </h3>
-        <h4>Overall Rating: {user.overallRating}</h4>
+        <h4>Overall Rating: {user.overallRating.toFixed(2)}</h4>
         <h4>
           Other services offered by {user.firstName} {user.lastName}
         </h4>
@@ -37,7 +37,7 @@ export default class SingleUserSnapshot extends React.Component {
                   onClick={() => this.handleClick()}
                 >
                   <p>
-                    {service.name} - {service.serviceRating}
+                    {service.name} - {service.serviceRating.toFixed(2)}
                   </p>
                 </NavLink>
               </li>
