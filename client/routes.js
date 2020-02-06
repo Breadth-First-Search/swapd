@@ -11,7 +11,8 @@ import {
   UserHome,
   SearchResults,
   SelectedService,
-  HomePage
+  HomePage,
+  MessagesList
 } from './components'
 import Oauth from './components/o-auth'
 import {me} from './store'
@@ -47,6 +48,8 @@ class Routes extends Component {
             />
 
             <Route exact path="/swaps" component={SwapList} />
+
+            <Route exact path="/swaps/:swapId" component={MessagesList} />
 
             <Route exact path="/user-profile-edit" component={EditProfile} />
 
