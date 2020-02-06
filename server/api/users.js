@@ -66,6 +66,7 @@ router.get('/top', async (req, res, next) => {
   }
 })
 
+//change data in the user table
 router.put('/:userId', async (req, res, next) => {
   try {
     console.log('userPut', req.body)
@@ -236,6 +237,23 @@ router.get('/:userId/interests', async (req, res, next) => {
     })
 
     res.json(interests)
+  } catch (err) {
+    next(err)
+  }
+})
+
+//add interest for a user ..add interest id to userInterest for user id.
+router.post('/userInterests', async (req, res, next) => {
+  try {
+    const {name, userId} = req.body
+    const interest = await Interest.findOne({where: {name: name}})
+    const userInterest = await UserInterest.create({
+      userId: userId,
+      interestId: interest.id
+    })
+
+    console.log('added Interest in db', userInterest)
+    res.json(interest)
   } catch (err) {
     next(err)
   }
