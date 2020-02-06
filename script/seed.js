@@ -205,18 +205,21 @@ async function seed() {
 
   await Promise.all([
     Message.create({
+      userId: 1,
       swapId: 1,
       text: 'Hello',
       requesterId: 1,
       responderId: 2
     }),
     Message.create({
+      userId: 2,
       swapId: 1,
       text: 'Hi',
       requesterId: 1,
       responderId: 2
     }),
     Message.create({
+      userId: 1,
       swapId: 1,
       text:
         'Would love to practice on algo problems with you. Would you like to learn dancing?',
@@ -224,18 +227,21 @@ async function seed() {
       responderId: 2
     }),
     Message.create({
+      userId: 2,
       swapId: 1,
       text: 'I definitely would love to.',
       requesterId: 1,
       responderId: 2
     }),
     Message.create({
+      userId: 1,
       swapId: 1,
       text: 'Cool is Feb 2nd at 3pm at Fullstack okay?',
       requesterId: 1,
       responderId: 2
     }),
     Message.create({
+      userId: 2,
       swapId: 1,
       text: 'Sounds good to me',
       requesterId: 1,
