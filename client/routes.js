@@ -3,6 +3,7 @@ import {connect} from 'react-redux'
 import {withRouter, Route, Switch} from 'react-router-dom'
 import PropTypes from 'prop-types'
 import UserProfile from './components/user-profile'
+import SelectedUserProfile from './components/SelectedUserProfile'
 import EditProfile from './components/user-profile-edit'
 import {
   Login,
@@ -39,6 +40,11 @@ class Routes extends Component {
             {/* Routes placed here are only available after logging in */}
             <Route exact path="/home" component={HomePage} />
             <Route exact path="/user-profile" component={UserProfile} />
+            <Route
+              exact
+              path="/user-profile/:userId"
+              component={SelectedUserProfile}
+            />
 
             <Route exact path="/swaps" component={SwapList} />
 

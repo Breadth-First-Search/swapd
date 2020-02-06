@@ -2,6 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import axios from 'axios'
 import SingleUserSnapshot from './SingleUserSnapshot'
+import {NavLink} from 'react-router-dom'
 
 class SelectedService extends React.Component {
   constructor() {
@@ -45,9 +46,11 @@ class SelectedService extends React.Component {
     return (
       <div>
         <h1>{service.name}</h1>
-        <h3>
-          Offered by {user.firstName} {user.lastName}
-        </h3>
+        <NavLink to={`/user-profile/${user.id}`}>
+          <h3>
+            Offered by {user.firstName} {user.lastName}
+          </h3>
+        </NavLink>
         <img src={service.imageUrl} />
         <p>{service.description}</p>
         <p>Proficiency: {service.proficiency}</p>
