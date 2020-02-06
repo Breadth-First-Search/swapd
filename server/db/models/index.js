@@ -55,12 +55,36 @@ Swap.hasMany(Exchange)
 
 Review.beforeCreate(async (review, options) => {
   const reviewedService = await Service.findByPk(review.serviceId)
-
   const reviewedUser = await User.findByPk(reviewedService.userId)
-  console.log('reviewed user count', reviewedUser.reviewCount)
+
+  if (reviewedUser.reviewCount === 0) {
+    reviewedUser.overallRating = review.rating
+
+    await reviewedUser.save()
+  } else {
+    reviewedUser.overallRating =
+      (reviewedUser.overallRating * reviewedUser.reviewCount +
+        review.rating * 1.0) /
+      (reviewedUser.reviewCount + 1)
+    await reviewedUser.save()
+  }
+
+  if (reviewedService.reviewCount === 0) {
+    reviewedUser.serviceRating = review.rating
+    await reviewedService.save()
+  } else {
+    reviewedService.serviceRating =
+      (reviewedService.serviceRating * reviewedService.reviewCount +
+        review.rating) /
+      (reviewedService.reviewCount + 1)
+    await reviewedService.save()
+  }
+
   await reviewedUser.increment('reviewCount', {by: 1})
   await reviewedService.increment('reviewCount', {by: 1})
-  console.log(reviewedUser.reviewCount)
+
+  console.log('after', reviewedUser.reviewCount)
+
   // await reviewedUser.update({
   //   reviewCount: reviewedUser.reviewCount+1
   // })
@@ -74,21 +98,29 @@ Review.beforeCreate(async (review, options) => {
   // await User.findByPk()
 })
 
-Review.beforeBulkCreate(function(reviewArray) {
-  reviewArray.forEach(async review => {
-    const reviewedService = await Service.findByPk(review.dataValues.serviceId)
+// Review.beforeBulkCreate(function(reviewArray) {
+//   reviewArray.forEach(async review => {
+//     try{
 
-    const reviewedUser = await User.findOne(reviewedService.userId)
+//       const reviewedService = await Service.findByPk(review.dataValues.serviceId)
 
-    await reviewedUser.update({
-      reviewCount: reviewedUser.reviewCount + 1
-    })
+//       console.log(reviewedService)
+//       const reviewedUser = await User.findByPk(reviewedService.userId)
+//       await reviewedUser.increment('reviewCount', {by: 1})
+//       await reviewedService.increment('reviewCount', {by: 1})
+//     }catch(error){
+//       console.error(error)
+//     }
 
-    await reviewedService.update({
-      reviewCount: reviewedService.reviewCount + 1
-    })
-  })
-})
+//     // await reviewedUser.update({
+//     //   reviewCount: reviewedUser.reviewCount + 1
+//     // })
+
+//     // await reviewedService.update({
+//     //   reviewCount: reviewedService.reviewCount + 1
+//     // })
+//   })
+// })
 /**
  * If we had any associations to make, this would be a great place to put them!
  * ex. if we had another model called BlogPost, we might say:
