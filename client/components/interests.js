@@ -27,8 +27,6 @@ class Interests extends React.Component {
       userId: this.props.user.id,
       name: this.state.value
     }
-    console.log('state in submit', evt.target.value)
-    console.log('new user interest in submit', newUserInterest)
     this.props.addUserInterest(newUserInterest)
   }
 
@@ -44,7 +42,7 @@ class Interests extends React.Component {
         <div>
           <h4>Your Interests:</h4>
           <div>{userInterests.map(ui => <li key={ui.id}>{ui.name}</li>)}</div>
-          Add an interest:
+          Add A New Interest:
           <div>
             <form onSubmit={this.handleSubmit}>
               <input
@@ -62,8 +60,6 @@ class Interests extends React.Component {
         </div>
       )
     )
-
-    //add new interest to interests table and to user's interests if unique and update for all via socket
   }
 }
 

@@ -3,62 +3,56 @@ import {connect} from 'react-redux'
 import {
   getServiceCategories,
   addUserService,
+  getServices,
   getUserServices
 } from '../store/services'
-// getServices,
-// getUserServices and Categories
-// get categories
-// addUserService with Category
-// writeService
 
 class Services extends React.Component {
   constructor() {
     super()
-    this.state = {value: ''}
+    this.state = {serviceCategories: '', service: '', description: ''}
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   componentDidMount() {
-    //  this.props.getAllServices()
+    this.props.getServices()
     this.props.getServiceCategories()
+    this.props.getUserServices(this.props.user.id)
   }
 
   handleSubmit(evt) {
     evt.preventDefault()
 
+    const userId = this.props.user.id
     const newUserService = {
-      userId: this.props.user.id,
-      serviceCategories: this.state.value
+      service: this.state.service,
+      serviceCategories: this.state.serviceCategories,
+      description: this.state.description
     }
-    // console.log('state in submit', evt.target.value)
-    // console.log('new user interest in submit', newUserInterest)
-    // this.props.addUserInterest(newUserInterest)
+    this.props.addUserService(userId, newUserService)
   }
 
   handleChange(evt) {
-    this.setState({value: evt.target.value})
+    this.setState({[evt.target.name]: evt.target.value})
   }
 
   render() {
-    const {serviceCategories} = this.props
+    const {serviceCategories, services, userServices} = this.props
 
     return (
-      // userServices && (
       <div>
-        {/* <h4>Your Services:</h4>
-          <div>
-            {userServices.map(us => (
-              <li key={us.id}>{us.name}</li>
-            ))}
-          </div> */}
-        <div>ADD A SERVICE</div>
-        Pick A Service Category:
+        <h4>Your Offered Services:</h4>
+        {userServices.map(us => <li key={us.id}>{us.name}</li>)}
+
         <div>
+          Offer A New Service:
           <form onSubmit={this.handleSubmit}>
+            Service Category:
             <input
               type="text"
               autoComplete="on"
+              name="serviceCategories"
               list="serviceCategories"
               onChange={this.handleChange}
             />
@@ -67,6 +61,24 @@ class Services extends React.Component {
                 <option key={sc.id} value={sc.name} />
               ))}
             </datalist>
+            Service Name:
+            <input
+              type="text"
+              autoComplete="on"
+              name="service"
+              list="service"
+              onChange={this.handleChange}
+            />
+            <datalist id="service">
+              {services.map(s => <option key={s.id} value={s.name} />)}
+            </datalist>
+            Description:
+            <input
+              type="text"
+              size="200"
+              name="description"
+              onChange={this.handleChange}
+            />
             <button type="submit">ADD</button>
           </form>
         </div>
@@ -77,6 +89,7 @@ class Services extends React.Component {
 
 const mapStateToProps = state => {
   return {
+    services: state.services.all,
     serviceCategories: state.services.serviceCategories,
     userServices: state.services.userServices,
     user: state.user
@@ -84,9 +97,11 @@ const mapStateToProps = state => {
 }
 const mapDispatchToProps = dispatch => {
   return {
+    getServices: () => dispatch(getServices()),
     getServiceCategories: () => dispatch(getServiceCategories()),
     getUserServices: id => dispatch(getUserServices(id)),
-    addUserService: service => dispatch(addUserService(service))
+    addUserService: (id, serviceInfo) =>
+      dispatch(addUserService(id, serviceInfo))
   }
 }
 
