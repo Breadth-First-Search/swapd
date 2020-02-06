@@ -45,23 +45,24 @@ class SwapList extends React.Component {
 
   render() {
     const swaps = this.props.swaps
+    console.log(swaps)
 
     return !this.state.isLoading ? (
       <div>
         {swaps.map(swap => {
-          const responder = swap.messages[0].responder
-          let date = swap.messages[swap.messages.length - 1].createdAt.slice(
-            0,
-            10
+          const otherUser =
+            swap.requesterId === this.props.user.id ? 'responder' : 'requester'
+          const otherUserData = swap.messages[0][otherUser]
+          const newDate = this.formatDate(
+            swap.messages[swap.messages.length - 1].createdAt.slice(0, 10)
           )
-          const newDate = this.formatDate(date)
           return (
             <Link to={`/swaps/${swap.id}`} key={swap.id}>
               <div className="swaplistcontainer">
                 <div className="swaplistdetails">
-                  <img className="swapListImage" src={responder.photo} />
+                  <img className="swapListImage" src={otherUserData.photo} />
                   <div>
-                    <div>{responder.firstName}</div>
+                    <div>{otherUserData.firstName}</div>
                     <div>{newDate}</div>
                   </div>
                   <div>{swap.messages[swap.messages.length - 1].text}</div>

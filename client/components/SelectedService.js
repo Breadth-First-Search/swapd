@@ -3,6 +3,7 @@ import {connect} from 'react-redux'
 import axios from 'axios'
 import SingleUserSnapshot from './SingleUserSnapshot'
 import {NavLink} from 'react-router-dom'
+import Button from '@material-ui/core/Button'
 
 class SelectedService extends React.Component {
   constructor() {
@@ -54,6 +55,14 @@ class SelectedService extends React.Component {
         <img src={service.imageUrl} />
         <p>{service.description}</p>
         <p>Proficiency: {service.proficiency}</p>
+        <Button
+          style={{backgroundColor: '#25665C'}}
+          size="medium"
+          variant="contained"
+          color="primary"
+        >
+          Request Swap
+        </Button>
         {user.firstName ? (
           <SingleUserSnapshot
             user={user}

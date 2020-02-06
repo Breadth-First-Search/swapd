@@ -200,6 +200,16 @@ async function seed() {
       requesterServiceId: 3,
       responderServiceId: 4,
       location: ''
+    }),
+    Swap.create({
+      id: 3,
+      swapDate: new Date(2020, 1, 1),
+      swapStatus: 'completed',
+      requesterId: 1,
+      responderId: 2,
+      requesterServiceId: 1,
+      responderServiceId: 2,
+      location: 'Fullstack Academy'
     })
   ])
 
@@ -238,6 +248,18 @@ async function seed() {
     Message.create({
       swapId: 1,
       text: 'Sounds good to me',
+      requesterId: 1,
+      responderId: 2
+    }),
+    Message.create({
+      swapId: 3,
+      text: 'Testing',
+      requesterId: 1,
+      responderId: 2
+    }),
+    Message.create({
+      swapId: 3,
+      text: 'Testing again',
       requesterId: 1,
       responderId: 2
     })

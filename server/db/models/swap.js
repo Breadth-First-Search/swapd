@@ -22,6 +22,16 @@ const Swap = db.define('swap', {
   },
   location: {
     type: Sequelize.TEXT
+  },
+  requesterId: {
+    type: Sequelize.INTEGER,
+    foreignKey: true,
+    unique: false
+  },
+  responderId: {
+    type: Sequelize.INTEGER,
+    foreignKey: true,
+    unique: false
   }
 })
 
