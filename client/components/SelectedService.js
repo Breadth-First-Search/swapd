@@ -3,6 +3,28 @@ import {connect} from 'react-redux'
 import axios from 'axios'
 import SingleUserSnapshot from './SingleUserSnapshot'
 import {NavLink} from 'react-router-dom'
+import {confirmAlert} from 'react-confirm-alert'
+// import 'react-confirm-alert/src/react-confirm-alert.css'
+
+const options = {
+  title: 'Title',
+  message: 'Message',
+  buttons: [
+    {
+      label: 'Yes',
+      onClick: () => alert('Click Yes')
+    },
+    {
+      label: 'No',
+      onClick: () => alert('Click No')
+    }
+  ],
+  childrenElement: () => <div />,
+  customUI: ({title, message, onClose}) => <div>Custom UI</div>,
+  willUnmount: () => {}
+}
+
+confirmAlert(options)
 
 class SelectedService extends React.Component {
   constructor() {
@@ -13,6 +35,23 @@ class SelectedService extends React.Component {
     }
 
     this.getData = this.getData.bind(this)
+  }
+
+  submit = () => {
+    confirmAlert({
+      title: 'Confirm to submit',
+      message: 'Are you sure to do this.',
+      buttons: [
+        {
+          label: 'Yes',
+          onClick: () => alert('Click Yes')
+        },
+        {
+          label: 'No',
+          onClick: () => alert('Click No')
+        }
+      ]
+    })
   }
 
   async getData() {
@@ -54,6 +93,9 @@ class SelectedService extends React.Component {
         <img src={service.imageUrl} />
         <p>{service.description}</p>
         <p>Proficiency: {service.proficiency}</p>
+        <button type="button" onClick={this.submit}>
+          Confirm dialog
+        </button>
         {user.firstName ? (
           <SingleUserSnapshot
             user={user}
