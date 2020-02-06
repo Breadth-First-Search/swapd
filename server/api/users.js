@@ -81,16 +81,12 @@ router.put('/:userId', async (req, res, next) => {
 })
 
 //get services by userId and service categories
-
 router.get('/:userId/services', async (req, res, next) => {
   try {
-    // const id = Number(req.params.userId)
-
     const userServices = await Service.findAll({
       where: {userId: req.params.userId},
       include: [{model: ServiceCategory}]
     })
-    console.log('user w services', userServices)
 
     res.json(userServices)
   } catch (err) {
@@ -98,8 +94,31 @@ router.get('/:userId/services', async (req, res, next) => {
   }
 })
 
-// get single user data
+//post services by userId and service categories
+router.post('/:userId/services', async (req, res, next) => {
+  try {
+    const categoryName = req.body.serviceCategories
+    const newService = req.body.service
+    const description = req.body.description
 
+    const serviceCategory = await ServiceCategory.findOne({
+      where: {name: categoryName}
+    })
+
+    const service = await Service.create({
+      name: newService,
+      serviceCategoryId: serviceCategory.id,
+      userId: req.params.userId,
+      description: description
+    })
+
+    res.json(service)
+  } catch (err) {
+    console.error(err)
+  }
+})
+
+// get single user data
 router.get('/:userId', async (req, res, next) => {
   try {
     const user = await User.findByPk(req.params.userId, {
@@ -245,15 +264,24 @@ router.get('/:userId/interests', async (req, res, next) => {
 //add interest for a user ..add interest id to userInterest for user id.
 router.post('/userInterests', async (req, res, next) => {
   try {
+    let userInterest
     const {name, userId} = req.body
     const interest = await Interest.findOne({where: {name: name}})
-    const userInterest = await UserInterest.create({
-      userId: userId,
-      interestId: interest.id
-    })
 
-    console.log('added Interest in db', userInterest)
-    res.json(interest)
+    if (interest) {
+      userInterest = await UserInterest.create({
+        userId: userId,
+        interestId: interest.id
+      })
+      res.json(interest)
+    } else {
+      const newInterest = await Interest.create({name: name})
+      userInterest = await UserInterest.create({
+        userId: userId,
+        interestId: newInterest.id
+      })
+      res.json(newInterest)
+    }
   } catch (err) {
     next(err)
   }
