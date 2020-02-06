@@ -16,7 +16,10 @@ router.get('/:userId', async (req, res, next) => {
       include: [
         {
           model: Message,
-          include: [{model: User, as: 'responder'}]
+          include: [
+            {model: User, as: 'responder'},
+            {model: User, as: 'requester'}
+          ]
         }
       ],
       order: [[{model: Message}, 'id', 'ASC']]
