@@ -6,6 +6,10 @@ module.exports = io => {
       socket.broadcast.emit('new-interest', interest)
     })
 
+    socket.on('new-message', message => {
+      socket.broadcast.emit('new-message', message)
+    })
+
     socket.on('disconnect', () => {
       console.log(`Connection ${socket.id} has left the building`)
     })

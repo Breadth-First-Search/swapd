@@ -8,6 +8,7 @@ router.use('/swaps', require('./swaps'))
 
 router.use('/services', require('./services'))
 router.use('/service-categories', require('./service-categories'))
+router.use('/messages', require('./messages'))
 
 router.use((req, res, next) => {
   const error = new Error('Not Found')
