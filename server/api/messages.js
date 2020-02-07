@@ -13,6 +13,22 @@ router.get('/swap/:swapId', async (req, res, next) => {
       },
       include: [
         {
+          model: Swap,
+          attributes: ['id'],
+          include: [
+            {
+              model: Service,
+              as: 'responderService',
+              attributes: ['id', 'name', 'serviceRating', 'reviewCount']
+            },
+            {
+              model: Service,
+              as: 'requesterService',
+              attributes: ['id', 'name', 'serviceRating', 'reviewCount']
+            }
+          ]
+        },
+        {
           model: User,
           as: 'responder',
           attributes: ['id', 'firstName', 'lastName', 'email', 'photo']
@@ -20,7 +36,8 @@ router.get('/swap/:swapId', async (req, res, next) => {
         {
           model: User,
           as: 'requester',
-          attributes: ['id', 'firstName', 'lastName', 'email', 'photo']
+          attributes: ['id', 'firstName', 'lastName', 'email', 'photo'],
+          include: [{model: Service}]
         }
       ],
       order: [['id', 'ASC']]
@@ -46,6 +63,22 @@ router.post('/', async (req, res, next) => {
     let newMessagePacked = await Message.findByPk(newMessage.dataValues.id, {
       include: [
         {
+          model: Swap,
+          attributes: ['id'],
+          include: [
+            {
+              model: Service,
+              as: 'responderService',
+              attributes: ['id', 'name', 'serviceRating', 'reviewCount']
+            },
+            {
+              model: Service,
+              as: 'requesterService',
+              attributes: ['id', 'name', 'serviceRating', 'reviewCount']
+            }
+          ]
+        },
+        {
           model: User,
           as: 'responder',
           attributes: ['id', 'firstName', 'lastName', 'email', 'photo']
@@ -53,7 +86,8 @@ router.post('/', async (req, res, next) => {
         {
           model: User,
           as: 'requester',
-          attributes: ['id', 'firstName', 'lastName', 'email', 'photo']
+          attributes: ['id', 'firstName', 'lastName', 'email', 'photo'],
+          include: [{model: Service}]
         }
       ]
     })

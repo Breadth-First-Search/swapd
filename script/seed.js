@@ -135,83 +135,79 @@ async function seed() {
     })
   ])
 
-  await Promise.all([
-    Service.create({
-      serviceCategoryId: 2,
-      userId: 1,
-      name: 'Dance Lessons',
-      description: 'Learn the basics of dance over 2 hours.',
-      proficiency: 1,
-      remote: false,
-      photo: 'mingdance.png',
-      serviceRating: Math.random() * 5
-    }),
-    Service.create({
-      serviceCategoryId: 1,
-      userId: 2,
-      name: 'Algo Practice',
-      description: 'Solve medium to hard algorithms over 3 hours.',
-      proficiency: 3,
-      remote: true,
-      photo: 'algorithm.jpg',
-      serviceRating: Math.random() * 5
-    }),
-    Service.create({
-      serviceCategoryId: 1,
-      userId: 3,
-      name: 'Data Structures',
-      description:
-        'Understand the basics of data structures before tackling algo problems.',
-      proficiency: 1,
-      remote: true,
-      photo: 'algorithm.jpg',
-      serviceRating: Math.random() * 5
-    }),
-    Service.create({
-      serviceCategoryId: 2,
-      userId: 4,
-      name: 'Dad Hacks',
-      description:
-        'Learn the secrets of being a great and time efficient dad. The essential guide on how to survive coding bootcamp while taking care of your family.',
-      proficiency: 1,
-      remote: true,
-      photo: 'algorithm.jpg',
-      serviceRating: Math.random() * 5
-    })
-  ])
+  await Service.create({
+    serviceCategoryId: 2,
+    userId: 1,
+    name: 'Dance Lessons',
+    description: 'Learn the basics of dance over 2 hours.',
+    proficiency: 1,
+    remote: false,
+    photo: 'mingdance.png',
+    serviceRating: Math.random() * 5
+  })
+  await Service.create({
+    serviceCategoryId: 1,
+    userId: 2,
+    name: 'Algo Practice',
+    description: 'Solve medium to hard algorithms over 3 hours.',
+    proficiency: 3,
+    remote: true,
+    photo: 'algorithm.jpg',
+    serviceRating: Math.random() * 5
+  })
+  await Service.create({
+    serviceCategoryId: 1,
+    userId: 3,
+    name: 'Data Structures',
+    description:
+      'Understand the basics of data structures before tackling algo problems.',
+    proficiency: 1,
+    remote: true,
+    photo: 'algorithm.jpg',
+    serviceRating: Math.random() * 5
+  })
+  await Service.create({
+    serviceCategoryId: 2,
+    userId: 4,
+    name: 'Dad Hacks',
+    description:
+      'Learn the secrets of being a great and time efficient dad. The essential guide on how to survive coding bootcamp while taking care of your family.',
+    proficiency: 1,
+    remote: true,
+    photo: 'algorithm.jpg',
+    serviceRating: Math.random() * 5
+  })
 
   await Service.bulkCreate(fakeServices)
 
-  await Promise.all([
-    Swap.create({
-      swapDate: new Date(2020, 1, 1),
-      swapStatus: 'completed',
-      requesterId: 1,
-      responderId: 2,
-      requesterServiceId: 1,
-      responderServiceId: 2,
-      location: 'Fullstack Academy'
-    }),
-    Swap.create({
-      swapDate: new Date(2020, 2, 1),
-      swapStatus: 'pending',
-      requesterId: 3,
-      responderId: 4,
-      requesterServiceId: 3,
-      responderServiceId: 4,
-      location: ''
-    }),
-    Swap.create({
-      id: 3,
-      swapDate: new Date(2020, 1, 1),
-      swapStatus: 'completed',
-      requesterId: 1,
-      responderId: 2,
-      requesterServiceId: 1,
-      responderServiceId: 2,
-      location: 'Fullstack Academy'
-    })
-  ])
+  await Swap.create({
+    swapDate: new Date(2020, 1, 1),
+    swapStatus: 'completed',
+    requesterId: 1,
+    responderId: 2,
+    requesterServiceId: 1,
+    responderServiceId: 2,
+    location: 'Fullstack Academy'
+  })
+  await Swap.create({
+    swapDate: new Date(2020, 2, 1),
+    swapStatus: 'pending',
+    requesterId: 3,
+    responderId: 4,
+    requesterServiceId: 3,
+    responderServiceId: 4,
+    location: ''
+  })
+  await Swap.create({
+    id: 3,
+    swapDate: new Date(2020, 1, 1),
+    swapStatus: 'completed',
+    requesterId: 1,
+    responderId: 2,
+    requesterServiceId: 1,
+    responderServiceId: 2,
+    location: 'Fullstack Academy'
+  })
 
   await Promise.all([
     Message.create({
