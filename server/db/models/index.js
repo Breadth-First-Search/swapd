@@ -33,6 +33,20 @@ Message.belongsTo(User, {
   foreignKey: 'responderId'
 })
 
+/////////////////////////////
+
+Swap.belongsTo(Service, {
+  as: 'requesterService',
+  foreignKey: 'requesterServiceId'
+})
+
+Swap.belongsTo(Service, {
+  as: 'responderService',
+  foreignKey: 'responderServiceId'
+})
+
+/////////////////////////////
+
 User.hasMany(Message)
 
 Message.belongsTo(Swap)

@@ -27,7 +27,8 @@ const Service = db.define('service', {
     type: Sequelize.STRING
   },
   serviceRating: {
-    type: Sequelize.FLOAT
+    type: Sequelize.FLOAT,
+    defaultValue: 3.0
   },
   reviewCount: {
     type: Sequelize.INTEGER,

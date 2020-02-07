@@ -10,12 +10,12 @@ const Message = db.define('message', {
   },
   responderId: {
     type: Sequelize.INTEGER
+  },
+  type: {
+    type: Sequelize.ENUM,
+    values: ['MESSAGE', 'CURRENT_OFFER', 'OLD_OFFER'],
+    defaultValue: 'MESSAGE'
   }
-  // time: {
-  //   type: 'TIMESTAMP',
-  //   defaultValue: Sequelize.literal('CURRENT-TIMESTAMP'),
-  //   allowNull: false
-  // }
 })
 
 module.exports = Message

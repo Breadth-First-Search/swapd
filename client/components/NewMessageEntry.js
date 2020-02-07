@@ -22,7 +22,9 @@ class NewMessageEntry extends Component {
 
     const userId = this.props.userId
 
-    this.props.post({userId, text, swapId})
+    const type = 'CURRENT_OFFER'
+
+    this.props.post({userId, text, swapId, type})
   }
 
   render() {
