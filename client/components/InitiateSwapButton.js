@@ -12,6 +12,7 @@ import {postNewMessage} from '../store/messages'
 import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem'
 import ListItemText from '@material-ui/core/ListItemText'
+import history from '../history'
 
 function FormDialog(props) {
   const [open, setOpen] = useState(false)
@@ -31,31 +32,38 @@ function FormDialog(props) {
   }
 
   const handleSubmit = async () => {
-    const swapObj = {
-      requesterServiceId: selectedService.id,
-      requesterId: props.user.id,
-      responderServiceId: props.providerService.id,
-      responderId: props.providerUser.id,
-      swapStatus: 'pending'
-    }
-    try {
-      const swapRes = await axios.post('/api/swaps/', swapObj)
-      if (!swapRes.data[1]) alert('already have an open swap going')
-      else {
-        const messageObj = {
-          swapId: swapRes.data[0].id,
-          userId: props.user.id,
-          requesterId: props.user.id,
-          responderId: props.providerUser.id,
-          text: message,
-          type: 'CURRENT_OFFER'
-        }
-        // const res = await axios.post('/api/messages/initiate', messageObj)
-        props.post(messageObj)
-        setOpen(false)
+    if (message) {
+      const swapObj = {
+        requesterServiceId: selectedService.id,
+        requesterId: props.user.id,
+        responderServiceId: props.providerService.id,
+        responderId: props.providerUser.id,
+        swapStatus: 'pending'
       }
-    } catch (error) {
-      console.log(error)
+      try {
+        const swapRes = await axios.post('/api/swaps/', swapObj)
+        if (!swapRes.data[1]) {
+          alert('Looks like you already have a open swap going.')
+          history.push(`/swaps/${swapRes.data[0].id}`)
+        } else {
+          const messageObj = {
+            swapId: swapRes.data[0].id,
+            userId: props.user.id,
+            requesterId: props.user.id,
+            responderId: props.providerUser.id,
+            text: message,
+            type: 'CURRENT_OFFER'
+          }
+          // const res = await axios.post('/api/messages/initiate', messageObj)
+          props.post(messageObj)
+          setOpen(false)
+          history.push(`/swaps/${swapRes.data[0].id}`)
+        }
+      } catch (error) {
+        console.log(error)
+      }
+    } else {
+      alert('Please write a friendly message.')
     }
   }
 
