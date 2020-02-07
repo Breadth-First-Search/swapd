@@ -1,6 +1,5 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import axios from 'axios'
 import {loadAllSwaps} from '../store/swaps'
 import {Link} from 'react-router-dom'
 
@@ -45,7 +44,6 @@ class SwapList extends React.Component {
 
   render() {
     const swaps = this.props.swaps
-    console.log(swaps)
 
     return !this.state.isLoading ? (
       <div>

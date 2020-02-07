@@ -8,6 +8,7 @@ import DialogContentText from '@material-ui/core/DialogContentText'
 import DialogTitle from '@material-ui/core/DialogTitle'
 import {connect} from 'react-redux'
 import axios from 'axios'
+import {postNewMessage} from '../store/messages'
 import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem'
 import ListItemAvatar from '@material-ui/core/ListItemAvatar'
@@ -33,7 +34,7 @@ function FormDialog(props) {
   }
 
   const handleSubmit = async () => {
-    const obj = {
+    const swapObj = {
       requesterServiceId: selectedService.id,
       requesterId: props.user.id,
       responderServiceId: props.providerService.id,
@@ -41,9 +42,21 @@ function FormDialog(props) {
       swapStatus: 'pending'
     }
     try {
-      const res = await axios.post('/api/swaps/', obj)
-      console.log(res)
-      setOpen(false)
+      const swapRes = await axios.post('/api/swaps/', swapObj)
+      if (!swapRes.data[1]) alert('already have an open swap going')
+      else {
+        const messageObj = {
+          swapId: swapRes.data[0].id,
+          userId: props.user.id,
+          requesterId: props.user.id,
+          responderId: props.providerUser.id,
+          text: message,
+          type: 'CURRENT_OFFER'
+        }
+        // const res = await axios.post('/api/messages/initiate', messageObj)
+        props.post(messageObj)
+        setOpen(false)
+      }
     } catch (error) {
       console.log(error)
     }
@@ -101,7 +114,9 @@ function FormDialog(props) {
 }
 
 const mapDispatchToProps = dispatch => {
-  return {}
+  return {
+    post: message => dispatch(postNewMessage(message))
+  }
 }
 
 const mapStateToProps = state => {

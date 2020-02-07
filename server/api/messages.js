@@ -31,6 +31,15 @@ router.get('/swap/:swapId', async (req, res, next) => {
   }
 })
 
+// router.post('/initiate', async (req, res, next) => {
+//   try {
+//     let message = await Message.create(req.body)
+//     res.json(message)
+//   } catch (error) {
+//     console.error(error)
+//   }
+// })
+
 router.post('/', async (req, res, next) => {
   try {
     let swap = await Swap.findByPk(req.body.swapId)

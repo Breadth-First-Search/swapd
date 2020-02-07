@@ -53,7 +53,7 @@ class SelectedService extends React.Component {
             Offered by {user.firstName} {user.lastName}
           </h3>
         </NavLink>
-        <img src={service.imageUrl} />
+        <img style={{width: '50%'}} src={service.imageUrl} />
         <p>{service.description}</p>
         <p>Proficiency: {service.proficiency}</p>
         <InitiateSwapButton providerUser={user} providerService={service} />
