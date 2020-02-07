@@ -1,6 +1,8 @@
 import React from 'react'
 import axios from 'axios'
 import SearchResultsTile from './SearchResultsTile'
+import {Link} from 'react-router-dom'
+
 class HomePage extends React.Component {
   constructor() {
     super()
@@ -17,13 +19,16 @@ class HomePage extends React.Component {
   }
 
   render() {
-    console.log(this.state.topUsers)
     return (
       <div>
         <ul>
           {this.state.topUsers.length &&
-            this.state.topUsers.map((user, idx) => {
-              return <li key={idx}>{user.firstName}</li>
+            this.state.topUsers.map(user => {
+              return (
+                <Link key={user.id} to={`/user-profile/${user.id}`}>
+                  <li>{user.firstName}</li>
+                </Link>
+              )
             })}
         </ul>
       </div>
