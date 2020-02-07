@@ -16,7 +16,10 @@ router.get('/:userId', async (req, res, next) => {
       include: [
         {
           model: Message,
-          include: [{model: User, as: 'responder'}]
+          include: [
+            {model: User, as: 'responder'},
+            {model: User, as: 'requester'}
+          ]
         }
       ],
       order: [[{model: Message}, 'id', 'ASC']]
@@ -24,5 +27,15 @@ router.get('/:userId', async (req, res, next) => {
     res.json(swaps)
   } catch (err) {
     next(err)
+  }
+})
+
+router.post('/', async (req, res, next) => {
+  console.log(req.body)
+  try {
+    const swaps = await Swap.create(req.body)
+    res.json(swaps)
+  } catch (error) {
+    console.error(error)
   }
 })

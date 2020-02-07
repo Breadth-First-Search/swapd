@@ -11,14 +11,16 @@ const ServiceCategory = require('./serviceCategory')
 User.belongsToMany(User, {
   through: Swap,
   as: 'Requester',
-  foreignKey: 'requesterId',
-  otherId: 'swapId'
+  unique: false,
+  otherId: 'swapId',
+  constraints: false
 })
 User.belongsToMany(User, {
   through: Swap,
   as: 'Responder',
-  foreignKey: 'responderId',
-  otherId: 'swapId'
+  unique: false,
+  otherId: 'swapId',
+  constraints: false
 })
 
 Message.belongsTo(User, {

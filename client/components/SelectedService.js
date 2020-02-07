@@ -43,6 +43,7 @@ class SelectedService extends React.Component {
   render() {
     let user = this.state.user
     let service = this.state.service
+    service.id = Number(this.props.match.params.serviceId)
 
     return (
       <div>
@@ -55,7 +56,7 @@ class SelectedService extends React.Component {
         <img src={service.imageUrl} />
         <p>{service.description}</p>
         <p>Proficiency: {service.proficiency}</p>
-        <InitiateSwapButton />
+        <InitiateSwapButton providerUser={user} providerService={service} />
         {user.firstName ? (
           <SingleUserSnapshot
             user={user}

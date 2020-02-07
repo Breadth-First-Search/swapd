@@ -240,6 +240,18 @@ async function seed() {
       text: 'Sounds good to me',
       requesterId: 1,
       responderId: 2
+    }),
+    Message.create({
+      swapId: 3,
+      text: 'Testing',
+      requesterId: 1,
+      responderId: 2
+    }),
+    Message.create({
+      swapId: 3,
+      text: 'Testing again',
+      requesterId: 1,
+      responderId: 2
     })
   ])
 

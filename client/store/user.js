@@ -1,5 +1,6 @@
 import axios from 'axios'
 import history from '../history'
+import {getUserServices} from './services'
 
 /**
  * ACTION TYPES
@@ -30,6 +31,7 @@ export const me = () => async dispatch => {
   try {
     const res = await axios.get('/auth/me')
     dispatch(getUser(res.data || defaultUser))
+    dispatch(getUserServices(res.data.id))
   } catch (err) {
     console.error(err)
   }
@@ -39,6 +41,7 @@ export const editUser = (id, edits) => async dispatch => {
   try {
     const {data} = await axios.put(`/api/users/${id}`, edits)
     dispatch(getUser(data))
+    dispatch(getUserServices(this.props.user.id))
   } catch (err) {
     console.error(err)
   }

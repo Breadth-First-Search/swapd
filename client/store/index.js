@@ -6,13 +6,19 @@ import user, {selectedUser} from './user'
 import interests from './interests'
 import services from './services'
 import swaps from './swaps'
+import {
+  newEntryReducer as newEntry,
+  messagesReducer as messages
+} from './messages'
 
 const reducer = combineReducers({
   user,
   selectedUser,
   interests,
   services,
-  swaps
+  swaps,
+  messages,
+  newEntry
 })
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({collapsed: true}))

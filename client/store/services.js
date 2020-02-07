@@ -40,6 +40,11 @@ const gotServiceCategories = serviceCategories => ({
   serviceCategories
 })
 
+const addedUserService = newUserService => ({
+  type: ADDED_USER_SERVICE,
+  newUserService
+})
+
 export const writeService = input => {
   return {type: WRITE_SERVICE, newService: input}
 }
@@ -81,6 +86,16 @@ export const getUserServices = id => async dispatch => {
     console.error(err)
   }
 }
+
+export const addUserService = (id, serviceInfo) => async dispatch => {
+  try {
+    const {data} = await axios.post(`/api/users/${id}/services`, serviceInfo)
+    dispatch(addedUserService(data))
+  } catch (err) {
+    console.error(err)
+  }
+}
+
 /**
  * REDUCER
  */
@@ -90,6 +105,11 @@ export default function(state = defaultService, action) {
       return {...state, all: action.services}
     case GOT_USER_SERVICES:
       return {...state, userServices: action.userServices}
+    case ADDED_USER_SERVICE:
+      return {
+        ...state,
+        userServices: [...state.userServices, action.newUserService]
+      }
     case GOT_NEW_SERVICE_FROM_SERVER:
       return {...state, all: [...state.all, action.service]}
     case GOT_SERVICE_CATEGORIES:
