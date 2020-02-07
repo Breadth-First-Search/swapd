@@ -137,7 +137,7 @@ router.get('/:userId', async (req, res, next) => {
       include: [
         {
           model: Interest,
-          attributes: ['name']
+          attributes: ['name', 'id']
         },
         {
           model: Service,

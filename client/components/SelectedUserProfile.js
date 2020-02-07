@@ -28,8 +28,7 @@ class SelectedUserProfile extends React.Component {
   }
 
   render() {
-    console.log(this.state.isLoading)
-    const {selectedUser, interests, services} = this.props
+    const {selectedUser} = this.props
     return !this.state.isLoading ? (
       <div>
         <div className="leftProfile">
@@ -42,13 +41,13 @@ class SelectedUserProfile extends React.Component {
           </div>
           <div>
             Interests:
-            {interests.map(i => <li key={i.id}>{i.name}</li>)}
+            {selectedUser.interests.map(i => <li key={i.id}>{i.name}</li>)}
           </div>
         </div>
         <div className="rightProfile">
           <div>
             Services:
-            {services.map(s => <li key={s.id}>{s.name}</li>)}
+            {selectedUser.services.map(s => <li key={s.id}>{s.name}</li>)}
           </div>
         </div>
       </div>
