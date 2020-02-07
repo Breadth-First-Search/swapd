@@ -24,6 +24,7 @@ form div {
 #navbarcontainer {
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
 #logocontainer {

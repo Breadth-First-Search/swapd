@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 import axios from 'axios'
 import SingleUserSnapshot from './SingleUserSnapshot'
 import {NavLink} from 'react-router-dom'
-import Button from '@material-ui/core/Button'
+import InitiateSwapButton from './InitiateSwapButton'
 
 class SelectedService extends React.Component {
   constructor() {
@@ -43,6 +43,7 @@ class SelectedService extends React.Component {
   render() {
     let user = this.state.user
     let service = this.state.service
+    service.id = Number(this.props.match.params.serviceId)
 
     return (
       <div>
@@ -52,17 +53,10 @@ class SelectedService extends React.Component {
             Offered by {user.firstName} {user.lastName}
           </h3>
         </NavLink>
-        <img src={service.imageUrl} />
+        <img style={{width: '50%'}} src={service.imageUrl} />
         <p>{service.description}</p>
         <p>Proficiency: {service.proficiency}</p>
-        <Button
-          style={{backgroundColor: '#25665C'}}
-          size="medium"
-          variant="contained"
-          color="primary"
-        >
-          Request Swap
-        </Button>
+        <InitiateSwapButton providerUser={user} providerService={service} />
         {user.firstName ? (
           <SingleUserSnapshot
             user={user}

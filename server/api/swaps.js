@@ -29,3 +29,16 @@ router.get('/:userId', async (req, res, next) => {
     next(err)
   }
 })
+
+router.post('/', async (req, res, next) => {
+  console.log(req.body)
+  try {
+    const swaps = await Swap.findOrCreate({
+      where: req.body
+    })
+    console.log(swaps)
+    res.json(swaps)
+  } catch (error) {
+    console.error(error)
+  }
+})
