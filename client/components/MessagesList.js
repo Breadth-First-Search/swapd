@@ -3,6 +3,7 @@ import Message from './Message'
 import NewMessageEntry from './NewMessageEntry'
 import {connect} from 'react-redux'
 import {getMessagesFromServer} from '../store/messages'
+import OfferForm from './OfferForm'
 
 class MessagesList extends Component {
   async componentDidMount() {
@@ -15,14 +16,24 @@ class MessagesList extends Component {
     // const filteredMessages = messages.filter(
     //   message => message.swapId === swapId
     // );
-    console.log(messages)
+    // console.log(messages)
     return (
       <div>
         <ul className="media-list">
           {messages.length &&
-            messages.map(message => (
-              <Message message={message} key={message.id} />
-            ))}
+            messages.map(message => {
+              if (message.type === 'MESSAGE') {
+                return <Message message={message} key={message.id} />
+              } else {
+                return (
+                  <OfferForm
+                    offer={message}
+                    key={message.id}
+                    user={this.props.user}
+                  />
+                )
+              }
+            })}
         </ul>
         {messages.length && <NewMessageEntry swapId={swapId} />}
       </div>
