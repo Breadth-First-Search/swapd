@@ -17,7 +17,11 @@ import history from '../history'
 function FormDialog(props) {
   const [open, setOpen] = useState(false)
   const [message, setMessage] = useState('')
-  const [selectedService, setSelectedService] = useState(props.providerService)
+  const [selectedService, setSelectedService] = useState(null)
+
+  // useEffect( ()=> {
+  //   if(props.services.userServices)
+  // })
 
   const handleClickOpen = () => {
     setOpen(true)
@@ -32,7 +36,7 @@ function FormDialog(props) {
   }
 
   const handleSubmit = async () => {
-    if (message) {
+    if (message && selectedService) {
       const swapObj = {
         requesterServiceId: selectedService.id,
         requesterId: props.user.id,
@@ -63,11 +67,11 @@ function FormDialog(props) {
         console.log(error)
       }
     } else {
-      alert('Please write a friendly message.')
+      alert('Please include a friendly message and select a service to swap.')
     }
   }
 
-  return (
+  return props.services.length ? (
     <div>
       <Button
         style={{color: 'white', backgroundColor: '#25665C'}}
@@ -85,17 +89,19 @@ function FormDialog(props) {
         <DialogTitle id="form-dialog-title">Select Service to Swap</DialogTitle>
         <DialogContent>
           <List>
-            {props.services.map(service => (
-              <ListItem
-                button
-                selected={selectedService.id === service.id}
-                onClick={() => handleServiceButtonClick(service)}
-                key={service.id}
-              >
-                <img src={service.photo} />
-                <ListItemText primary={service.name} />
-              </ListItem>
-            ))}
+            {props.services.length
+              ? props.services.map(service => (
+                  <ListItem
+                    button
+                    selected={selectedService === service}
+                    onClick={() => handleServiceButtonClick(service)}
+                    key={service.id}
+                  >
+                    <img src={service.photo} />
+                    <ListItemText primary={service.name} />
+                  </ListItem>
+                ))
+              : null}
           </List>
           <DialogContentText>
             Curate your message and work out the details!
@@ -121,7 +127,7 @@ function FormDialog(props) {
         </DialogActions>
       </Dialog>
     </div>
-  )
+  ) : null
 }
 
 const mapDispatchToProps = dispatch => {

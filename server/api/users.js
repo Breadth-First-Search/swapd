@@ -41,10 +41,11 @@ router.get('/top', async (req, res, next) => {
     const topUsers = await User.findAll({
       where: {
         overallRating: {
-          [Sequelize.Op.gte]: 4
+          [Sequelize.Op.gte]: 3
         }
       }
     })
+
     const preference = {ratingWeight: 5, reviewCountWeight: 7}
     topUsers.sort((userA, userB) => {
       const userAScore =
