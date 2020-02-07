@@ -42,8 +42,10 @@ function FormDialog(props) {
       }
       try {
         const swapRes = await axios.post('/api/swaps/', swapObj)
-        if (!swapRes.data[1]) alert('already have an open swap going')
-        else {
+        if (!swapRes.data[1]) {
+          alert('Looks like you already have a open swap going.')
+          history.push(`/swaps/${swapRes.data[0].id}`)
+        } else {
           const messageObj = {
             swapId: swapRes.data[0].id,
             userId: props.user.id,
@@ -61,7 +63,7 @@ function FormDialog(props) {
         console.log(error)
       }
     } else {
-      alert('Write a message!')
+      alert('Please write a friendly message.')
     }
   }
 
