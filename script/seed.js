@@ -198,16 +198,6 @@ async function seed() {
     responderServiceId: 4,
     location: ''
   })
-  await Swap.create({
-    id: 3,
-    swapDate: new Date(2020, 1, 1),
-    swapStatus: 'completed',
-    requesterId: 1,
-    responderId: 2,
-    requesterServiceId: 1,
-    responderServiceId: 2,
-    location: 'Fullstack Academy'
-  })
 
   await Promise.all([
     Message.create({

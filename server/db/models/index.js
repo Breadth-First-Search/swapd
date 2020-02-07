@@ -97,8 +97,6 @@ Review.beforeCreate(async (review, options) => {
   await reviewedUser.increment('reviewCount', {by: 1})
   await reviewedService.increment('reviewCount', {by: 1})
 
-  console.log('after', reviewedUser.reviewCount)
-
   // await reviewedUser.update({
   //   reviewCount: reviewedUser.reviewCount+1
   // })
