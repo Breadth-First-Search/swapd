@@ -9,6 +9,9 @@ import InputBase from '@material-ui/core/InputBase'
 import SearchIcon from '@material-ui/icons/Search'
 import ClearIcon from '@material-ui/icons/Clear'
 import history from '../history'
+import Menu from '@material-ui/core/Menu'
+import MenuItem from '@material-ui/core/MenuItem'
+import Avatar from '@material-ui/core/Avatar'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -17,7 +20,7 @@ const useStyles = makeStyles(theme => ({
     },
     display: 'flex',
     alignSelf: 'center',
-    color: 'white'
+    alignItems: 'center'
   },
   inputRoot: {
     color: 'inherit'
@@ -37,7 +40,8 @@ const useStyles = makeStyles(theme => ({
     margin: 0,
     [theme.breakpoints.up('md')]: {
       width: 200
-    }
+    },
+    boxShadow: '0 3px 5px 2px rgba(0, 0, 0, .1)'
   },
   search: {
     display: 'flex',
@@ -79,6 +83,21 @@ const Navbar = props => {
   const handleClick = props.handleClick
   const classes = useStyles()
 
+  const [anchorEl, setAnchorEl] = useState(null)
+
+  const handleAvatarClick = event => {
+    setAnchorEl(event.currentTarget)
+  }
+
+  const handleProfile = () => {
+    setAnchorEl(null)
+    history.push('/user-profile')
+  }
+
+  const handleClose = () => {
+    setAnchorEl(null)
+  }
+
   return (
     <div>
       <nav>
@@ -95,6 +114,7 @@ const Navbar = props => {
                     <SearchIcon />
                   </div>
                   <InputBase
+                    style={{border: '10px'}}
                     placeholder="Search…"
                     classes={{
                       root: classes.inputRoot,
@@ -119,30 +139,53 @@ const Navbar = props => {
 
             <div className={classes.root}>
               <Button
-                style={{backgroundColor: '#25665C'}}
+                style={{backgroundColor: 'white', outlineColor: '#25665C'}}
                 size="medium"
-                variant="contained"
                 color="primary"
               >
-                <Link to="/swaps">Messages</Link>
+                <Link
+                  style={{color: '#25665C', fontWeight: 'bold'}}
+                  to="/swaps"
+                >
+                  Messages
+                </Link>
               </Button>
-              <Button
-                style={{backgroundColor: '#25665C'}}
+              {/* <Button
+                style={{backgroundColor: 'white', outlineColor: "#25665C"}}
                 size="medium"
-                variant="contained"
                 color="primary"
               >
-                <Link to="/user-profile">User Profile</Link>
-              </Button>
-              <Button
-                style={{backgroundColor: '#25665C'}}
+                <Link style={{color: "#25665C", fontWeight: 'bold'}} to="/user-profile">Profile</Link>
+              </Button> */}
+              {/* <Button
+                style={{backgroundColor: 'white', outlineColor: "#25665C"}}
                 size="medium"
-                variant="contained"
                 color="primary"
                 onClick={handleClick}
               >
-                <Link to="/">Logout</Link>
+                <Link style={{color: "#25665C", fontWeight: 'bold'}} to="/">Logout</Link>
+              </Button> */}
+              <Button
+                aria-controls="simple-menu"
+                aria-haspopup="true"
+                onClick={handleAvatarClick}
+              >
+                <Avatar alt="User" src={props.user.photo} />
               </Button>
+              <Menu
+                id="simple-menu"
+                anchorEl={anchorEl}
+                keepMounted
+                open={Boolean(anchorEl)}
+                onClose={handleClose}
+              >
+                <MenuItem style={{fontSize: '15px'}} onClick={handleProfile}>
+                  Profile
+                </MenuItem>
+                <MenuItem style={{fontSize: '15px'}} onClick={handleClick}>
+                  Logout
+                </MenuItem>
+              </Menu>
             </div>
           </div>
         ) : (
@@ -172,20 +215,28 @@ const Navbar = props => {
 
             <div className={classes.root}>
               <Button
-                style={{backgroundColor: '#25665C'}}
+                style={{backgroundColor: 'white', outlineColor: '#25665C'}}
                 size="medium"
-                variant="contained"
                 color="primary"
               >
-                <Link to="/login">Login</Link>
+                <Link
+                  style={{color: '#25665C', fontWeight: 'bold'}}
+                  to="/login"
+                >
+                  Login
+                </Link>
               </Button>
               <Button
-                style={{backgroundColor: '#25665C'}}
+                sstyle={{backgroundColor: 'white', outlineColor: '#25665C'}}
                 size="medium"
-                variant="contained"
                 color="primary"
               >
-                <Link to="/signup">Sign Up</Link>
+                <Link
+                  style={{color: '#25665C', fontWeight: 'bold'}}
+                  to="/signup"
+                >
+                  Sign Up
+                </Link>
               </Button>
             </div>
           </div>

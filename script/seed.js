@@ -143,7 +143,7 @@ async function seed() {
       description: 'Learn the basics of dance over 2 hours.',
       proficiency: 1,
       remote: false,
-      photo: 'mingdance.png',
+      photo: 'mingdance.jpg',
       serviceRating: Math.random() * 5
     }),
     Service.create({

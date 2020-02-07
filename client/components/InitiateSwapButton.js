@@ -11,15 +11,12 @@ import axios from 'axios'
 import {postNewMessage} from '../store/messages'
 import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem'
-import ListItemAvatar from '@material-ui/core/ListItemAvatar'
 import ListItemText from '@material-ui/core/ListItemText'
-import Avatar from '@material-ui/core/Avatar'
-import PersonIcon from '@material-ui/icons/Person'
 
 function FormDialog(props) {
   const [open, setOpen] = useState(false)
   const [message, setMessage] = useState('')
-  const [selectedService, setSelectedService] = useState(null)
+  const [selectedService, setSelectedService] = useState(props.providerService)
 
   const handleClickOpen = () => {
     setOpen(true)
@@ -64,7 +61,12 @@ function FormDialog(props) {
 
   return (
     <div>
-      <Button variant="outlined" color="primary" onClick={handleClickOpen}>
+      <Button
+        style={{color: 'white', backgroundColor: '#25665C'}}
+        variant="contained"
+        color="primary"
+        onClick={handleClickOpen}
+      >
         Request Swap
       </Button>
       <Dialog
@@ -78,6 +80,7 @@ function FormDialog(props) {
             {props.services.map(service => (
               <ListItem
                 button
+                selected={selectedService.id === service.id}
                 onClick={() => handleServiceButtonClick(service)}
                 key={service.id}
               >
@@ -94,7 +97,7 @@ function FormDialog(props) {
             margin="dense"
             id="name"
             label="Message"
-            type="email"
+            type="text"
             value={message}
             onChange={() => setMessage(event.target.value)}
             fullWidth
