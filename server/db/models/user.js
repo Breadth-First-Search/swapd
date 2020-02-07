@@ -36,14 +36,14 @@ const User = db.define('user', {
   distancePrefWeight: {
     type: Sequelize.FLOAT,
     defaultValue: 20
-    //unit of measure = miles
   },
   email: {
     type: Sequelize.STRING,
     unique: true
   },
   overallRating: {
-    type: Sequelize.FLOAT
+    type: Sequelize.FLOAT,
+    defaultValue: 3.0
   },
   reviewCount: {
     type: Sequelize.INTEGER,

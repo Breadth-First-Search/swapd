@@ -16,11 +16,6 @@ const Message = db.define('message', {
     values: ['MESSAGE', 'CURRENT_OFFER', 'OLD_OFFER'],
     defaultValue: 'MESSAGE'
   }
-  // time: {
-  //   type: 'TIMESTAMP',
-  //   defaultValue: Sequelize.literal('CURRENT-TIMESTAMP'),
-  //   allowNull: false
-  // }
 })
 
 module.exports = Message
