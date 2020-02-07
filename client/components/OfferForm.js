@@ -26,14 +26,14 @@ class OfferForm extends React.Component {
     let theyWant
 
     if (you.id === requesterId) {
-      youWant = this.props.offer.swap.requesterService
-      theyWant = this.props.offer.swap.responderService
-    } else {
       youWant = this.props.offer.swap.responderService
       theyWant = this.props.offer.swap.requesterService
+    } else {
+      youWant = this.props.offer.swap.requesterService
+      theyWant = this.props.offer.swap.responderService
     }
 
-    // console.log(this.props)
+    console.log(this.props.theyWant)
 
     return (
       <div>
