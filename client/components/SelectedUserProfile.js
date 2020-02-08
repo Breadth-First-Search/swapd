@@ -1,27 +1,38 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {getUserInterests} from '../store/interests'
-import {getUserServices} from '../store/services'
+// import {getUserServices} from '../store/services'
 import {loadSelectedUser} from '../store/user'
+import StarRateIcon from '@material-ui/icons/StarRate'
 
 class SelectedUserProfile extends React.Component {
   constructor() {
     super()
     this.state = {
-      isLoading: true
+      isLoading: true,
+      matchingInterests: []
     }
   }
 
   componentDidMount() {
-    //add interests and services for user along with user info
-    //load user's interests
-    //load user's services
+    //load user interests
+    //load selected user's info, interests, and services
     try {
       this.props.getSelectedUser(this.props.match.params.userId)
-      this.props.getUserServices(this.props.match.params.userId)
-      this.props
-        .getUserInterests(this.props.match.params.userId)
-        .then(() => this.setState({isLoading: false}))
+      this.props.getUserInterests(this.props.user.id).then(() => {
+        //check to see if there is a matching interest between user and selected user profile then set to local state
+        const matchingInterests = []
+        if (this.props.selectedUser.id !== this.props.user.id) {
+          for (let selectedUserInterest of this.props.selectedUser.interests) {
+            for (let userInterest of this.props.interests) {
+              if (selectedUserInterest.id === userInterest.id) {
+                matchingInterests.push(selectedUserInterest.id)
+              }
+            }
+          }
+        }
+        this.setState({isLoading: false, matchingInterests})
+      })
     } catch (error) {
       console.error(error)
     }
@@ -30,18 +41,39 @@ class SelectedUserProfile extends React.Component {
   render() {
     const {selectedUser} = this.props
     return !this.state.isLoading ? (
-      <div>
+      <div id="profileContainer">
         <div className="leftProfile">
-          <img src={selectedUser.photo} className="profilePhoto" />
-          <div>Overall Rating: {selectedUser.overallRating}</div>
-          <div>Email: {selectedUser.email}</div>
-          <div>Phone Number: {selectedUser.phoneNumber}</div>
-          <div>
-            Maximum Travel Distance: {selectedUser.distancePrefWeight}mi
+          <div style={{fontSize: '1.5em', fontWeight: 'bold'}}>
+            {selectedUser.firstName} {selectedUser.lastName}
           </div>
+          <img src={selectedUser.photo} className="profilePhoto" />
+          <div id="overallRating">
+            <StarRateIcon fontSize="small" viewBox="0 0 24 24" />
+            <span className="overallRating">
+              {selectedUser.overallRating.toFixed(2)}
+            </span>
+            <span style={{color: '#25665C'}}>{` (${
+              selectedUser.reviewCount
+            })`}</span>
+          </div>
+          <br />
+          <div>Max Travel Distance: {selectedUser.distancePrefWeight} mi</div>
+          <br />
           <div>
-            Interests:
-            {selectedUser.interests.map(i => <li key={i.id}>{i.name}</li>)}
+            <div className="interests">Interests:</div>
+            <ul>
+              {selectedUser.interests.map(interest => {
+                if (this.state.matchingInterests.includes(interest.id)) {
+                  return (
+                    <li className="matching" key={interest.id}>
+                      {interest.name}
+                    </li>
+                  )
+                } else {
+                  return <li key={interest.id}>{interest.name}</li>
+                }
+              })}
+            </ul>
           </div>
         </div>
         <div className="rightProfile">
@@ -69,8 +101,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     getSelectedUser: id => dispatch(loadSelectedUser(id)),
-    getUserInterests: id => dispatch(getUserInterests(id)),
-    getUserServices: id => dispatch(getUserServices(id))
+    getUserInterests: id => dispatch(getUserInterests(id))
   }
 }
 

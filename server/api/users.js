@@ -133,7 +133,9 @@ router.get('/:userId', async (req, res, next) => {
         'email',
         'overallRating',
         'latitude',
-        'longitude'
+        'longitude',
+        'distancePrefWeight',
+        'reviewCount'
       ],
       include: [
         {
