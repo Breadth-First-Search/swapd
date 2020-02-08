@@ -39,7 +39,10 @@ const useStyles = makeStyles(theme => ({
     },
     margin: 0,
     [theme.breakpoints.up('md')]: {
-      width: 200
+      width: 180,
+      '&:focus': {
+        width: 250
+      }
     },
     boxShadow: '0 3px 5px 2px rgba(0, 0, 0, .1)'
   },
@@ -64,7 +67,7 @@ const useStyles = makeStyles(theme => ({
     position: 'absolute',
     alignSelf: 'center',
     pointerEvents: 'none',
-    zIndex: 9,
+    zIndex: 3,
     alignItems: 'center',
     justifyContent: 'center'
   },
@@ -73,7 +76,10 @@ const useStyles = makeStyles(theme => ({
     padding: 0,
     border: 0,
     color: 'grey',
-    outline: 'none'
+    outline: 'none',
+    '&:focus': {
+      width: 20
+    }
   }
 }))
 
@@ -120,7 +126,7 @@ const Navbar = props => {
                       root: classes.inputRoot,
                       input: classes.inputInput
                     }}
-                    inputProps={{'aria-label': 'search'}}
+                    // inputProps={{'aria-label': 'search'}}
                     value={search}
                     onChange={() => setSearch(event.target.value)}
                   />
@@ -150,21 +156,6 @@ const Navbar = props => {
                   Messages
                 </Link>
               </Button>
-              {/* <Button
-                style={{backgroundColor: 'white', outlineColor: "#25665C"}}
-                size="medium"
-                color="primary"
-              >
-                <Link style={{color: "#25665C", fontWeight: 'bold'}} to="/user-profile">Profile</Link>
-              </Button> */}
-              {/* <Button
-                style={{backgroundColor: 'white', outlineColor: "#25665C"}}
-                size="medium"
-                color="primary"
-                onClick={handleClick}
-              >
-                <Link style={{color: "#25665C", fontWeight: 'bold'}} to="/">Logout</Link>
-              </Button> */}
               <Button
                 aria-controls="simple-menu"
                 aria-haspopup="true"

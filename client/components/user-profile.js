@@ -23,6 +23,9 @@ class UserProfile extends React.Component {
     return (
       <div id="profileContainer">
         <div className="leftProfile">
+          <div style={{fontSize: '1.5em', fontWeight: 'bold'}}>
+            Hi, {user.firstName}!
+          </div>
           <img src={user.photo} className="profilePhoto" />
           <div>Overall Rating: {user.overallRating.toFixed(2)}</div>
           <div>Email: {user.email}</div>
