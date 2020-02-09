@@ -1,39 +1,4 @@
-// import React from 'react'
-// import {connect} from 'react-redux'
-// import PropTypes from 'prop-types'
-// import {auth} from '../store'
-// import Oauth from './o-auth'
-
-// const AuthForm = props => {
-//   const {name, displayName, handleSubmit, error} = props
-
-//   return (
-//     <div>
-//       <form onSubmit={handleSubmit} name={name}>
-//         <div>
-//           <label htmlFor="email">
-//             <small>Email</small>
-//           </label>
-//           <input name="email" type="text" />
-//         </div>
-//         <div>
-//           <label htmlFor="password">
-//             <small>Password</small>
-//           </label>
-//           <input name="password" type="password" />
-//         </div>
-//         <div>
-//           <button type="submit">{displayName}</button>
-//         </div>
-//         {error && error.response && <div> {error.response.data} </div>}
-//       </form>
-//       <Oauth name={name} />
-//       {/* <a href="/auth/google">{displayName} with Google</a> */}
-//     </div>
-//   )
-// }
-
-import React from 'react'
+import React, {useState} from 'react'
 import Avatar from '@material-ui/core/Avatar'
 import Button from '@material-ui/core/Button'
 import CssBaseline from '@material-ui/core/CssBaseline'
@@ -107,6 +72,7 @@ const useStyles = makeStyles(theme => ({
 function AuthForm(props) {
   const classes = useStyles()
   const {name, handleSubmit, error} = props
+  const [isLoading, setLoading] = useState(true)
 
   return (
     <Grid container component="main" className={classes.root}>
@@ -198,7 +164,9 @@ const mapLogin = state => {
   return {
     name: 'login',
     displayName: 'Login',
-    error: state.user.error
+    error: state.user.error,
+    isLoggedIn: !!state.user.id,
+    user: state.user
   }
 }
 

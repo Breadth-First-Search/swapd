@@ -4,6 +4,8 @@ import {getUserInterests} from '../store/interests'
 // import {getUserServices} from '../store/services'
 import {loadSelectedUser} from '../store/user'
 import StarRateIcon from '@material-ui/icons/StarRate'
+import {Link} from 'react-router-dom'
+import Ratings from 'react-ratings-declarative'
 
 class SelectedUserProfile extends React.Component {
   constructor() {
@@ -12,26 +14,32 @@ class SelectedUserProfile extends React.Component {
       isLoading: true,
       matchingInterests: []
     }
+    this.getMatchingInterests = this.getMatchingInterests.bind(this)
+  }
+
+  getMatchingInterests() {
+    const matchingInterests = []
+    if (this.props.selectedUser.id !== this.props.user.id) {
+      for (let selectedUserInterest of this.props.selectedUser.interests) {
+        for (let userInterest of this.props.interests) {
+          if (selectedUserInterest.id === userInterest.id) {
+            matchingInterests.push(selectedUserInterest.id)
+          }
+        }
+      }
+    }
+    this.setState({isLoading: false, matchingInterests})
   }
 
   componentDidMount() {
     //load user interests
     //load selected user's info, interests, and services
     try {
-      this.props.getSelectedUser(this.props.match.params.userId)
-      this.props.getUserInterests(this.props.user.id).then(() => {
-        //check to see if there is a matching interest between user and selected user profile then set to local state
-        const matchingInterests = []
-        if (this.props.selectedUser.id !== this.props.user.id) {
-          for (let selectedUserInterest of this.props.selectedUser.interests) {
-            for (let userInterest of this.props.interests) {
-              if (selectedUserInterest.id === userInterest.id) {
-                matchingInterests.push(selectedUserInterest.id)
-              }
-            }
-          }
-        }
-        this.setState({isLoading: false, matchingInterests})
+      this.props.getSelectedUser(this.props.match.params.userId).then(() => {
+        this.props.getUserInterests(this.props.user.id).then(() => {
+          //check to see if there is a matching interest between user and selected user profile then set to local state
+          this.getMatchingInterests()
+        })
       })
     } catch (error) {
       console.error(error)
@@ -48,7 +56,7 @@ class SelectedUserProfile extends React.Component {
           </div>
           <img src={selectedUser.photo} className="profilePhoto" />
           <div id="overallRating">
-            <StarRateIcon fontSize="small" viewBox="0 0 24 24" />
+            <StarRateIcon viewBox="0 0 24 24" />
             <span className="overallRating">
               {selectedUser.overallRating.toFixed(2)}
             </span>
@@ -77,9 +85,51 @@ class SelectedUserProfile extends React.Component {
           </div>
         </div>
         <div className="rightProfile">
-          <div>
-            Services:
-            {selectedUser.services.map(s => <li key={s.id}>{s.name}</li>)}
+          <div style={{fontSize: '1.5em', fontWeight: 'bold'}}>Services</div>
+          <div id="servicelistcontainer">
+            {selectedUser.services.map(s => {
+              return (
+                <div className="singleservice" key={s.id}>
+                  <div className="servicephotobox">
+                    <div className="servicename">{s.name}</div>
+                    <Link to={`/users/${selectedUser.id}/services/${s.id}`}>
+                      <img src={s.imageUrl} className="servicephoto" />
+                    </Link>
+                    <div className="servicerating">
+                      <StarRateIcon
+                        fontSize="small"
+                        viewBox="0 0 24 24"
+                        color="secondary"
+                      />
+                      <span>{s.serviceRating.toFixed(2)}</span>
+                      <span style={{color: '#25665C'}}>{` (${
+                        s.reviewCount
+                      })`}</span>
+                    </div>
+                  </div>
+                  <div className="servicedescriptionbox">
+                    <div>
+                      <p>{s.description}</p>
+                    </div>
+                  </div>
+                  <div className="verticalline" />
+                  <div className="servicerightside">
+                    <div>
+                      <div className="servicerightsidetitle">Skill Level</div>
+                      <Ratings rating={s.proficiency} widgetRatedColors="gold">
+                        <Ratings.Widget widgetDimension="15px" />
+                        <Ratings.Widget widgetDimension="15px" />
+                        <Ratings.Widget widgetDimension="15px" />
+                      </Ratings>
+                    </div>
+                    <div>
+                      <div className="servicerightsidetitle">Remote</div>
+                      <div className="remote">{s.remote ? 'Yes' : 'No'}</div>
+                    </div>
+                  </div>
+                </div>
+              )
+            })}
           </div>
         </div>
       </div>

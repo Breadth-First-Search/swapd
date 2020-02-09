@@ -150,7 +150,10 @@ router.get('/:userId', async (req, res, next) => {
             'proficiency',
             'serviceRating',
             'imageUrl',
-            'videoUrl'
+            'videoUrl',
+            'reviewCount',
+            'description',
+            'remote'
           ],
           include: [
             {

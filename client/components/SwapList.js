@@ -44,6 +44,7 @@ class SwapList extends React.Component {
 
   render() {
     const swaps = this.props.swaps
+    console.log(swaps)
 
     return !this.state.isLoading ? (
       <div>
@@ -66,7 +67,6 @@ class SwapList extends React.Component {
                   <div>{swap.messages[swap.messages.length - 1].text}</div>
                   <div>{swap.swapStatus}</div>
                 </div>
-                <hr />
               </div>
             </Link>
           )

@@ -84,6 +84,7 @@ const useStyles = makeStyles(theme => ({
 
 const Navbar = props => {
   const [search, setSearch] = useState('')
+  const [loading, setLoading] = useState(true)
   const isLoggedIn = props.isLoggedIn
   const handleClick = props.handleClick
   const classes = useStyles()

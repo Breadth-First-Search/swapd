@@ -9,6 +9,11 @@ body {
 
 a {
   text-decoration: none;
+  color: #25665c;
+}
+
+a:visited {
+  color: #25665c;
 }
 
 label {
@@ -74,12 +79,16 @@ nav a {
 
 .profilePhoto {
   height: 180px;
+  width: 180px;
   border-radius: 50%;
   margin: 15px;
 }
 
 .swaplistcontainer {
   justify-content: center;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid grey;
 }
 
 .swaplistdetails {
@@ -121,10 +130,11 @@ nav a {
 #profileContainer {
   display: flex;
   justify-content: center;
+  flex-wrap: wrap;
 }
 
 .leftProfile {
-  width: 25%;
+  height: 100%;
   text-align: center;
   border: 1px;
   border-radius: 1px;
@@ -135,16 +145,113 @@ nav a {
   box-shadow: rgb(228, 228, 228);
 }
 
-.leftProfile img {
-  margin-bottom: 5px;
+.rightProfile {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  height: 100%;
+  padding: 15px;
+  margin: 45px;
+  width: 55%;
+  border: 1px;
+  border-radius: 1px;
+  border-style: solid;
+  border-color: rgb(228, 228, 228);
+  box-shadow: rgb(228, 228, 228);
 }
 
-.rightProfile {
-  width: 60%;
-  text-align: center;
-  border-color: rgb(228, 228, 228);
-  padding: 15px;
+#servicelistcontainer {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+}
+
+.singleservice {
+  display: flex;
+  justify-content: left;
+  width: 95%;
   margin: 15px;
+  border: 1px;
+  border-radius: 10px;
+  border-style: solid;
+  border-color: rgb(228, 228, 228);
+  box-shadow: rgb(228, 228, 228);
+}
+
+.servicephotobox {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;
+  width: 25%;
+}
+
+.servicephotobox a {
+  align-self: center;
+  width: 90%;
+}
+
+.servicephoto {
+  width: 100%;
+  border-radius: 10px;
+}
+
+.servicename {
+  text-align: center;
+  padding: 10px;
+  font-weight: bold;
+}
+
+.servicerating {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9em;
+  padding: 3px;
+}
+
+.servicerating span {
+  padding-right: 3px;
+}
+
+.servicedescriptionbox {
+  overflow: hidden;
+  width: 50%;
+  padding: 10px;
+}
+
+.servicedescriptionbox p {
+  margin: 0px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow: hidden;
+}
+
+.verticalline {
+  overflow: hidden;
+  border: 0px;
+  border-left: 1px;
+  border-style: solid;
+  border-color: rgb(228, 228, 228);
+}
+
+.servicerightside {
+  overflow: hidden;
+  white-space: nowrap;
+  width: 25%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.servicerightsidetitle {
+  padding-bottom: 10px;
+}
+
+.remote {
+  text-align: center;
 }
 
 #overallRating {
@@ -156,6 +263,7 @@ nav a {
 
 #overallRating span {
   padding: 2px;
+  padding-left: 0px;
 }
 
 .interests {

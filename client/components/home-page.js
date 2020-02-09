@@ -25,9 +25,11 @@ class HomePage extends React.Component {
           {this.state.topUsers.length &&
             this.state.topUsers.map(user => {
               return (
-                <Link key={user.id} to={`/user-profile/${user.id}`}>
-                  <li>{user.firstName}</li>
-                </Link>
+                <div key={user.id}>
+                  <Link to={`/user-profile/${user.id}`}>
+                    <li>{user.firstName}</li>
+                  </Link>
+                </div>
               )
             })}
         </ul>
