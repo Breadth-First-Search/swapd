@@ -38,24 +38,23 @@ const useStyles = makeStyles(theme => ({
       backgroundColor: '#ecececde'
     },
     margin: 0,
+    height: '50%',
     [theme.breakpoints.up('md')]: {
       width: 180,
       '&:focus': {
         width: 250
       }
     },
-    boxShadow: '0 3px 5px 2px rgba(0, 0, 0, .1)'
+    boxShadow: '0 1px 8px 2px rgba(0, 0, 0, .1)'
   },
   search: {
     display: 'flex',
     position: 'relative',
-    marginRight: theme.spacing(2),
     marginLeft: 0,
     margin: 0,
     width: '100%',
     height: 50,
     [theme.breakpoints.up('sm')]: {
-      marginLeft: theme.spacing(3),
       width: 'auto'
     }
   },
@@ -145,7 +144,7 @@ const Navbar = props => {
 
             <div className={classes.root}>
               <Button
-                style={{backgroundColor: 'white', outlineColor: '#25665C'}}
+                style={{backgroundColor: '#fff', outlineColor: '#25665C'}}
                 size="medium"
                 color="primary"
               >
@@ -206,7 +205,7 @@ const Navbar = props => {
 
             <div className={classes.root}>
               <Button
-                style={{backgroundColor: 'white', outlineColor: '#25665C'}}
+                // style={{backgroundColor: '#fff', outlineColor: '#25665C'}}
                 size="medium"
                 color="primary"
               >
@@ -218,7 +217,7 @@ const Navbar = props => {
                 </Link>
               </Button>
               <Button
-                sstyle={{backgroundColor: 'white', outlineColor: '#25665C'}}
+                // style={{backgroundColor: '#fff', outlineColor: '#25665C'}}
                 size="medium"
                 color="primary"
               >
@@ -233,7 +232,6 @@ const Navbar = props => {
           </div>
         )}
       </nav>
-      <hr />
     </div>
   )
 }

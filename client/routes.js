@@ -7,7 +7,6 @@ import SelectedUserProfile from './components/SelectedUserProfile'
 import EditProfile from './components/user-profile-edit'
 import {
   Login,
-  Signup,
   UserHome,
   SearchResults,
   SelectedService,
@@ -17,6 +16,7 @@ import {
 import Oauth from './components/o-auth'
 import {me} from './store'
 import SwapList from './components/SwapList'
+import SignUp from './components/SignUp'
 
 /**
  * COMPONENT
@@ -33,7 +33,7 @@ class Routes extends Component {
       <Switch>
         {/* Routes placed here are available to all visitors */}
         <Route exact path="/login" component={Login} />
-        <Route exact path="/signup" component={Signup} />
+        <Route exact path="/signup" component={SignUp} />
         <Route exact path="/auth/google" component={Oauth} />
         {/* <Route exact path="/search/:serviceName" component={SearchResults} /> */}
         {isLoggedIn && (

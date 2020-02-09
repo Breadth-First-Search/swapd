@@ -1,12 +1,11 @@
 import React from 'react'
+import GoogleButton from 'react-google-button'
 
 const Oauth = props => {
-  const {name} = props
-
   return (
     <form method="get" action="/auth/google">
-      <button type="submit" className="o-auth-button">
-        {name === 'signup' ? 'Signin with Google' : 'Login with Google'}
+      <button id="googleButton" type="submit">
+        <GoogleButton type="light" />
       </button>
     </form>
   )

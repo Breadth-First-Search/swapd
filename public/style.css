@@ -1,6 +1,10 @@
 body {
   font-family: 'Roboto,Noto,Segoe UI,Arial,sans-serif';
   font-size: 0.95em;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
 }
 
 a {
@@ -25,13 +29,16 @@ form div {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  background-color: #fff;
+  border-bottom: 1px solid grey;
+  width: 100%;
 }
 
 #logocontainer {
   display: flex;
   justify-content: center;
   align-content: center;
-  height: 50px;
+  height: 45px;
 }
 
 #logocontainer a {
@@ -41,19 +48,11 @@ form div {
 }
 
 #logocontainer form {
-  height: 50px;
+  align-self: center;
 }
 
 #swapdlogo {
-  width: 150px;
-}
-
-nav {
-  /* position: fixed;
-
-  width: 100%;
-  z-index: 1; */
-  top: 0;
+  width: 90%;
 }
 
 nav a {
@@ -64,6 +63,13 @@ nav a {
   padding: 0px;
   border: 0px;
   margin: 0px;
+}
+
+#googleButton {
+  margin: 0px;
+  padding: 0px;
+  border: 0px;
+  margin-top: 20px;
 }
 
 .profilePhoto {
@@ -105,10 +111,6 @@ nav a {
 .searchResultsInner {
   padding: 30px;
   margin: 15px;
-  /* border-radius: 10%;
-  border: 1px;
-  border: #25665C;
-  border-style: solid; */
 }
 
 .searchResultsName {
@@ -129,7 +131,7 @@ nav a {
   border-style: solid;
   border-color: rgb(228, 228, 228);
   padding: 15px;
-  margin: 15px;
+  margin: 45px;
   box-shadow: rgb(228, 228, 228);
 }
 
