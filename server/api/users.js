@@ -67,58 +67,6 @@ router.get('/top', async (req, res, next) => {
   }
 })
 
-//change data in the user table
-router.put('/:userId', async (req, res, next) => {
-  try {
-    console.log('userPut', req.body)
-
-    const user = await User.findByPk(+req.params.userId)
-
-    const userEdit = await user.update(req.body)
-    res.json(userEdit)
-  } catch (err) {
-    next(err)
-  }
-})
-
-//get services by userId and service categories
-router.get('/:userId/services', async (req, res, next) => {
-  try {
-    const userServices = await Service.findAll({
-      where: {userId: req.params.userId},
-      include: [{model: ServiceCategory}]
-    })
-
-    res.json(userServices)
-  } catch (err) {
-    console.error(err)
-  }
-})
-
-//post services by userId and service categories
-router.post('/:userId/services', async (req, res, next) => {
-  try {
-    const categoryName = req.body.serviceCategories
-    const newService = req.body.service
-    const description = req.body.description
-
-    const serviceCategory = await ServiceCategory.findOne({
-      where: {name: categoryName}
-    })
-
-    const service = await Service.create({
-      name: newService,
-      serviceCategoryId: serviceCategory.id,
-      userId: req.params.userId,
-      description: description
-    })
-
-    res.json(service)
-  } catch (err) {
-    console.error(err)
-  }
-})
-
 // get single user data
 router.get('/:userId', async (req, res, next) => {
   try {
@@ -166,6 +114,58 @@ router.get('/:userId', async (req, res, next) => {
     })
 
     res.json(user)
+  } catch (err) {
+    console.error(err)
+  }
+})
+
+//change data in the user table
+router.put('/:userId', async (req, res, next) => {
+  try {
+    console.log('userPut', req.body)
+
+    const user = await User.findByPk(+req.params.userId)
+
+    const userEdit = await user.update(req.body)
+    res.json(userEdit)
+  } catch (err) {
+    next(err)
+  }
+})
+
+//get services by userId and service categories
+router.get('/:userId/services', async (req, res, next) => {
+  try {
+    const userServices = await Service.findAll({
+      where: {userId: req.params.userId},
+      include: [{model: ServiceCategory}]
+    })
+
+    res.json(userServices)
+  } catch (err) {
+    console.error(err)
+  }
+})
+
+//post services by userId and service categories
+router.post('/:userId/services', async (req, res, next) => {
+  try {
+    const categoryName = req.body.serviceCategories
+    const newService = req.body.service
+    const description = req.body.description
+
+    const serviceCategory = await ServiceCategory.findOne({
+      where: {name: categoryName}
+    })
+
+    const service = await Service.create({
+      name: newService,
+      serviceCategoryId: serviceCategory.id,
+      userId: req.params.userId,
+      description: description
+    })
+
+    res.json(service)
   } catch (err) {
     console.error(err)
   }
