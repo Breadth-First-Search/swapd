@@ -2,6 +2,7 @@ import io from 'socket.io-client'
 import store from './store'
 import {gotNewInterestFromServer} from './store/interests'
 import {gotNewMessageFromServer} from './store/messages'
+// import {gotNewOfferFromServer} from './store/offers'
 
 const socket = io(window.location.origin)
 
@@ -17,7 +18,12 @@ socket.on('new-interest', interest => {
 
 // receive message
 socket.on('new-message', message => {
+  console.log(message)
   store.dispatch(gotNewMessageFromServer(message))
 })
+
+// socket.on('new-offer', offer => {
+// 	store.dispatch(gotNewOfferFromServer(offer))
+// })
 
 export default socket

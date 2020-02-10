@@ -48,6 +48,18 @@ router.get('/swap/:swapId', async (req, res, next) => {
   }
 })
 
+router.put('/:messageId', async (req, res, next) => {
+  try {
+    const offerToEdit = await Message.findByPk(+req.params.messageId)
+
+    await offerToEdit.update({type: 'OLD_OFFER'})
+
+    res.json(offerToEdit)
+  } catch (err) {
+    next(err)
+  }
+})
+
 // router.post('/initiate', async (req, res, next) => {
 //   try {
 //     let message = await Message.create(req.body)
