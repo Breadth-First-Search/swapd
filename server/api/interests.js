@@ -6,7 +6,9 @@ module.exports = router
 router.get('/', async (req, res, next) => {
   try {
     const interests = await Interest.findAll()
-    res.json(interests)
+    const interestsSet = new Set(interests)
+
+    res.json(Array.from(interestsSet))
   } catch (err) {
     next(err)
   }
