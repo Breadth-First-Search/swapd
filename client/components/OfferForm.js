@@ -34,7 +34,7 @@ class OfferForm extends React.Component {
       {
         userId: this.props.user.id,
         swapId: this.props.offer.swapId,
-        type: 'CURRENT_OFFER'
+        type: 'CONFIRMED_OFFER'
       },
       this.props.offer.id,
       this.state.selectedServiceId
@@ -69,14 +69,15 @@ class OfferForm extends React.Component {
 
     console.log(this.props)
 
-    return (
-      <div>
-        <h4>Offer</h4>
-        {youWant && (
-          <p>
-            You want:{' '}
-            {you.id === responderId &&
-            this.props.offer.type === 'CURRENT_OFFER' ? (
+    let toRender
+
+    if (you.id === responderId && this.props.offer.type === 'CURRENT_OFFER') {
+      toRender = (
+        <div className="offer_current_responder">
+          <h4>Offer</h4>
+          {youWant && (
+            <p>
+              You want:{' '}
               <form onSubmit={this.handleSubmit}>
                 <input
                   type="text"
@@ -97,18 +98,48 @@ class OfferForm extends React.Component {
                 </datalist>
                 <button type="submit">SEND</button>
               </form>
-            ) : (
-              youWant.name
-            )}
-          </p>
-        )}
-        {theyWant && (
-          <p>
-            {`${them.firstName} ${them.lastName}`} wants: {theyWant.name}
-          </p>
-        )}
-      </div>
-    )
+            </p>
+          )}
+          {theyWant && (
+            <p>
+              {`${them.firstName} ${them.lastName}`} wants: {theyWant.name}
+            </p>
+          )}
+        </div>
+      )
+    } else if (
+      you.id === requesterId &&
+      this.props.offer.type === 'CURRENT_OFFER'
+    ) {
+      toRender = (
+        <div className="offer_current_requester">
+          <h4>Offer</h4>
+          {youWant && <p>You want: {youWant.name}</p>}
+          {theyWant && (
+            <p>
+              {`${them.firstName} ${them.lastName}`} wants: {theyWant.name}
+            </p>
+          )}
+        </div>
+      )
+    }
+
+    if (this.props.offer.type === 'CONFIRMED_OFFER') {
+      toRender = (
+        <div className="offer_confirmed">
+          <h4>Confirmed Swap</h4>
+          {youWant && <p> You are getting: {youWant.name}</p>}
+          {theyWant && (
+            <p>
+              {' '}
+              {`${them.firstName} ${them.lastName}`} is getting: {theyWant.name}{' '}
+            </p>
+          )}
+        </div>
+      )
+    }
+
+    return <div>{toRender}</div>
   }
 }
 

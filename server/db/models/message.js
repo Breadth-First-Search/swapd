@@ -13,7 +13,7 @@ const Message = db.define('message', {
   },
   type: {
     type: Sequelize.ENUM,
-    values: ['MESSAGE', 'CURRENT_OFFER', 'OLD_OFFER'],
+    values: ['MESSAGE', 'CURRENT_OFFER', 'OLD_OFFER', 'CONFIRMED_OFFER'],
     defaultValue: 'MESSAGE'
   }
 })
