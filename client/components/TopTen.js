@@ -62,7 +62,7 @@ export default function TopTen(props) {
         {topUsers.map((user, index) => (
           <GridListTile key={user.id}>
             <img src={user.photo} alt={user.firstName} />
-            <Link>
+            <Link to={`/user-profile/${user.id}`}>
               <GridListTileBar title={user.firstName} actionIcon={index} />
             </Link>
           </GridListTile>

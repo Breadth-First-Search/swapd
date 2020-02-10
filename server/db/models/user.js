@@ -43,7 +43,7 @@ const User = db.define('user', {
   },
   overallRating: {
     type: Sequelize.FLOAT,
-    defaultValue: 3.0
+    defaultValue: 3.5
   },
   reviewCount: {
     type: Sequelize.INTEGER,
