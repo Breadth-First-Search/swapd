@@ -13,7 +13,14 @@ class MessagesList extends Component {
   render() {
     const swapId = Number(this.props.match.params.swapId) // because it's a string "1", not a number!
     const messages = this.props.messages
-    // const filteredMessages = messages.filter(
+    const filteredMessages = messages
+      .filter(message => message.type === 'CURRENT_OFFER')
+      .map(message => {
+        return (
+          <OfferForm offer={message} key={message.id} user={this.props.user} />
+        )
+      })
+    console.log(filteredMessages[filteredMessages.length - 1])
     //   message => message.swapId === swapId
     // );
     // console.log(messages)
@@ -21,19 +28,12 @@ class MessagesList extends Component {
       <div>
         <ul className="media-list">
           {messages.length &&
-            messages.map(message => {
-              if (message.type === 'MESSAGE') {
+            messages
+              .filter(message => message.type === 'MESSAGE')
+              .map(message => {
                 return <Message message={message} key={message.id} />
-              } else {
-                return (
-                  <OfferForm
-                    offer={message}
-                    key={message.id}
-                    user={this.props.user}
-                  />
-                )
-              }
-            })}
+              })
+              .concat([filteredMessages[filteredMessages.length - 1]])}
         </ul>
         {messages.length && <NewMessageEntry swapId={swapId} />}
       </div>

@@ -38,9 +38,29 @@ export const postNewMessage = message => {
 
     // console.log(newMessage)
 
-    const action = gotNewMessageFromServer(newMessage)
+    const action = getMessagesFromServer(message.swapId)
     dispatch(action)
+
     socket.emit('new-message', newMessage)
+  }
+}
+
+export const postNewOffer = (offer, prevId, selectedServiceId) => {
+  return async dispatch => {
+    const updatedOffer = await axios.put(`/api/messages/${prevId}`)
+    const updateSwap = await axios.put(
+      `/api/swaps/${offer.swapId}/services/${selectedServiceId}`
+    )
+
+    const response = await axios.post('/api/messages', offer)
+    const newOffer = response.data
+
+    console.log('ID:', newOffer)
+
+    dispatch(getMessagesFromServer(offer.swapId)).then(() => {
+      console.log('fdsfdsffsdfsdf', newOffer)
+      socket.emit('new-message', newOffer)
+    })
   }
 }
 
@@ -50,7 +70,13 @@ export function messagesReducer(state = initialState.messages, action) {
     case GOT_MESSAGES_FROM_SERVER:
       return action.messages
     case GOT_NEW_MESSAGE_FROM_SERVER:
-      return [...state, action.message]
+      let newState = state.filter(
+        message =>
+          message.type === 'MESSAGE' || message.type === 'CURRENT_OFFER'
+      )
+      newState.push(action.message)
+      return newState
+
     default:
       return state
   }
