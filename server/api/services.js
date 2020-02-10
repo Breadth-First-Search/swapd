@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const {Service, User, ServiceCategory} = require('../db/models')
+const {Service, User, ServiceCategory, Review} = require('../db/models')
 module.exports = router
 
 router.get('/', async (req, res, next) => {
@@ -30,6 +30,10 @@ router.get('/:serviceId', async (req, res, next) => {
         {
           model: ServiceCategory,
           attributes: ['name']
+        },
+        {
+          model: Review,
+          attributes: ['rating', 'comment']
         }
       ]
     })

@@ -45,7 +45,11 @@ class SelectedService extends React.Component {
     let service = this.state.service
     service.id = Number(this.props.match.params.serviceId)
 
-    console.log(this.state.service)
+    let reviewsPerService
+    if (service.reviews) {
+      reviewsPerService = service.reviews
+    }
+    console.log(reviewsPerService)
 
     return (
       <div id="selectedServiceContainer">
@@ -69,6 +73,15 @@ class SelectedService extends React.Component {
             service={service}
           />
         ) : null}
+        <ul>
+          {reviewsPerService &&
+            reviewsPerService.map((review, idx) => (
+              <li key={idx}>
+                <div>{review.rating}</div>
+                <h3>{review.comment}</h3>
+              </li>
+            ))}
+        </ul>
       </div>
     )
   }
