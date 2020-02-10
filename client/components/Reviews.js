@@ -29,19 +29,44 @@ class Review extends React.Component {
     //calls a thunk to update the swap review status and clears the review
     this.props.updateReviewStatus(this.props.swapId, this.props.userId)
   }
+
+  formatDate(date) {
+    const formatted = new Date(date)
+
+    const monthNames = [
+      'Jan',
+      'Feb',
+      'Mar',
+      'Apr',
+      'May',
+      'Jun',
+      'Jul',
+      'Aug',
+      'Sep',
+      'Oct',
+      'Nov',
+      'Dec'
+    ]
+
+    const day = formatted.getDate()
+    const monthIndex = formatted.getMonth()
+    const year = formatted.getFullYear()
+
+    return monthNames[monthIndex] + ' ' + day + ', ' + year
+  }
   render() {
     const {service, swapDate} = this.props
-
+    const formattedDate = this.formatDate(swapDate)
     return service.user && service.user.firstName ? (
-      <div>
-        <div>
+      <div className="reviewContainer">
+        <div style={{fontSize: '1.5em', fontWeight: 'bold'}}>
           Please Review your {service.name} from {service.user.firstName}{' '}
-          {service.user.lastName} on {swapDate}:
+          {service.user.lastName} on {formattedDate}:
         </div>
         <form onSubmit={this.handleSubmit}>
           <div>
             <label htmlFor="rating">
-              <small>Rating (0-5):</small>
+              <small>Rate The Service (0-5):</small>
             </label>
             <input
               name="rating"
@@ -53,7 +78,7 @@ class Review extends React.Component {
               size="20"
             />
             <label htmlFor="comment">
-              <small>Include your comments:</small>
+              <small>Let Everyone Know More About It:</small>
             </label>
             <input
               name="comment"

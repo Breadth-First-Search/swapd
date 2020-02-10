@@ -35,7 +35,7 @@ form div {
   justify-content: space-between;
   align-items: center;
   background-color: #fff;
-  border-bottom: 1px solid grey;
+  border-bottom: 1px solid lightgray;
   width: 100%;
 }
 
@@ -129,17 +129,22 @@ nav a {
 
 #profileContainer {
   display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
+  justify-content: center;
   flex-wrap: wrap;
 }
 
 .leftProfile {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  justify-content: space-evenly;
+  height: 100%;
+  text-align: center;
+  border: 1px;
+  border-radius: 1px;
+  border-style: solid;
+  border-color: rgb(228, 228, 228);
+  padding: 15px;
+  margin: 45px;
+  box-shadow: rgb(228, 228, 228);
 }
+
 .userProfileMain {
   height: 100%;
   text-align: center;
@@ -168,7 +173,15 @@ nav a {
   display: flex;
   align-items: center;
   flex-direction: column;
-  justify-content: space-evenly;
+  height: 100%;
+  padding: 15px;
+  margin: 45px;
+  width: 55%;
+  border: 1px;
+  border-radius: 1px;
+  border-style: solid;
+  border-color: rgb(228, 228, 228);
+  box-shadow: rgb(228, 228, 228);
 }
 .profileInterestsList {
   height: 100%;
@@ -320,4 +333,47 @@ li {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
+}
+.reviewContainer {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  width: 95%;
+  margin: 15px;
+  border: 1px;
+  border-radius: 10px;
+  border-style: solid;
+  border-color: rgb(228, 228, 228);
+  box-shadow: rgb(228, 228, 228);
+/* message form */
+
+#new-message-form {
+  position: relative;
+}
+
+#new-message-form .form-control {
+  border-width: 3px 1.5px 3px 3px;
+}
+
+#new-message-form.btn {
+  border-width: 3px;
+}
+
+.media-list {
+  overflow-y: scroll;
+  flex: 1 1 auto;
+}
+
+.media img {
+  height: 64px;
+  width: 64px;
+}
+
+.media-object {
+  border-radius: 5px;
+}
+
+.offer_confirmed {
+  border-radius: 5px;
+  background-color: green;
 }
