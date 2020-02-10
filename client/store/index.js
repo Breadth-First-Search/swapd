@@ -10,6 +10,7 @@ import {
   newEntryReducer as newEntry,
   messagesReducer as messages
 } from './messages'
+import reviews from './reviews'
 
 const reducer = combineReducers({
   user,
@@ -18,7 +19,8 @@ const reducer = combineReducers({
   services,
   swaps,
   messages,
-  newEntry
+  newEntry,
+  reviews
 })
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({collapsed: true}))

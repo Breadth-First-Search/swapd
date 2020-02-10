@@ -39,6 +39,26 @@ router.post('/', async (req, res, next) => {
     console.log(swaps)
     res.json(swaps)
   } catch (error) {
-    console.error(error)
+    next(error)
+  }
+})
+
+//updtate review status
+router.put('/reviews/:swapId', async (req, res, next) => {
+  try {
+    const swapId = Number(req.params.swapId)
+    const {userId} = req.body
+    Number(userId)
+    const swap = await Swap.findByPk(swapId)
+    console.log('swap in update review api', swap)
+    if (swap.requesterId !== userId) {
+      const updated = await swap.update({requesterServiceReviewed: true})
+      res.json(updated)
+    } else {
+      const updated = await swap.update({responderServiceReviewed: true})
+      res.json(updated)
+    }
+  } catch (error) {
+    next(error)
   }
 })
