@@ -285,3 +285,9 @@ li {
   color: #25665c;
   font-weight: bold;
 }
+
+#selectedServiceContainer {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}

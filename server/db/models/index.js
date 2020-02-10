@@ -64,6 +64,9 @@ ServiceCategory.hasMany(Service)
 Review.belongsTo(Service)
 Service.hasMany(Review)
 
+Review.belongsTo(User)
+User.hasMany(Review)
+
 Exchange.belongsTo(Swap)
 Swap.hasMany(Exchange)
 

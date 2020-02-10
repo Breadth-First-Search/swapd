@@ -107,7 +107,8 @@ function generateReviews() {
     reviews.push({
       rating: Math.ceil(Math.random() * 5) * 1.0,
       comment: reviewList[Math.floor(Math.random() * reviewList.length)],
-      serviceId: Math.ceil(Math.random() * numberOfServices)
+      serviceId: Math.ceil(Math.random() * numberOfServices),
+      userId: Math.ceil(Math.random() * (totalUsersToFake + 4))
     })
   }
   return reviews
