@@ -44,12 +44,11 @@ export default function TopTen(props) {
           <GridListTile key={user.id}>
             <img src={user.photo} alt={user.firstName} />
 
-             <Link to={`/user-profile/${user.id}`}>
+            <Link to={`/user-profile/${user.id}`}>
               <GridListTileBar
                 title={user.firstName}
                 actionIcon={<span className={classes.icon}>{index + 1}</span>}
               />
-
             </Link>
           </GridListTile>
         ))}

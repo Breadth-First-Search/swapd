@@ -101,14 +101,6 @@ const reviewList = [
 ]
 
 const imageUrls = [
-  'https://media.licdn.com/dms/image/C4E03AQEQCkON28A7Zw/profile-displayphoto-shrink_200_200/0?e=1580947200&v=beta&t=DgQ8eDJf6ZCSpwu_dFmMyWcvs0liehc_j4CwulvaXWI',
-  'https://media.licdn.com/dms/image/C4E03AQHc5GMdbxnenw/profile-displayphoto-shrink_200_200/0?e=1580947200&v=beta&t=tL7RKNJajaMgPzf5slYzk_GjJl4_A3Dydfz6fcT8SzY',
-  'https://media.licdn.com/dms/image/C5603AQHuYtqK1s9aOQ/profile-displayphoto-shrink_200_200/0?e=1580947200&v=beta&t=57_ie6kQlshqdv0Mtp8AinxHbru30pt6amahPjRINJo',
-  'https://media.licdn.com/dms/image/C4E03AQF846_NQL1qKg/profile-displayphoto-shrink_200_200/0?e=1580947200&v=beta&t=lYk73ysohLFZ1VjctMHtHZYXv8D1koK3RQff3cO47Y0',
-  'https://media.licdn.com/dms/image/C4E03AQE7h2Er_GiNPg/profile-displayphoto-shrink_200_200/0?e=1580947200&v=beta&t=MgmQ42UWNfJIpe-rp3vz8OO-A0sRAIde2Gx9nYy4pUg',
-  'https://instagram.fewr1-5.fna.fbcdn.net/vp/43c49464d0019cdd7b05f64d690a72fc/5E7FFE72/t51.2885-19/s150x150/50103995_333201810625556_8400392776079900672_n.jpg?_nc_ht=instagram.fewr1-5.fna.fbcdn.net',
-  'https://media.licdn.com/dms/image/C4E03AQHvTsT5W_L28w/profile-displayphoto-shrink_200_200/0?e=1580947200&v=beta&t=crv7pCpxG4x7rdiyHNFe2c7feXccAQJ2R2bs6z7Y9yg',
-  'https://media.licdn.com/dms/image/C4D03AQHE15W8Q8k4rw/profile-displayphoto-shrink_200_200/0?e=1580947200&v=beta&t=QX-XKZ7VUpi7sM5mQemhAGygH78YkCQI1SlAzmjwFMY',
   'https://ca.slack-edge.com/T024FPYBQ-UNVS3D1CL-72903580eea7-512',
   'https://ca.slack-edge.com/T024FPYBQ-U4837KX9Q-6cf4b0197f03-512',
   'https://ca.slack-edge.com/T024FPYBQ-U0T06NJ3X-38881f57d249-512',

@@ -89,19 +89,19 @@ Review.beforeCreate(async (review, options) => {
 
   if (reviewedService.reviewCount === 0) {
     reviewedService.serviceRating = review.rating
-    reviewedService.reviewCount = reviewedService.reviewCount + 1
+    // reviewedService.reviewCount = reviewedService.reviewCount + 1
     await reviewedService.save()
   } else {
     reviewedService.serviceRating =
       (reviewedService.serviceRating * reviewedService.reviewCount +
         review.rating * 1.0) /
       (reviewedService.reviewCount + 1)
-    reviewedUser.reviewCount = reviewedUser.reviewCount + 1
+    // reviewedUser.reviewCount = reviewedUser.reviewCount + 1
     await reviewedService.save()
   }
 
-  // await reviewedUser.increment('reviewCount', {by: 1})
-  // await reviewedService.increment('reviewCount', {by: 1})
+  await reviewedUser.increment('reviewCount', {by: 1})
+  await reviewedService.increment('reviewCount', {by: 1})
 
   // await reviewedUser.update({
   //   reviewCount: reviewedUser.reviewCount+1
