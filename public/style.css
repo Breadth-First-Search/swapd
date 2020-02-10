@@ -35,7 +35,7 @@ form div {
   justify-content: space-between;
   align-items: center;
   background-color: #fff;
-  border-bottom: 1px solid grey;
+  border-bottom: 1px solid lightgray;
   width: 100%;
 }
 
@@ -135,11 +135,17 @@ nav a {
 }
 
 .leftProfile {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  justify-content: space-evenly;
+  height: 100%;
+  text-align: center;
+  border: 1px;
+  border-radius: 1px;
+  border-style: solid;
+  border-color: rgb(228, 228, 228);
+  padding: 15px;
+  margin: 45px;
+  box-shadow: rgb(228, 228, 228);
 }
+
 .userProfileMain {
   height: 100%;
   text-align: center;
@@ -169,6 +175,15 @@ nav a {
   align-items: center;
   flex-direction: column;
   justify-content: space-evenly;
+  height: 100%;
+  padding: 15px;
+  margin: 45px;
+  width: 55%;
+  border: 1px;
+  border-radius: 1px;
+  border-style: solid;
+  border-color: rgb(228, 228, 228);
+  box-shadow: rgb(228, 228, 228);
 }
 .profileInterestsList {
   height: 100%;
