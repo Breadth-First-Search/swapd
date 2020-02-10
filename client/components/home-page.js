@@ -1,10 +1,10 @@
 import React from 'react'
 import axios from 'axios'
-import SearchResultsTile from './SearchResultsTile'
 import {Link} from 'react-router-dom'
 import {getUnreviewedSwaps} from '../store/reviews'
 import {connect} from 'react-redux'
 import Reviews from './Reviews'
+import TopTen from './TopTen'
 
 class HomePage extends React.Component {
   constructor() {
@@ -23,42 +23,14 @@ class HomePage extends React.Component {
   }
 
   render() {
-    console.log(this.state)
     return this.props.reviews.length > 0 ? (
       <div>
         <Reviews />
-        <ul>
-          {this.state.topUsers.length &&
-            this.state.topUsers.map(user => {
-              return (
-                <Link key={user.id} to={`/user-profile/${user.id}`}>
-                  <img className="searchResultsImg" src={user.photo} />
-                  <div className="searchResultsName">
-                    {user.firstName} {user.lastName}
-                  </div>
-                  <div>
-                    Overall Rating:{' '}
-                    {`${user.overallRating.toFixed(2)} (${user.reviewCount})`}{' '}
-                  </div>
-                </Link>
-              )
-            })}
-        </ul>
+        <TopTen topUsers={this.state.topUsers} />
       </div>
     ) : (
       <div>
-        <ul>
-          {this.state.topUsers.length &&
-            this.state.topUsers.map(user => {
-              return (
-                <div key={user.id}>
-                  <Link to={`/user-profile/${user.id}`}>
-                    <li>{user.firstName}</li>
-                  </Link>
-                </div>
-              )
-            })}
-        </ul>
+        <TopTen topUsers={this.state.topUsers} />
       </div>
     )
   }
