@@ -23,6 +23,7 @@ class HomePage extends React.Component {
   }
 
   render() {
+    console.log(this.state)
     return this.props.reviews.length > 0 ? (
       <div>
         <Reviews />
@@ -31,7 +32,14 @@ class HomePage extends React.Component {
             this.state.topUsers.map(user => {
               return (
                 <Link key={user.id} to={`/user-profile/${user.id}`}>
-                  <li>{user.firstName}</li>
+                  <img className="searchResultsImg" src={user.photo} />
+                  <div className="searchResultsName">
+                    {user.firstName} {user.lastName}
+                  </div>
+                  <div>
+                    Overall Rating:{' '}
+                    {`${user.overallRating.toFixed(2)} (${user.reviewCount})`}{' '}
+                  </div>
                 </Link>
               )
             })}
