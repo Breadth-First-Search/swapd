@@ -129,14 +129,33 @@ nav a {
 
 #profileContainer {
   display: flex;
-  justify-content: center;
+  flex-direction: row;
+  justify-content: space-evenly;
   flex-wrap: wrap;
 }
 
 .leftProfile {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+.userProfileMain {
   height: 100%;
   text-align: center;
   border: 1px;
+  border-radius: 1px;
+  border-style: solid;
+  border-color: rgb(228, 228, 228);
+  padding: 15px;
+  margin: 45px;
+  box-shadow: rgb(228, 228, 228);
+}
+.profileServicesList {
+  height: 100%;
+  text-align: center;
+  border: 1px;
+  width: 300px;
   border-radius: 1px;
   border-style: solid;
   border-color: rgb(228, 228, 228);
@@ -149,15 +168,26 @@ nav a {
   display: flex;
   align-items: center;
   flex-direction: column;
+  justify-content: space-evenly;
+}
+.profileInterestsList {
   height: 100%;
   padding: 15px;
   margin: 45px;
-  width: 55%;
+  /* width: 55%; */
   border: 1px;
   border-radius: 1px;
   border-style: solid;
   border-color: rgb(228, 228, 228);
   box-shadow: rgb(228, 228, 228);
+}
+.profileEditButton {
+  height: 100%;
+  padding: 15px;
+  margin: 45px;
+  /* width: 55%; */
+  border: 1px;
+  border-radius: 1px;
 }
 
 #servicelistcontainer {

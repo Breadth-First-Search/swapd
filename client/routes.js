@@ -2,9 +2,9 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {withRouter, Route, Switch} from 'react-router-dom'
 import PropTypes from 'prop-types'
-import UserProfile from './components/user-profile'
+import UserProfile from './components/UserProfile'
 import SelectedUserProfile from './components/SelectedUserProfile'
-import EditProfile from './components/user-profile-edit'
+import EditProfile from './components/UserProfileEdit'
 import {
   Login,
   UserHome,
