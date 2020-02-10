@@ -1,10 +1,19 @@
 body {
   font-family: 'Roboto,Noto,Segoe UI,Arial,sans-serif';
   font-size: 0.95em;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
 }
 
 a {
   text-decoration: none;
+  color: #25665c;
+}
+
+a:visited {
+  color: #25665c;
 }
 
 label {
@@ -25,13 +34,16 @@ form div {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  background-color: #fff;
+  border-bottom: 1px solid grey;
+  width: 100%;
 }
 
 #logocontainer {
   display: flex;
   justify-content: center;
   align-content: center;
-  height: 50px;
+  height: 45px;
 }
 
 #logocontainer a {
@@ -41,19 +53,11 @@ form div {
 }
 
 #logocontainer form {
-  height: 50px;
+  align-self: center;
 }
 
 #swapdlogo {
-  width: 150px;
-}
-
-nav {
-  /* position: fixed;
-
-  width: 100%;
-  z-index: 1; */
-  top: 0;
+  width: 90%;
 }
 
 nav a {
@@ -66,14 +70,25 @@ nav a {
   margin: 0px;
 }
 
+#googleButton {
+  margin: 0px;
+  padding: 0px;
+  border: 0px;
+  margin-top: 20px;
+}
+
 .profilePhoto {
   height: 180px;
+  width: 180px;
   border-radius: 50%;
   margin: 15px;
 }
 
 .swaplistcontainer {
   justify-content: center;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid grey;
 }
 
 .swaplistdetails {
@@ -105,10 +120,6 @@ nav a {
 .searchResultsInner {
   padding: 30px;
   margin: 15px;
-  /* border-radius: 10%;
-  border: 1px;
-  border: #25665C;
-  border-style: solid; */
 }
 
 .searchResultsName {
@@ -119,23 +130,158 @@ nav a {
 #profileContainer {
   display: flex;
   justify-content: center;
+  flex-wrap: wrap;
 }
 
 .leftProfile {
-  width: 20%;
+  height: 100%;
   text-align: center;
   border: 1px;
   border-radius: 1px;
   border-style: solid;
   border-color: rgb(228, 228, 228);
   padding: 15px;
-  margin: 15px;
+  margin: 45px;
+  box-shadow: rgb(228, 228, 228);
 }
 
 .rightProfile {
-  width: 60%;
-  text-align: center;
-  border-color: rgb(228, 228, 228);
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  height: 100%;
   padding: 15px;
+  margin: 45px;
+  width: 55%;
+  border: 1px;
+  border-radius: 1px;
+  border-style: solid;
+  border-color: rgb(228, 228, 228);
+  box-shadow: rgb(228, 228, 228);
+}
+
+#servicelistcontainer {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+}
+
+.singleservice {
+  display: flex;
+  justify-content: left;
+  width: 95%;
   margin: 15px;
+  border: 1px;
+  border-radius: 10px;
+  border-style: solid;
+  border-color: rgb(228, 228, 228);
+  box-shadow: rgb(228, 228, 228);
+}
+
+.servicephotobox {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;
+  width: 25%;
+}
+
+.servicephotobox a {
+  align-self: center;
+  width: 90%;
+}
+
+.servicephoto {
+  width: 100%;
+  border-radius: 10px;
+}
+
+.servicename {
+  text-align: center;
+  padding: 10px;
+  font-weight: bold;
+}
+
+.servicerating {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9em;
+  padding: 3px;
+}
+
+.servicerating span {
+  padding-right: 3px;
+}
+
+.servicedescriptionbox {
+  overflow: hidden;
+  width: 50%;
+  padding: 10px;
+}
+
+.servicedescriptionbox p {
+  margin: 0px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow: hidden;
+}
+
+.verticalline {
+  overflow: hidden;
+  border: 0px;
+  border-left: 1px;
+  border-style: solid;
+  border-color: rgb(228, 228, 228);
+}
+
+.servicerightside {
+  overflow: hidden;
+  white-space: nowrap;
+  width: 25%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.servicerightsidetitle {
+  padding-bottom: 10px;
+}
+
+.remote {
+  text-align: center;
+}
+
+#overallRating {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1em;
+}
+
+#overallRating span {
+  padding: 2px;
+  padding-left: 0px;
+}
+
+.interests {
+  padding-bottom: 5px;
+  font-weight: bold;
+}
+
+div ul {
+  list-style-type: none;
+  margin: 0px;
+  padding: 0px;
+}
+
+li {
+  padding: 5px;
+}
+
+.matching {
+  color: #25665c;
+  font-weight: bold;
 }

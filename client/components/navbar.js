@@ -38,21 +38,23 @@ const useStyles = makeStyles(theme => ({
       backgroundColor: '#ecececde'
     },
     margin: 0,
+    height: '50%',
     [theme.breakpoints.up('md')]: {
-      width: 200
+      width: 180,
+      '&:focus': {
+        width: 250
+      }
     },
-    boxShadow: '0 3px 5px 2px rgba(0, 0, 0, .1)'
+    boxShadow: '0 1px 8px 2px rgba(0, 0, 0, .1)'
   },
   search: {
     display: 'flex',
     position: 'relative',
-    marginRight: theme.spacing(2),
     marginLeft: 0,
     margin: 0,
     width: '100%',
     height: 50,
     [theme.breakpoints.up('sm')]: {
-      marginLeft: theme.spacing(3),
       width: 'auto'
     }
   },
@@ -64,7 +66,7 @@ const useStyles = makeStyles(theme => ({
     position: 'absolute',
     alignSelf: 'center',
     pointerEvents: 'none',
-    zIndex: 9,
+    zIndex: 3,
     alignItems: 'center',
     justifyContent: 'center'
   },
@@ -73,12 +75,16 @@ const useStyles = makeStyles(theme => ({
     padding: 0,
     border: 0,
     color: 'grey',
-    outline: 'none'
+    outline: 'none',
+    '&:focus': {
+      width: 20
+    }
   }
 }))
 
 const Navbar = props => {
   const [search, setSearch] = useState('')
+  const [loading, setLoading] = useState(true)
   const isLoggedIn = props.isLoggedIn
   const handleClick = props.handleClick
   const classes = useStyles()
@@ -120,7 +126,7 @@ const Navbar = props => {
                       root: classes.inputRoot,
                       input: classes.inputInput
                     }}
-                    inputProps={{'aria-label': 'search'}}
+                    // inputProps={{'aria-label': 'search'}}
                     value={search}
                     onChange={() => setSearch(event.target.value)}
                   />
@@ -139,7 +145,7 @@ const Navbar = props => {
 
             <div className={classes.root}>
               <Button
-                style={{backgroundColor: 'white', outlineColor: '#25665C'}}
+                style={{backgroundColor: '#fff', outlineColor: '#25665C'}}
                 size="medium"
                 color="primary"
               >
@@ -150,21 +156,6 @@ const Navbar = props => {
                   Messages
                 </Link>
               </Button>
-              {/* <Button
-                style={{backgroundColor: 'white', outlineColor: "#25665C"}}
-                size="medium"
-                color="primary"
-              >
-                <Link style={{color: "#25665C", fontWeight: 'bold'}} to="/user-profile">Profile</Link>
-              </Button> */}
-              {/* <Button
-                style={{backgroundColor: 'white', outlineColor: "#25665C"}}
-                size="medium"
-                color="primary"
-                onClick={handleClick}
-              >
-                <Link style={{color: "#25665C", fontWeight: 'bold'}} to="/">Logout</Link>
-              </Button> */}
               <Button
                 aria-controls="simple-menu"
                 aria-haspopup="true"
@@ -215,7 +206,7 @@ const Navbar = props => {
 
             <div className={classes.root}>
               <Button
-                style={{backgroundColor: 'white', outlineColor: '#25665C'}}
+                // style={{backgroundColor: '#fff', outlineColor: '#25665C'}}
                 size="medium"
                 color="primary"
               >
@@ -227,7 +218,7 @@ const Navbar = props => {
                 </Link>
               </Button>
               <Button
-                sstyle={{backgroundColor: 'white', outlineColor: '#25665C'}}
+                // style={{backgroundColor: '#fff', outlineColor: '#25665C'}}
                 size="medium"
                 color="primary"
               >
@@ -242,7 +233,6 @@ const Navbar = props => {
           </div>
         )}
       </nav>
-      <hr />
     </div>
   )
 }
