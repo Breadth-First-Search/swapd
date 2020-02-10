@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import Button from '@material-ui/core/Button'
+import Snackbar from '@material-ui/core/Snackbar'
 import TextField from '@material-ui/core/TextField'
 import Dialog from '@material-ui/core/Dialog'
 import DialogActions from '@material-ui/core/DialogActions'
@@ -18,10 +19,13 @@ function FormDialog(props) {
   const [open, setOpen] = useState(false)
   const [message, setMessage] = useState('')
   const [selectedService, setSelectedService] = useState(null)
+  const [state, setState] = React.useState({
+    openSnack: false,
+    vertical: 'top',
+    horizontal: 'center'
+  })
 
-  // useEffect( ()=> {
-  //   if(props.services.userServices)
-  // })
+  const {vertical, horizontal, openSnack} = state
 
   const handleClickOpen = () => {
     setOpen(true)
@@ -29,6 +33,14 @@ function FormDialog(props) {
 
   const handleClose = () => {
     setOpen(false)
+  }
+
+  const handleSnackClick = newState => () => {
+    setState({open: true, ...newState})
+  }
+
+  const handleSnackClose = () => {
+    setState({...state, open: false})
   }
 
   const handleServiceButtonClick = service => {
@@ -47,7 +59,7 @@ function FormDialog(props) {
       try {
         const swapRes = await axios.post('/api/swaps/', swapObj)
         if (!swapRes.data[1]) {
-          alert('Looks like you already have a open swap going.')
+          handleSnackClick({vertical: 'bottom', horizontal: 'center'})
           history.push(`/swaps/${swapRes.data[0].id}`)
         } else {
           const messageObj = {
@@ -67,7 +79,7 @@ function FormDialog(props) {
         console.log(error)
       }
     } else {
-      alert('Please include a friendly message and select a service to swap.')
+      handleSnackClick({vertical: 'bottom', horizontal: 'center'})
     }
   }
 
@@ -126,6 +138,13 @@ function FormDialog(props) {
           </Button>
         </DialogActions>
       </Dialog>
+      <Snackbar
+        anchorOrigin={{vertical, horizontal}}
+        key={`${vertical},${horizontal}`}
+        open={openSnack}
+        onClose={handleSnackClose}
+        message="I love snacks"
+      />
     </div>
   ) : null
 }

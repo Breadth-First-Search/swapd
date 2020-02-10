@@ -21,32 +21,13 @@ const useStyles = makeStyles(theme => ({
     height: '40%'
   },
   icon: {
-    color: 'rgba(255, 255, 255, 0.54)'
+    color: '#fff'
   }
 }))
 
-/**
- * The example data is structured as follows:
- *
- * import image from 'path/to/image.jpg';
- * [etc...]
- *
- * const tileData = [
- *   {
- *     img: image,
- *     title: 'Image',
- *     author: 'author',
- *   },
- *   {
- *     [etc...]
- *   },
- * ];
- */
 export default function TopTen(props) {
   const classes = useStyles()
   const {topUsers} = props
-
-  console.log(topUsers)
 
   return (
     <div className={classes.root}>
@@ -63,7 +44,10 @@ export default function TopTen(props) {
           <GridListTile key={user.id}>
             <img src={user.photo} alt={user.firstName} />
             <Link>
-              <GridListTileBar title={user.firstName} actionIcon={index} />
+              <GridListTileBar
+                title={user.firstName}
+                actionIcon={<span className={classes.icon}>{index + 1}</span>}
+              />
             </Link>
           </GridListTile>
         ))}
