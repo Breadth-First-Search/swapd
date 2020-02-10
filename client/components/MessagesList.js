@@ -28,13 +28,19 @@ class MessagesList extends Component {
     // );
     // console.log(messages)
     return (
-      <div>
+      <div className="messageList">
         <ul className="media-list">
           {messages.length &&
             messages
               .filter(message => message.type === 'MESSAGE')
               .map(message => {
-                return <Message message={message} key={message.id} />
+                return (
+                  <Message
+                    className="message"
+                    message={message}
+                    key={message.id}
+                  />
+                )
               })
               .concat([filteredMessages[filteredMessages.length - 1]])}
         </ul>
