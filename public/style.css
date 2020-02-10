@@ -321,7 +321,17 @@ li {
   justify-content: center;
   flex-wrap: wrap;
 }
-
+.reviewContainer {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  width: 95%;
+  margin: 15px;
+  border: 1px;
+  border-radius: 10px;
+  border-style: solid;
+  border-color: rgb(228, 228, 228);
+  box-shadow: rgb(228, 228, 228);
 /* message form */
 
 #new-message-form {
