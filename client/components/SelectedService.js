@@ -45,14 +45,19 @@ class SelectedService extends React.Component {
     let service = this.state.service
     service.id = Number(this.props.match.params.serviceId)
 
+    console.log(this.state.service)
+
     return (
-      <div>
-        <h1>{service.name}</h1>
-        <NavLink to={`/user-profile/${user.id}`}>
-          <h3>
-            Offered by {user.firstName} {user.lastName}
-          </h3>
-        </NavLink>
+      <div id="selectedServiceContainer">
+        <div>{service.name}</div>
+        <span>
+          <NavLink to={`/user-profile/${user.id}`}>
+            <div>
+              by {user.firstName} {user.lastName}
+            </div>
+          </NavLink>
+        </span>
+
         <img style={{width: '50%'}} src={service.imageUrl} />
         <p>{service.description}</p>
         <p>Proficiency: {service.proficiency}</p>

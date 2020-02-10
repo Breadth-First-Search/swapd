@@ -21,7 +21,10 @@ router.get('/:serviceId', async (req, res, next) => {
         'remote',
         'imageUrl',
         'videoUrl',
-        'serviceRating'
+        'serviceRating',
+        'remote',
+        'serviceCategoryId',
+        'reviewCount'
       ],
       include: [
         {
