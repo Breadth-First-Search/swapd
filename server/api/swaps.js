@@ -67,7 +67,10 @@ router.put('/:swapId/services/:serviceId', async (req, res, next) => {
   try {
     const swapToUpdate = await Swap.findByPk(+req.params.swapId)
 
-    await swapToUpdate.update({requesterServiceId: +req.params.serviceId})
+    await swapToUpdate.update({
+      requesterServiceId: +req.params.serviceId,
+      swapStatus: 'Active'
+    })
 
     res.json(swapToUpdate)
   } catch (err) {

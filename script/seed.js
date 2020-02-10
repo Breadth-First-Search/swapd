@@ -182,7 +182,7 @@ async function seed() {
 
   await Swap.create({
     swapDate: new Date(2020, 1, 1),
-    swapStatus: 'completed',
+    swapStatus: 'Completed',
     requesterId: 1,
     responderId: 2,
     requesterServiceId: 1,

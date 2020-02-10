@@ -14,7 +14,10 @@ class MessagesList extends Component {
     const swapId = Number(this.props.match.params.swapId) // because it's a string "1", not a number!
     const messages = this.props.messages
     const filteredMessages = messages
-      .filter(message => message.type === 'CURRENT_OFFER')
+      .filter(
+        message =>
+          message.type === 'CURRENT_OFFER' || message.type === 'CONFIRMED_OFFER'
+      )
       .map(message => {
         return (
           <OfferForm offer={message} key={message.id} user={this.props.user} />

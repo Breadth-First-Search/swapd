@@ -72,7 +72,9 @@ export function messagesReducer(state = initialState.messages, action) {
     case GOT_NEW_MESSAGE_FROM_SERVER:
       let newState = state.filter(
         message =>
-          message.type === 'MESSAGE' || message.type === 'CURRENT_OFFER'
+          message.type === 'MESSAGE' ||
+          message.type === 'CURRENT_OFFER' ||
+          message.type === 'CONFIRMED_OFFER'
       )
       newState.push(action.message)
       return newState

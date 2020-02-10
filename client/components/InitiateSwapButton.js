@@ -42,7 +42,7 @@ function FormDialog(props) {
         requesterId: props.user.id,
         responderServiceId: props.providerService.id,
         responderId: props.providerUser.id,
-        swapStatus: 'pending'
+        swapStatus: 'Pending'
       }
       try {
         const swapRes = await axios.post('/api/swaps/', swapObj)

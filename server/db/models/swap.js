@@ -11,8 +11,9 @@ const Swap = db.define('swap', {
     type: Sequelize.DATE
   },
   swapStatus: {
-    type: Sequelize.STRING,
-    defaultValue: 'open'
+    type: Sequelize.ENUM,
+    values: ['Pending', 'Completed', 'Active', 'Cancelled'],
+    defaultValue: 'Pending'
   },
   requesterServiceId: {
     type: Sequelize.INTEGER
