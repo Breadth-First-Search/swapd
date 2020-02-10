@@ -265,19 +265,18 @@ router.get('/:userId/interests', async (req, res, next) => {
 //add interest for a user ..add interest id to userInterest for user id.
 router.post('/userInterests', async (req, res, next) => {
   try {
-    let userInterest
     const {name, userId} = req.body
     const interest = await Interest.findOne({where: {name: name}})
 
     if (interest) {
-      userInterest = await UserInterest.create({
+      await UserInterest.create({
         userId: userId,
         interestId: interest.id
       })
       res.json(interest)
     } else {
       const newInterest = await Interest.create({name: name})
-      userInterest = await UserInterest.create({
+      await UserInterest.create({
         userId: userId,
         interestId: newInterest.id
       })

@@ -20,6 +20,14 @@ const Swap = db.define('swap', {
   responderServiceId: {
     type: Sequelize.INTEGER
   },
+  requesterServiceReviewed: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: false
+  },
+  responderServiceReviewed: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: false
+  },
   location: {
     type: Sequelize.TEXT
   },
