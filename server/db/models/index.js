@@ -89,7 +89,7 @@ Review.beforeCreate(async (review, options) => {
   } else {
     reviewedService.serviceRating =
       (reviewedService.serviceRating * reviewedService.reviewCount +
-        review.rating) /
+        review.rating * 1.0) /
       (reviewedService.reviewCount + 1)
     await reviewedService.save()
   }

@@ -18,7 +18,11 @@ export default class SearchResultsTile extends React.Component {
           <div className="searchResultsName">
             {result.firstName} {result.lastName}
           </div>
-          <div>Overall Rating: {result.overallRating.toFixed(2)}</div>
+          <div>
+            Overall Rating:{' '}
+            {`${result.overallRating.toFixed(2)} (${result.reviewCount})`}{' '}
+          </div>
+
           <div>
             Service Rating: {result.services[0].serviceRating.toFixed(2)}
           </div>
