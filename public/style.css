@@ -129,8 +129,7 @@ nav a {
 
 #profileContainer {
   display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
+  justify-content: center;
   flex-wrap: wrap;
 }
 
@@ -174,7 +173,6 @@ nav a {
   display: flex;
   align-items: center;
   flex-direction: column;
-  justify-content: space-evenly;
   height: 100%;
   padding: 15px;
   margin: 45px;
