@@ -67,7 +67,7 @@ export function auth(userInfo, method) {
 
     try {
       dispatch(getUser(res.data))
-      history.push('/')
+      method === 'signup' ? history.push('/add-service') : history.push('/')
     } catch (dispatchOrHistoryErr) {
       console.error(dispatchOrHistoryErr)
     }

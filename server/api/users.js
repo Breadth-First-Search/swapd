@@ -150,17 +150,11 @@ router.get('/:userId/services', async (req, res, next) => {
 //post services by userId and service categories
 router.post('/:userId/services', async (req, res, next) => {
   try {
-    const categoryName = req.body.serviceCategories
     const newService = req.body.service
     const description = req.body.description
 
-    const serviceCategory = await ServiceCategory.findOne({
-      where: {name: categoryName}
-    })
-
     const service = await Service.create({
       name: newService,
-      serviceCategoryId: serviceCategory.id,
       userId: req.params.userId,
       description: description
     })

@@ -14,31 +14,18 @@ class UserProfile extends React.Component {
   render() {
     const {user, interests, services} = this.props
     return (
-      <div id="userProfile">
+
+      <div className="newUserServiceContainer">
+
         <div className="leftProfile">
-          <div className="userProfileMain">
-            <div style={{fontSize: '1.5em', fontWeight: 'bold'}}>
-              Hi, {user.firstName}!
-            </div>
-            <img src={user.photo} className="profilePhoto" />
-            <div>Overall Rating: {user.overallRating.toFixed(2)}</div>
-            <div>Email: {user.email}</div>
-            <div>Phone Number: {user.phoneNumber}</div>
-            <div>Maximum Travel Distance: {user.distancePrefWeight}mi</div>
+          <div style={{fontSize: '1.5em', fontWeight: 'bold'}}>
+            Hi, {user.firstName}!
           </div>
-          <div className="profileServicesList">
-            <div style={{fontSize: '1.5em', fontWeight: 'bold'}}>
-              Services You're Offering:
-            </div>
-            {services.map(s => (
-              <div key={s.id}>
-                <li key={s.id}>{s.name}</li>
-                <div>{s.description}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-        <div className="rightProfile">
+          <img src={user.photo} className="profilePhoto" />
+          <div>Overall Rating: {user.overallRating.toFixed(2)}</div>
+          <div>Email: {user.email}</div>
+          <div>Phone Number: {user.phoneNumber}</div>
+          <div>Maximum Travel Distance: {user.distancePrefWeight}mi</div>
           <div className="profileEditButton">
             <Button
               style={{backgroundColor: '#25665C'}}
@@ -53,6 +40,20 @@ class UserProfile extends React.Component {
                 Edit Your Profile
               </Link>
             </Button>
+          </div>
+        </div>
+
+        <div className="rightProfile">
+          <div className="profileServicesList">
+            <div style={{fontSize: '1.5em', fontWeight: 'bold'}}>
+              Services You're Offering:
+            </div>
+            {services.map(s => (
+              <div key={s.id}>
+                <li key={s.id}>{s.name}</li>
+                <div>{s.description}</div>
+              </div>
+            ))}
           </div>
 
           <div className="profileInterestsList">
