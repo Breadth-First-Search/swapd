@@ -23,10 +23,7 @@ class MessagesList extends Component {
           <OfferForm offer={message} key={message.id} user={this.props.user} />
         )
       })
-    // console.log(filteredMessages[filteredMessages.length - 1])
     //   message => message.swapId === swapId
-    // );
-    // console.log(messages)
 
     console.log('filtered', filteredMessages)
     return (
@@ -44,9 +41,7 @@ class MessagesList extends Component {
                       key={message.id}
                     />
                   )
-                })
-            // .concat([filteredMessages[filteredMessages.length - 1]])
-            }
+                })}
             {filteredMessages}
           </div>
           {messages.length && <NewMessageEntry swapId={swapId} />}
