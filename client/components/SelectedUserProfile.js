@@ -60,7 +60,7 @@ class SelectedUserProfile extends React.Component {
             </span>
             <span style={{color: '#25665C'}}>{` (${
               selectedUser.reviewCount
-            })`}</span>
+            } Reviews)`}</span>
           </div>
           <br />
           <div>Max Travel Distance: {selectedUser.distancePrefWeight} mi</div>
@@ -102,7 +102,7 @@ class SelectedUserProfile extends React.Component {
                       <span>{s.serviceRating.toFixed(2)}</span>
                       <span style={{color: '#25665C'}}>{` (${
                         s.reviewCount
-                      })`}</span>
+                      } Reviews)`}</span>
                     </div>
                   </div>
                   <div className="servicedescriptionbox">
