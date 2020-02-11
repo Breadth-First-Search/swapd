@@ -26,25 +26,31 @@ class MessagesList extends Component {
     // console.log(filteredMessages[filteredMessages.length - 1])
     //   message => message.swapId === swapId
     // );
-    console.log(messages)
+    // console.log(messages)
+
+    console.log('filtered', filteredMessages)
     return (
-      <div id="chatContainer">
-        <div className="message-list">
-          {messages.length &&
-            messages
-              .filter(message => message.type === 'MESSAGE')
-              .map(message => {
-                return (
-                  <Message
-                    className="message"
-                    message={message}
-                    key={message.id}
-                  />
-                )
-              })
-              .concat([filteredMessages[filteredMessages.length - 1]])}
+      <div id="outerchatcontainer">
+        <div id="chatContainer">
+          <div className="message-list">
+            {messages.length &&
+              messages
+                .filter(message => message.type === 'MESSAGE')
+                .map(message => {
+                  return (
+                    <Message
+                      className="message"
+                      message={message}
+                      key={message.id}
+                    />
+                  )
+                })
+            // .concat([filteredMessages[filteredMessages.length - 1]])
+            }
+            {filteredMessages}
+          </div>
+          {messages.length && <NewMessageEntry swapId={swapId} />}
         </div>
-        {messages.length && <NewMessageEntry swapId={swapId} />}
       </div>
     )
   }

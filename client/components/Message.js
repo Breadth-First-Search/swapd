@@ -18,6 +18,21 @@ function Message(props) {
       ? `${props.message.responder.photo}`
       : `${props.message.requester.photo}`
 
+  const toFormat = new Date(message.createdAt)
+
+  function formatAMPM(date) {
+    let hours = date.getHours()
+    let minutes = date.getMinutes()
+    let ampm = hours >= 12 ? 'PM' : 'AM'
+    hours = hours % 12
+    hours = hours ? hours : 12 // the hour '0' should be '12'
+    minutes = minutes < 10 ? '0' + minutes : minutes
+    let strTime = hours + ':' + minutes + ' ' + ampm
+    return strTime
+  }
+
+  let time = formatAMPM(toFormat)
+
   return props.message.userId !== props.user.id ? (
     <div className="media-otheruser">
       <div className="media-left">
@@ -29,12 +44,15 @@ function Message(props) {
           <div className="media-bubble">{message.text}</div>
         </div>
       </div>
+      <div className="message-timestamp-container">
+        <div className="message-timestamp">{time}</div>
+      </div>
     </div>
   ) : (
     <div className="media-user">
-      {/* <div className="media-right">
-        <img className="media-object" src={senderPhoto} />
-      </div> */}
+      <div className="message-timestamp-container">
+        <div className="message-timestamp">{time}</div>
+      </div>
       <div className="media-userbody">
         <div>
           <div className="media-userbubble">{message.text}</div>

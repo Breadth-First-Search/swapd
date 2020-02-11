@@ -353,9 +353,9 @@ li {
   justify-content: center;
   overflow: hidden;
   height: 600px;
-  max-width: 30%;
+  width: 400px;
   margin-top: 60px;
-  margin-left: 100px;
+  margin-bottom: 60px;
   max-height: 100%;
   border: 1px;
   border-radius: 10px;
@@ -452,6 +452,16 @@ li {
   max-width: 250px;
 }
 
+.message-timestamp-container {
+  display: flex;
+  align-self: flex-end;
+  padding: 5px;
+}
+
+.message-timestamp {
+  font-size: 0.6em;
+}
+
 .media-user {
   display: flex;
   padding: 10px;
@@ -476,7 +486,7 @@ li {
   line-height: 1.25;
   word-wrap: break-word;
   text-align: left;
-  max-width: 250px;
+  max-width: 200px;
 }
 
 .offer_confirmed {
@@ -488,4 +498,9 @@ li {
   background-color: #fff;
   border-color: #fff;
   border: none;
+}
+
+#outerchatcontainer {
+  display: flex;
+  justify-content: center;
 }

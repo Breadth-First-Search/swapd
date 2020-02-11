@@ -5,8 +5,6 @@ import {postNewOffer} from '../store/messages'
 class OfferForm extends React.Component {
   constructor() {
     super()
-    // console.log("fdfadsfadsf")
-
     this.state = {
       selectedService: {},
       selectedServiceId: 0
