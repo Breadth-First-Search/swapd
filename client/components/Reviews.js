@@ -64,22 +64,62 @@ class Review extends React.Component {
           {service.user.lastName} on {formattedDate}:
         </div>
         <form onSubmit={this.handleSubmit}>
-          <div>
-            <label htmlFor="rating">
-              <small>Rate The Service (0-5):</small>
-            </label>
+          <div className="reviewMaker">
+            {/* <label htmlFor="rating"> */}
+            <small>Rate The Service (0-5):</small>
+            {/* </label> */}
             <input
+              className="star"
+              type="radio"
               name="rating"
-              value={this.state.rating}
+              id="star1"
+              value={1}
+            />
+            <label htmlFor="star1" />
+            <input
+              className="star"
+              type="radio"
+              name="rating"
+              id="star2"
+              value={2}
+            />
+            <label htmlFor="star2" />
+            <input
+              className="star"
+              type="radio"
+              name="rating"
+              id="star3"
+              value={3}
+            />
+            <label htmlFor="star3" />
+            <input
+              className="star"
+              type="radio"
+              name="rating"
+              id="star4"
+              value={4}
+            />
+            <label htmlFor="star4" />
+            <input
+              className="star"
+              type="radio"
+              name="rating"
+              id="star5"
+              value={5}
+            />
+            <label htmlFor="star5" />
+            {/* <inpu5
+              nam5="rating"
+              val5e={this.state.rating}
               onChange={this.handleChange}
               type="number"
               min="0"
               max="5"
               size="20"
-            />
-            <label htmlFor="comment">
-              <small>Let Everyone Know More About It:</small>
-            </label>
+            /> */}
+            {/* <label htmlFor="comment"> */}
+            <small>Let Everyone Know More About It:</small>
+            {/* </label> */}
             <input
               name="comment"
               value={this.state.comment}

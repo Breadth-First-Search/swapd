@@ -8,7 +8,8 @@ const Swap = db.define('swap', {
     autoIncrement: true
   },
   swapDate: {
-    type: Sequelize.DATE
+    type: Sequelize.DATE,
+    defaultValue: new Date()
   },
   swapStatus: {
     type: Sequelize.ENUM,
@@ -30,7 +31,7 @@ const Swap = db.define('swap', {
     defaultValue: false
   },
   location: {
-    type: Sequelize.TEXT
+    type: Sequelize.STRING
   },
   requesterId: {
     type: Sequelize.INTEGER,
