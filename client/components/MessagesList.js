@@ -23,28 +23,34 @@ class MessagesList extends Component {
           <OfferForm offer={message} key={message.id} user={this.props.user} />
         )
       })
-    console.log(filteredMessages[filteredMessages.length - 1])
+    // console.log(filteredMessages[filteredMessages.length - 1])
     //   message => message.swapId === swapId
     // );
     // console.log(messages)
+
+    console.log('filtered', filteredMessages)
     return (
-      <div className="messageList">
-        <ul className="media-list">
-          {messages.length &&
-            messages
-              .filter(message => message.type === 'MESSAGE')
-              .map(message => {
-                return (
-                  <Message
-                    className="message"
-                    message={message}
-                    key={message.id}
-                  />
-                )
-              })
-              .concat([filteredMessages[filteredMessages.length - 1]])}
-        </ul>
-        {messages.length && <NewMessageEntry swapId={swapId} />}
+      <div id="outerchatcontainer">
+        <div id="chatContainer">
+          <div className="message-list">
+            {messages.length &&
+              messages
+                .filter(message => message.type === 'MESSAGE')
+                .map(message => {
+                  return (
+                    <Message
+                      className="message"
+                      message={message}
+                      key={message.id}
+                    />
+                  )
+                })
+            // .concat([filteredMessages[filteredMessages.length - 1]])
+            }
+            {filteredMessages}
+          </div>
+          {messages.length && <NewMessageEntry swapId={swapId} />}
+        </div>
       </div>
     )
   }
