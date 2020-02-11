@@ -1,24 +1,19 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {
-  getServiceCategories,
-  addUserService,
-  getServices,
-  getUserServices
-} from '../store/services'
+import {addUserService, getServices} from '../store/services'
+import history from '../history'
+import {Link} from 'react-router-dom'
 
-class Services extends React.Component {
+class NewUserService extends React.Component {
   constructor() {
     super()
-    this.state = {serviceCategories: '', service: '', description: ''}
+    this.state = {service: '', description: ''}
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   componentDidMount() {
     this.props.getServices()
-    this.props.getServiceCategories()
-    this.props.getUserServices(this.props.user.id)
   }
 
   handleSubmit(evt) {
@@ -27,10 +22,11 @@ class Services extends React.Component {
     const userId = this.props.user.id
     const newUserService = {
       service: this.state.service,
-      serviceCategories: this.state.serviceCategories,
       description: this.state.description
     }
     this.props.addUserService(userId, newUserService)
+
+    history.push('/')
   }
 
   handleChange(evt) {
@@ -38,27 +34,22 @@ class Services extends React.Component {
   }
 
   render() {
-    const {serviceCategories, services, userServices} = this.props
-
+    const {services} = this.props
     return (
-      <div className="editServices">
-        <div className="boldText">Your Offered Services:</div>
-        {userServices.map(us => <li key={us.id}>{us.name}</li>)}
+      <div className="newUserServiceContainer">
+        <div className="innerNewUserService">
+          <div className="newUserServiceHeader">Let's Get Started</div>
+          <div className="newUserServiceText">
+            To search for services or skills you want, enter something you're
+            good at that you'd be happy to share with others!
+          </div>
 
-        <div>
-          Add A New Service:
-          <form onSubmit={this.handleSubmit}>
-            <datalist id="serviceCategories">
-              {serviceCategories.map(sc => (
-                <option key={sc.id} value={sc.name} />
-              ))}
-            </datalist>
-            <label htmlFor="service">
-              <small>Service:</small>
-            </label>
+          <form onSubmit={this.handleSubmit} className="newUserServiceForm">
+            Service Name:
             <input
               type="text"
               autoComplete="on"
+              size="40"
               name="service"
               list="service"
               onChange={this.handleChange}
@@ -66,11 +57,9 @@ class Services extends React.Component {
             <datalist id="service">
               {services.map(s => <option key={s.id} value={s.name} />)}
             </datalist>
-            <label htmlFor="description">
-              <small>Description:</small>
-            </label>
+            Description:
             <input
-              className="editDescription"
+              className="serviceNameDescription"
               type="text"
               size="200"
               name="description"
@@ -78,28 +67,27 @@ class Services extends React.Component {
             />
             <button type="submit">ADD</button>
           </form>
+          <div>
+            And...to improve search results even more, enter your interests in
+            your profile!
+          </div>
         </div>
       </div>
     )
   }
 }
-
 const mapStateToProps = state => {
   return {
     services: state.services.all,
-    serviceCategories: state.services.serviceCategories,
-    userServices: state.services.userServices,
     user: state.user
   }
 }
 const mapDispatchToProps = dispatch => {
   return {
     getServices: () => dispatch(getServices()),
-    getServiceCategories: () => dispatch(getServiceCategories()),
-    getUserServices: id => dispatch(getUserServices(id)),
     addUserService: (id, serviceInfo) =>
       dispatch(addUserService(id, serviceInfo))
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Services)
+export default connect(mapStateToProps, mapDispatchToProps)(NewUserService)

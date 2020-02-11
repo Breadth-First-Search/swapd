@@ -345,7 +345,8 @@ li {
   border-style: solid;
   border-color: rgb(228, 228, 228);
   box-shadow: rgb(228, 228, 228);
-/* message form */
+  /* message form */
+}
 
 #new-message-form {
   position: relative;
@@ -376,4 +377,98 @@ li {
 .offer_confirmed {
   border-radius: 5px;
   background-color: green;
+}
+
+.newUserServiceContainer {
+  display: flex;
+  justify-content: center;
+}
+
+.innerNewUserService {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 75%;
+  height: 300px;
+  margin: 15px;
+  border: 1px;
+  border-radius: 10px;
+  border-style: solid;
+  border-color: rgb(228, 228, 228);
+  box-shadow: rgb(228, 228, 228);
+}
+
+.newUserServiceForm {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-between;
+
+  width: 80%;
+}
+
+.serviceNameDescription {
+  width: 80%;
+}
+
+.newUserServiceHeader {
+  font-size: 40px;
+  padding: 5px;
+}
+.newUserServiceText {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  font-size: 20px;
+  width: 75%;
+}
+
+.editDescription {
+  width: 30%;
+}
+
+.leftEditProfile {
+  height: 100%;
+  width: 35%;
+  text-align: center;
+  border: 1px;
+  border-radius: 1px;
+  border-style: solid;
+  border-color: rgb(228, 228, 228);
+  padding: 15px;
+  margin: 45px;
+  box-shadow: rgb(228, 228, 228);
+}
+
+.rightEditProfile {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  height: 100%;
+  padding: 15px;
+  margin: 45px;
+  width: 40%;
+  border: 1px;
+  border-radius: 1px;
+  border-style: solid;
+  border-color: rgb(228, 228, 228);
+  box-shadow: rgb(228, 228, 228);
+}
+
+.editServices {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  height: 100%;
+  padding: 15px;
+  margin: 10px;
+  width: 40%;
+}
+
+.boldText {
+  font-size: 1.5em;
+  font-weight: bold;
 }
