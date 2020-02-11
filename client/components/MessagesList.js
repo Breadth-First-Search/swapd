@@ -23,13 +23,28 @@ class MessagesList extends Component {
           <OfferForm offer={message} key={message.id} user={this.props.user} />
         )
       })
-    //   message => message.swapId === swapId
 
-    console.log('filtered', filteredMessages)
+    //find the other user's full name
+    let otherUserName = null
+    const user = this.props.user
+    if (this.props.messages.length && user.firstName) {
+      otherUserName =
+        user.id !== messages[0].requester.id
+          ? `${messages[0].requester.firstName} ${
+              messages[0].requester.firstName
+            }`
+          : `${messages[0].responder.firstName} ${
+              messages[0].responder.lastName
+            }`
+    }
+
     return (
       <div id="outerchatcontainer">
         <div id="chatContainer">
           <div className="message-list">
+            {otherUserName && (
+              <div id="chatTitle">Chatting with: {otherUserName}</div>
+            )}
             {messages.length &&
               messages
                 .filter(message => message.type === 'MESSAGE')
@@ -41,11 +56,13 @@ class MessagesList extends Component {
                       key={message.id}
                     />
                   )
-                })}
-            {filteredMessages}
+                })
+            // .concat([filteredMessages[filteredMessages.length - 1]])
+            }
           </div>
           {messages.length && <NewMessageEntry swapId={swapId} />}
         </div>
+        {filteredMessages}
       </div>
     )
   }
