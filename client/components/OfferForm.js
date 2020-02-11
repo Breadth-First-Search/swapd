@@ -67,8 +67,6 @@ class OfferForm extends React.Component {
 
     const requesterServices = this.props.offer.requester.services
 
-    console.log(this.props)
-
     let toRender
 
     if (you.id === responderId && this.props.offer.type === 'CURRENT_OFFER') {

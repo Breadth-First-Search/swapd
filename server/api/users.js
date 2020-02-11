@@ -173,6 +173,124 @@ router.post('/:userId/services', async (req, res, next) => {
 
 // get all users who have a specified service, eager loading their interests
 // to be used in search page
+
+function customLCS_subseq(s1, s2) {
+  let dp = [] /* .fill(Array(s2.length+1).fill(0)) */
+
+  for (let row = 0; row <= s1.length; row++) {
+    dp.push([])
+    for (let col = 0; col <= s2.length; col++) {
+      dp[row].push([])
+    }
+  }
+
+  // let lcs = []
+  for (let row = 1; row < dp.length; row++) {
+    for (let col = 1; col < dp[row].length; col++) {
+      if (s1[row - 1].toLowerCase() === s2[col - 1].toLowerCase()) {
+        const prev = dp[row - 1][col - 1]
+        // if(prev.length > 0) {
+        //   if(Math.abs(prev[prev.length - 1] - (col - 1)) > 2){
+        //     dp[row][col] = [...prev]
+        //     continue
+        //   }
+        // }
+        dp[row][col] = [...prev, col - 1] // String: dp[row - 1][col - 1] + s1[row - 1].toLowerCase()
+        // lcs = lcs.length < dp[row][col].length ? dp[row][col] : lcs
+      } else {
+        dp[row][col] =
+          dp[row - 1][col].length > dp[row][col - 1].length
+            ? [...dp[row - 1][col]]
+            : [...dp[row][col - 1]] //String:  dp[row - 1][col].length > dp[row][col - 1].length ? dp[row - 1][col] : dp[row][col - 1]
+      }
+    }
+  }
+  // console.log(dp[s1.length][s2.length])
+  return dp[s1.length][s2.length].length
+}
+
+function customLCS_substr(s1, s2) {
+  let dp = []
+
+  for (let row = 0; row <= s1.length; row++) {
+    dp.push([])
+    for (let col = 0; col <= s2.length; col++) {
+      dp[row].push(0)
+    }
+  }
+
+  let max = 0
+
+  for (let row = 1; row < dp.length; row++) {
+    for (let col = 1; col < dp[row].length; col++) {
+      if (s1[row - 1].toLowerCase() === s2[col - 1].toLowerCase()) {
+        dp[row][col] = dp[row - 1][col - 1] + 1
+        max = Math.max(max, dp[row][col])
+      }
+    }
+  }
+
+  return max
+}
+
+function KMPmatch(s, p) {
+  const failure = pattern => {
+    const ret = Array(pattern.length).fill(0)
+
+    let k = 0,
+      j = 1
+
+    while (j < pattern.length) {
+      if (pattern[j] === pattern[k]) {
+        ret[j] = k + 1
+        k++
+        j++
+      } else if (k > 0) {
+        k = ret[k - 1]
+      } else j++
+    }
+    return ret
+  }
+
+  if (p.length === 0) return 0
+  let j = 0,
+    k = 0
+  const fail = failure(p)
+  // console.log(fail)
+  while (j < s.length) {
+    if (s[j] === p[k]) {
+      if (k === p.length - 1) return j - p.length + 1
+      j++
+      k++
+    } else if (k > 0) k = fail[k - 1]
+    else j++
+  }
+
+  return -1
+}
+
+function bestMatch(serviceNames, searchString) {
+  let max = 0
+  let max2 = 0
+  let top = serviceNames[0]
+  let top2 = serviceNames[1]
+
+  serviceNames.forEach(serviceObj => {
+    const res = customLCS_substr(searchString, serviceObj.name)
+    if (res > max) {
+      max2 = max
+      top2 = top
+
+      max = res
+      top = serviceObj
+    } else if (res > max2) {
+      max2 = res
+      top2 = serviceObj
+    }
+  })
+  return [top, top2, max, max2]
+}
+
 router.get('/services/:serviceName/', async (req, res, next) => {
   try {
     // get all interest ids of the searching user
@@ -186,12 +304,28 @@ router.get('/services/:serviceName/', async (req, res, next) => {
     let searcherInterestsSet = userInterestsToSet(searcherInterests)
 
     // get all users who have services that match the search and include their interest ids
+
+    const serviceNames = await Service.findAll({
+      attributes: [[Sequelize.fn('DISTINCT', Sequelize.col('name')), 'name']]
+
+      // [Sequelize.fn('DISTINCT', Sequelize.col('country')) ,'country'],
+    })
+
+    let result = bestMatch(serviceNames, req.params.serviceName)
+
+    let info = [result[0].dataValues.name, result[1].dataValues.name]
+
+    console.log(result[0].dataValues.name, result[2])
+    console.log(result[1].dataValues.name, result[3])
+
+    // console.log(KMPmatch("piano","lessens of piano"))
+
     const users = await User.findAll({
       include: [
         {
           model: Service,
           where: {
-            name: req.params.serviceName
+            name: result[0].dataValues.name
           }
         },
         {
@@ -236,6 +370,8 @@ router.get('/services/:serviceName/', async (req, res, next) => {
 
       return userBScore - userAScore
     })
+
+    users.push(info)
 
     res.json(users)
   } catch (err) {
