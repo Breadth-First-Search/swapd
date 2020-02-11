@@ -54,6 +54,7 @@ export const writeService = input => {
 export const getServices = () => async dispatch => {
   try {
     const {data} = await axios.get('/api/services')
+    console.log(data)
     dispatch(gotServices(data))
   } catch (err) {
     console.error(err)

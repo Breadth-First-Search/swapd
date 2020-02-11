@@ -39,7 +39,7 @@ class Services extends React.Component {
 
   render() {
     const {serviceCategories, services, userServices} = this.props
-
+    console.log(services)
     return (
       <div>
         <h4>Your Offered Services:</h4>
@@ -70,7 +70,7 @@ class Services extends React.Component {
               onChange={this.handleChange}
             />
             <datalist id="service">
-              {services.map(s => <option key={s.id} value={s.name} />)}
+              {services.map((s, idx) => <option key={idx} value={s} />)}
             </datalist>
             Description:
             <input
