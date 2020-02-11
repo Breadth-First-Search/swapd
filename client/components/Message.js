@@ -1,9 +1,8 @@
 import React from 'react'
+import {connect} from 'react-redux'
 
-export default function Message(props) {
+function Message(props) {
   const message = props.message
-
-  console.log(message)
 
   let senderName =
     props.message.userId === props.message.responderId
@@ -19,15 +18,36 @@ export default function Message(props) {
       ? `${props.message.responder.photo}`
       : `${props.message.requester.photo}`
 
-  return (
-    <li className="media">
+  return props.message.userId !== props.user.id ? (
+    <div className="media-otheruser">
       <div className="media-left">
         <img className="media-object" src={senderPhoto} />
       </div>
       <div className="media-body">
-        <h4 className="media-heading">{senderName}</h4>
-        {message.text}
+        <div className="sender-name">{senderName}</div>
+        <div>
+          <div className="media-bubble">{message.text}</div>
+        </div>
       </div>
-    </li>
+    </div>
+  ) : (
+    <div className="media-user">
+      {/* <div className="media-right">
+        <img className="media-object" src={senderPhoto} />
+      </div> */}
+      <div className="media-userbody">
+        <div>
+          <div className="media-userbubble">{message.text}</div>
+        </div>
+      </div>
+    </div>
   )
 }
+
+const mapStateToProps = state => {
+  return {
+    user: state.user
+  }
+}
+
+export default connect(mapStateToProps, null)(Message)

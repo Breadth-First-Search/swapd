@@ -23,13 +23,13 @@ class MessagesList extends Component {
           <OfferForm offer={message} key={message.id} user={this.props.user} />
         )
       })
-    console.log(filteredMessages[filteredMessages.length - 1])
+    // console.log(filteredMessages[filteredMessages.length - 1])
     //   message => message.swapId === swapId
     // );
-    // console.log(messages)
+    console.log(messages)
     return (
-      <div className="messageList">
-        <ul className="media-list">
+      <div id="chatContainer">
+        <div className="message-list">
           {messages.length &&
             messages
               .filter(message => message.type === 'MESSAGE')
@@ -43,7 +43,7 @@ class MessagesList extends Component {
                 )
               })
               .concat([filteredMessages[filteredMessages.length - 1]])}
-        </ul>
+        </div>
         {messages.length && <NewMessageEntry swapId={swapId} />}
       </div>
     )
