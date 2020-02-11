@@ -156,6 +156,7 @@ nav a {
   margin: 45px;
   box-shadow: rgb(228, 228, 228);
 }
+
 .profileServicesList {
   height: 100%;
   text-align: center;
@@ -345,6 +346,38 @@ li {
   border-style: solid;
   border-color: rgb(228, 228, 228);
   box-shadow: rgb(228, 228, 228);
+}
+
+#reviewMaker {
+}
+.reviewMaker {
+  display: flex;
+}
+.star {
+  display: none;
+}
+
+.reviewMaker label {
+  display: block;
+  cursor: pointer;
+  background: #ccc;
+}
+
+.reviewMaker label:before {
+  content: '\f005';
+  font-family: fontAwesome;
+  position: relative;
+  display: block;
+}
+
+.reviewMaker label:after {
+  content: '\f005';
+  font-family: fontAwesome;
+  position: absolute;
+  display: block;
+  color: #25665c;
+  top: 0;
+  opacity: 0;
 }
 
 #chatContainer {

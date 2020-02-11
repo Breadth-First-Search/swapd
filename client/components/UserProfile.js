@@ -14,7 +14,7 @@ class UserProfile extends React.Component {
   render() {
     const {user, interests, services} = this.props
     return (
-      <div id="">
+      <div id="userProfile">
         <div className="leftProfile">
           <div className="userProfileMain">
             <div style={{fontSize: '1.5em', fontWeight: 'bold'}}>
