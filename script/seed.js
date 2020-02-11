@@ -190,87 +190,54 @@ async function seed() {
     location: 'Fullstack Academy'
   })
 
-  await Promise.all([
-    Message.create({
-      userId: 1,
-      swapId: 1,
-      text: 'Hello',
-      requesterId: 1,
-      responderId: 2
-    }),
-    Message.create({
-      userId: 2,
-      swapId: 1,
-      text: 'Hi',
-      requesterId: 1,
-      responderId: 2
-    }),
-    Message.create({
-      userId: 1,
-      swapId: 1,
-      text:
-        'Would love to practice on algo problems with you. Would you like to learn dancing?',
-      requesterId: 1,
-      responderId: 2
-    }),
-    Message.create({
-      userId: 2,
-      swapId: 1,
-      text: 'I definitely would love to.',
-      requesterId: 1,
-      responderId: 2
-    }),
-    Message.create({
-      userId: 1,
-      swapId: 1,
-      text: 'Cool is Feb 2nd at 3pm at Fullstack okay?',
-      requesterId: 1,
-      responderId: 2
-    }),
-    Message.create({
-      userId: 2,
-      swapId: 1,
-      text: 'Sounds good to me',
-      requesterId: 1,
-      responderId: 2
-    })
-  ])
+  await Message.create({
+    userId: 1,
+    swapId: 1,
+    text: 'Hello',
+    requesterId: 1,
+    responderId: 2
+  })
 
-  // await Promise.all([
-  //   Review.create({
-  //     rating: 5,
-  //     comment: 'The best dance lessons ever',
-  //     serviceId: 1
-  //   }),
-  //   Review.create({
-  //     rating: 3,
-  //     comment:
-  //       'Eh I am okay with the service, great guy but nothing new for me.',
-  //     serviceId: 1
-  //   }),
-  //   Review.create({
-  //     rating: 1,
-  //     comment: 'Absolutely garbage.',
-  //     serviceId: 1
-  //   }),
-  //   Review.create({
-  //     rating: 2,
-  //     comment:
-  //       'Too hard for me, wished the description of the service was more specific on what to expect.',
-  //     serviceId: 2
-  //   }),
-  //   Review.create({
-  //     rating: 5,
-  //     comment:
-  //       'Loved the experience! Jasen is incredibly good at algos and would swap with him again!',
-  //     serviceId: 2
-  //   }),
-  //   Review.create({
-  //     rating: 4,
-  //     comment: 'Learned a lot from this swap. Wished it was longer though.',
-  //     serviceId: 2
-  //   })
-  // ])
+  await Message.create({
+    userId: 2,
+    swapId: 1,
+    text: 'Hi',
+    requesterId: 1,
+    responderId: 2
+  })
+
+  await Message.create({
+    userId: 1,
+    swapId: 1,
+    text:
+      'Would love to practice on algo problems with you. Would you like to learn dancing?',
+    requesterId: 1,
+    responderId: 2
+  })
+
+  await Message.create({
+    userId: 2,
+    swapId: 1,
+    text: 'I definitely would love to.',
+    requesterId: 1,
+    responderId: 2
+  })
+
+  await Message.create({
+    userId: 1,
+    swapId: 1,
+    text: 'Cool is Feb 2nd at 3pm at Fullstack okay?',
+    requesterId: 1,
+    responderId: 2
+  })
+
+  await Message.create({
+    userId: 2,
+    swapId: 1,
+    text: 'Sounds good to me',
+    requesterId: 1,
+    responderId: 2
+  })
 
   await Interest.bulkCreate(interestHelper(interestsList))
   await UserInterest.bulkCreate(interestJoinTableHelper(users))
