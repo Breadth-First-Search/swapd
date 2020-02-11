@@ -5,6 +5,7 @@ import PropTypes from 'prop-types'
 import UserProfile from './components/UserProfile'
 import SelectedUserProfile from './components/SelectedUserProfile'
 import EditProfile from './components/UserProfileEdit'
+import NewUserService from './components/NewUserService'
 import {
   Login,
   UserHome,
@@ -46,7 +47,7 @@ class Routes extends Component {
               path="/user-profile/:userId"
               component={SelectedUserProfile}
             />
-
+            <Route exact path="/add-service" component={NewUserService} />
             <Route exact path="/swaps" component={SwapList} />
 
             <Route exact path="/swaps/:swapId" component={MessagesList} />

@@ -30,7 +30,6 @@ class SelectedUserProfile extends React.Component {
   }
 
   componentDidMount() {
-    //load user interests
     //load selected user's info, interests, and services
     try {
       this.props.getSelectedUser(this.props.match.params.userId).then(() => {
