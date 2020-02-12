@@ -34,7 +34,6 @@ router.get('/', async (req, res, next) => {
       ],
       include: [{model: Interest, as: 'interests', through: UserInterest}]
     })
-    console.log(users)
     res.json(users)
   } catch (err) {
     next(err)
@@ -43,7 +42,7 @@ router.get('/', async (req, res, next) => {
 
 router.get('/top', async (req, res, next) => {
   try {
-    //get all users where the overallRating is greater than 4
+    //get all users where the overallRating is greater than 3
     const topUsers = await User.findAll({
       where: {
         overallRating: {
@@ -325,8 +324,6 @@ router.get('/services/:serviceName/', async (req, res, next) => {
     console.log(result[0].dataValues.name, result[2])
     console.log(result[1].dataValues.name, result[3])
 
-    // console.log(KMPmatch("piano","lessens of piano"))
-
     const users = await User.findAll({
       include: [
         {
@@ -343,14 +340,10 @@ router.get('/services/:serviceName/', async (req, res, next) => {
       ]
     })
 
-    // algorithm here
-    // console.log(users);
-
     users.sort((userA, userB) => {
       userA = userA.dataValues
       userB = userB.dataValues
-      // console.log(userA.interests)
-      // console.log(userB.interests)
+
       let numIntersectionsA = getScoreFromInterestsObject(
         searcherInterestsSet,
         userA.interests
