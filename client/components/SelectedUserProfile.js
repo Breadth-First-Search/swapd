@@ -64,21 +64,25 @@ class SelectedUserProfile extends React.Component {
           <br />
           <div>Max Travel Distance: {selectedUser.distancePrefWeight} mi</div>
           <br />
-          <div>
-            <div className="interests">Interests:</div>
-            <ul>
+          <div className="displayinterestscontainer">
+            <div className="interests">Interests</div>
+            <div className="interestswrapper">
               {selectedUser.interests.map(interest => {
                 if (this.state.matchingInterests.includes(interest.id)) {
                   return (
-                    <li className="matching" key={interest.id}>
+                    <span className="matching singleinterest" key={interest.id}>
                       {interest.name}
-                    </li>
+                    </span>
                   )
                 } else {
-                  return <li key={interest.id}>{interest.name}</li>
+                  return (
+                    <span className="singleinterest" key={interest.id}>
+                      {interest.name}
+                    </span>
+                  )
                 }
               })}
-            </ul>
+            </div>
           </div>
         </div>
         <div className="rightProfile">

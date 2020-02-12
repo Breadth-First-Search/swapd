@@ -44,6 +44,17 @@ class UserProfile extends React.Component {
         </div>
 
         <div className="rightProfile">
+          <div className="profileInterestsList">
+            <div style={{fontSize: '1.5em', fontWeight: 'bold'}}>
+              Your Interests
+            </div>
+            <br />
+            {interests.map(i => (
+              <span className="singleinterest" key={i.id}>
+                {i.name}
+              </span>
+            ))}
+          </div>
           <div style={{fontSize: '1.5em', fontWeight: 'bold'}}>
             Services You're Offering
           </div>
@@ -92,13 +103,6 @@ class UserProfile extends React.Component {
                 </div>
               </div>
             ))}
-          </div>
-
-          <div className="profileInterestsList">
-            <div style={{fontSize: '1.5em', fontWeight: 'bold'}}>
-              Your Interests:
-            </div>
-            {interests.map(i => <li key={i.id}>{i.name}</li>)}
           </div>
         </div>
       </div>

@@ -40,70 +40,84 @@ class EditUserProfile extends React.Component {
         <div className="leftEditProfile">
           <div className="boldText">Hi, {user.firstName}</div>
           <img src={user.photo} className="profilePhoto" />
-          <div>Overall Rating: {user.overallRating}</div>
 
-          <form onSubmit={this.handleSubmit}>
-            <div>
-              <label htmlFor="email">
-                <small>Email:</small>
-              </label>
-              <input
-                name="email"
-                value={this.state.email}
-                onChange={this.handleChange}
-                type="text"
-                size="50"
-              />
-              <label htmlFor="phoneNumber">
-                <small>Phone Number:</small>
-              </label>
-              <input
-                name="phoneNumber"
-                value={this.state.phoneNumber}
-                onChange={this.handleChange}
-                type="text"
-                size="12"
-              />
-              <label htmlFor="distancePrefWeight">
-                <small>"Maximum Travel Distance (mi):"</small>
-              </label>
-              <input
-                name="distancePrefWeight"
-                value={this.state.distancePrefWeight}
-                onChange={this.handleChange}
-                type="range"
-                min="0"
-                max="100"
-                size="4"
-              />
-              <label htmlFor="distancePrefWeight">{`${
-                this.state.distancePrefWeight
-              } miles`}</label>
+          <div>Overall Rating: {user.overallRating.toFixed(2)}</div>
+          <div className="leftEditProfileInfo">
+            <form onSubmit={this.handleSubmit}>
+              <div>
+                <label htmlFor="email">
+                  <small>Email:</small>
+                </label>
+                <input
+                  className="editFields"
+                  name="email"
+                  value={this.state.email}
+                  onChange={this.handleChange}
+                  type="text"
+                  size="50"
+                />
+                <br />
+                <br />
+                <label htmlFor="phoneNumber">
+                  <small>Phone Number:</small>
+                </label>
+                <input
+                  className="editFields"
+                  name="phoneNumber"
+                  value={this.state.phoneNumber}
+                  onChange={this.handleChange}
+                  type="text"
+                  size="12"
+                />
+                <br />
+                <br />
+                <label htmlFor="distancePrefWeight">
+                  <small>"Maximum Travel Distance (mi):"</small>
+                </label>
+                <input
+                  name="distancePrefWeight"
+                  value={this.state.distancePrefWeight}
+                  onChange={this.handleChange}
+                  type="range"
+                  min="0"
+                  max="100"
+                  size="4"
+                 />
+                <label htmlFor="distancePrefWeight">
+                  {`${this.state.distancePrefWeight} miles`}
+                </label>
 
-              <label htmlFor="zipcode">
-                <small>ZIP Code:</small>
-              </label>
-              <input
-                name="zipcode"
-                value={this.state.zipcode}
-                onChange={this.handleChange}
-                type="text"
-                size="5"
-              />
-              <label htmlFor="bio">
-                <small>Your Bio:</small>
-              </label>
-              <input
-                className="editDescription"
-                name="bio"
-                value={this.state.bio}
-                onChange={this.handleChange}
-                type="text"
-                size="200"
-              />
-              <button type="submit">SAVE CHANGES</button>
-            </div>
-          </form>
+                <br />
+                <br />
+                <label htmlFor="zipcode">
+                  <small>ZIP Code:</small>
+                </label>
+                <input
+                  className="editFields"
+                  name="zipcode"
+                  value={this.state.zipcode}
+                  onChange={this.handleChange}
+                  type="text"
+                  size="5"
+                />
+                <br />
+                <br />
+                <label htmlFor="bio">
+                  <small>Your Bio:</small>
+                </label>
+                <textarea
+                  className="editDescription"
+                  name="bio"
+                  value={this.state.bio}
+                  onChange={this.handleChange}
+                  type="text"
+                  size="200"
+                  rows="5"
+                />
+                <button type="submit">SAVE CHANGES</button>
+              </div>
+            </form>
+          </div>
         </div>
         <div className="rightEditProfile">
           <Interests />

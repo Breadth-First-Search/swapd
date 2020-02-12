@@ -3,7 +3,9 @@ import {connect} from 'react-redux'
 import {
   getInterests,
   getUserInterests,
-  addUserInterest
+  addUserInterest,
+  deleteUserInterest,
+  writeInterest
 } from '../store/interests'
 
 class Interests extends React.Component {
@@ -38,8 +40,16 @@ class Interests extends React.Component {
     return (
       userInterests && (
         <div>
-          <div className="boldText">Your Interests:</div>
-          <div>{userInterests.map(ui => <li key={ui.id}>{ui.name}</li>)}</div>
+          <h4>Your Interests:</h4>
+          <div className="interestswrapper">
+            {userInterests.map(ui => (
+              <span key={ui.id} className="singleinterest">
+                {ui.name}
+              </span>
+            ))}
+          </div>
+          <br />
+          <br />
           Add A New Interest:
           <div>
             <form onSubmit={this.handleSubmit}>

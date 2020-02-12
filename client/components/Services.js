@@ -6,6 +6,9 @@ import {
   getServices,
   getUserServices
 } from '../store/services'
+import {Link} from 'react-router-dom'
+import StarRateIcon from '@material-ui/icons/StarRate'
+import Ratings from 'react-ratings-declarative'
 
 class Services extends React.Component {
   constructor() {
@@ -38,13 +41,57 @@ class Services extends React.Component {
   }
 
   render() {
-    const {serviceCategories, services, userServices} = this.props
+    const {serviceCategories, services, userServices, user} = this.props
 
     return (
       <div className="editServices">
         <div className="boldText">Your Offered Services:</div>
-        {userServices.map(us => <li key={us.id}>{us.name}</li>)}
-
+        <div className="servicelistcontainer">
+          {userServices.map(s => (
+            <div key={s.id} className="singleservice">
+              <div className="servicephotobox">
+                <div className="servicename">{s.name}</div>
+                <Link to={`/users/${user.id}/services/${s.id}`}>
+                  <img src={s.imageUrl} className="servicephoto" />
+                </Link>
+                <div className="servicerating">
+                  <StarRateIcon
+                    fontSize="small"
+                    viewBox="0 0 24 24"
+                    color="secondary"
+                  />
+                  <span>{s.serviceRating && s.serviceRating.toFixed(2)}</span>
+                  <span style={{color: '#25665C'}}>{` (${
+                    s.reviewCount
+                  } Reviews)`}</span>
+                </div>
+              </div>
+              <div className="servicedescriptionbox">
+                <div>
+                  <p>{s.description}</p>
+                </div>
+              </div>
+              <div className="verticalline" />
+              <div className="servicerightside">
+                <div>
+                  <div className="servicerightsidetitle">Skill Level</div>
+                  <Ratings
+                    rating={s.proficiency === null ? 1 : s.proficiency}
+                    widgetRatedColors="gold"
+                  >
+                    <Ratings.Widget widgetDimension="15px" />
+                    <Ratings.Widget widgetDimension="15px" />
+                    <Ratings.Widget widgetDimension="15px" />
+                  </Ratings>
+                </div>
+                <div>
+                  <div className="servicerightsidetitle">Remote</div>
+                  <div className="remote">{s.remote ? 'Yes' : 'No'}</div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
         <div>
           Add A New Service:
           <form onSubmit={this.handleSubmit}>
@@ -69,12 +116,13 @@ class Services extends React.Component {
             <label htmlFor="description">
               <small>Description:</small>
             </label>
-            <input
+            <textarea
               className="editDescription"
               type="text"
               size="200"
               name="description"
               onChange={this.handleChange}
+              rows="5"
             />
             <button type="submit">ADD</button>
           </form>
