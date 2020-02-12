@@ -632,7 +632,7 @@ li {
   flex-direction: column;
   flex: 1 1 auto;
   align-items: flex-start;
-  overflow-x: hidden;
+  overflow-x: auto;
   overflow-y: auto;
   scroll-behavior: smooth;
 }
