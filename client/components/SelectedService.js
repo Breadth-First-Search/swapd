@@ -4,6 +4,8 @@ import axios from 'axios'
 import SingleUserSnapshot from './SingleUserSnapshot'
 import {NavLink} from 'react-router-dom'
 import InitiateSwapButton from './InitiateSwapButton'
+import StarRateIcon from '@material-ui/icons/StarRate'
+import Ratings from 'react-ratings-declarative'
 
 class SelectedService extends React.Component {
   constructor() {
@@ -49,39 +51,72 @@ class SelectedService extends React.Component {
     if (service.reviews) {
       reviewsPerService = service.reviews
     }
-    console.log(reviewsPerService)
+
+    let rating
+    if (user.hasOwnProperty('id')) {
+      rating = user.overallRating
+    }
 
     return (
       <div id="selectedServiceContainer">
-        <div>{service.name}</div>
-        <span>
-          <NavLink to={`/user-profile/${user.id}`}>
+        <div id="selectedserviceleftcontainer">
+          <div className="selectedservicedetails">
+            <div className="selectedservicetitle">{service.name}</div>
             <div>
-              by {user.firstName} {user.lastName}
+              <NavLink to={`/user-profile/${user.id}`}>
+                <div className="selectedserviceuser">
+                  by {user.firstName} {user.lastName}
+                </div>
+              </NavLink>
+              <span>
+                <div className="skilllevelcontainer">
+                  <div className="skilllevelname">Level</div>
+                  <Ratings
+                    rating={service.proficiency}
+                    widgetRatedColors="gold"
+                  >
+                    <Ratings.Widget widgetDimension="15px" />
+                    <Ratings.Widget widgetDimension="15px" />
+                    <Ratings.Widget widgetDimension="15px" />
+                  </Ratings>
+                </div>
+                {/* <div id="overallRating">
+                <StarRateIcon viewBox="0 0 24 24" />
+                <span className="overallRating">
+                  {rating && rating.toFixed(2)}
+                </span>
+                <span style={{color: '#25665C'}}>{` (${
+                  user.reviewCount
+                } Reviews)`}</span>
+              </div> */}
+              </span>
             </div>
-          </NavLink>
-        </span>
+            <div>
+              <img className="selectedservicephoto" src={service.imageUrl} />
+            </div>
+          </div>
+          <p style={{textAlign: 'left'}}>{service.description}</p>
 
-        <img style={{width: '50%'}} src={service.imageUrl} />
-        <p>{service.description}</p>
-        <p>Proficiency: {service.proficiency}</p>
-        <InitiateSwapButton providerUser={user} providerService={service} />
-        {user.firstName ? (
-          <SingleUserSnapshot
-            user={user}
-            getData={this.getData}
-            service={service}
-          />
-        ) : null}
-        <ul>
-          {reviewsPerService &&
-            reviewsPerService.map((review, idx) => (
-              <li key={idx}>
-                <div>{review.rating}</div>
-                <h3>{review.comment}</h3>
-              </li>
-            ))}
-        </ul>
+          <InitiateSwapButton providerUser={user} providerService={service} />
+          {user.firstName ? (
+            <SingleUserSnapshot
+              user={user}
+              getData={this.getData}
+              service={service}
+            />
+          ) : null}
+        </div>
+        <div id="selectedservicerightcontainer">
+          <div>
+            {reviewsPerService &&
+              reviewsPerService.map(review => (
+                <li key={review.id}>
+                  <div>{review.rating}</div>
+                  <h3>{review.comment}</h3>
+                </li>
+              ))}
+          </div>
+        </div>
       </div>
     )
   }

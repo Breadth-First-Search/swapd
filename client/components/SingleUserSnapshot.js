@@ -1,5 +1,6 @@
 import React from 'react'
 import {NavLink} from 'react-router-dom'
+import StarRateIcon from '@material-ui/icons/StarRate'
 
 export default class SingleUserSnapshot extends React.Component {
   constructor() {
@@ -20,30 +21,37 @@ export default class SingleUserSnapshot extends React.Component {
 
     return (
       <div className="singleUserSnapshot">
-        <h3>
-          {user.firstName} {user.lastName}
-        </h3>
-        <h4>Overall Rating: {user.overallRating.toFixed(2)}</h4>
+        {/* <div>
+          Overall Rating: {user.overallRating.toFixed(2)}
+        </div> */}
         <h4>
-          Other services offered by {user.firstName} {user.lastName}
+          Other Services by {user.firstName} {user.lastName}
         </h4>
-        <ul>
-          {user.services.map((service, i) => {
-            if (service.name === this.props.service.name) return
+        <div className="otherserviceslist">
+          {user.services.map(service => {
+            if (service.id === this.props.service.id) return
             return (
-              <li key={i}>
-                <NavLink
-                  to={`/users/${user.id}/services/${service.id}`}
-                  onClick={() => this.handleClick()}
-                >
-                  <p>
-                    {service.name} - {service.serviceRating.toFixed(2)}
-                  </p>
-                </NavLink>
-              </li>
+              <NavLink
+                key={service.id}
+                className="eachservicecontainer"
+                to={`/users/${user.id}/services/${service.id}`}
+                onClick={() => this.handleClick()}
+              >
+                <div className="eachservicename">{service.name}</div>
+                <img className="eachservicephoto" src={service.imageUrl} />
+                <div className="servicerating">
+                  <StarRateIcon
+                    fontSize="small"
+                    viewBox="0 0 24 24"
+                    color="secondary"
+                  />
+                  <span>{service.serviceRating.toFixed(2)}</span>
+                  <span>{` (${service.reviewCount} Reviews)`}</span>
+                </div>
+              </NavLink>
             )
           })}
-        </ul>
+        </div>
       </div>
     )
   }

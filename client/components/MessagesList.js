@@ -31,7 +31,7 @@ class MessagesList extends Component {
       otherUserName =
         user.id !== messages[0].requester.id
           ? `${messages[0].requester.firstName} ${
-              messages[0].requester.firstName
+              messages[0].requester.lastName
             }`
           : `${messages[0].responder.firstName} ${
               messages[0].responder.lastName
