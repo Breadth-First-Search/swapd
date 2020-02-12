@@ -39,7 +39,7 @@ class Services extends React.Component {
 
   render() {
     const {serviceCategories, services, userServices} = this.props
-    console.log(services)
+
     return (
       <div className="editServices">
         <div className="boldText">Your Offered Services:</div>

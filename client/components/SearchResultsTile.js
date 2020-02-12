@@ -10,7 +10,6 @@ export default class SearchResultsTile extends React.Component {
 
   render() {
     let result = this.props.result
-    // console.log(result)
     return (
       <div className="searchResultsInner">
         <NavLink to={`/users/${result.id}/services/${result.services[0].id}`}>
