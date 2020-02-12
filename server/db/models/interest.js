@@ -4,7 +4,8 @@ const db = require('../db')
 const Interest = db.define('interest', {
   name: {
     type: Sequelize.STRING,
-    unique: true
+    unique: true,
+    allowNull: false
   }
 })
 
