@@ -41,7 +41,13 @@ router.get('/:serviceId', async (req, res, next) => {
         },
         {
           model: Review,
-          attributes: ['rating', 'comment']
+          attributes: ['rating', 'comment'],
+          include: [
+            {
+              model: User,
+              attributes: ['id', 'firstName', 'lastName', 'photo']
+            }
+          ]
         }
       ]
     })

@@ -20,6 +20,11 @@ label {
   display: block;
 }
 
+nav {
+  /* position: fixed;
+  width: 100%; */
+}
+
 nav a {
   display: inline-block;
   margin: 1em;
@@ -335,6 +340,143 @@ li {
   justify-content: center;
   flex-wrap: wrap;
 }
+
+#selectedserviceleftcontainer {
+  /* position: fixed; */
+  height: 80%;
+  width: 30%;
+  left: 3%;
+  text-align: center;
+  border: 1px;
+  border-radius: 1px;
+  border-style: solid;
+  border-color: rgb(228, 228, 228);
+  padding: 15px;
+  margin: 30px;
+  margin-left: 45px;
+  box-shadow: rgb(228, 228, 228);
+}
+
+.selectedservicedetails {
+}
+
+.selectedservicetitle {
+  font-size: 1.8em;
+  font-weight: bold;
+}
+
+.selectedserviceuser {
+  padding: 2px;
+}
+
+.selectedservicephoto {
+  width: 95%;
+  border-radius: 5%;
+}
+
+.skilllevelcontainer {
+  display: flex;
+  justify-content: center;
+  padding: 5px;
+}
+
+.skilllevelname {
+  padding-bottom: 2px;
+  padding-right: 10px;
+}
+
+.otherserviceslist {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.eachservicecontainer {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  width: 50%;
+  align-items: center;
+}
+
+.eachservicename {
+  padding-bottom: 5px;
+  padding-top: 5px;
+  font-size: 0.9em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.eachservicephoto {
+  width: 90%;
+  border-radius: 5px;
+}
+
+.eachservicerating {
+  font-size: 0.9em;
+}
+
+#selectedservicerightcontainer {
+  display: flex;
+  /* align-items: center; */
+  flex-direction: column;
+  height: 100%;
+  left: 20%;
+  /* padding: 15px; */
+  margin: 30px;
+  width: 45%;
+}
+
+.selectedserviceratingcontainer {
+  font-weight: bold;
+}
+
+.reviewtitle {
+  font-size: 1.8em;
+}
+
+.selectedservicereviewscontainer {
+  width: 100%;
+}
+
+.selectedserviceratingtitle {
+  font-size: 1.5em;
+}
+
+.selectedserviceratingvalue {
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+
+.selectedserviceratingvalue span {
+  padding-right: 5px;
+  font-size: 1.2em;
+  align-self: center;
+}
+
+#review-details-container {
+  display: flex;
+  flex-direction: row;
+  padding: 10px;
+  border: 1px;
+  border-radius: 1px;
+  border-style: solid;
+  border-color: rgb(228, 228, 228);
+  box-shadow: rgb(228, 228, 228);
+}
+
+.review-user-photo {
+  width: 10%;
+  height: 10%;
+}
+
+.review-user-photo img {
+  width: 100%;
+  border-radius: 50%;
+}
+
 .reviewContainer {
   display: flex;
   justify-content: center;
@@ -394,7 +536,7 @@ li {
   border-radius: 10px;
   border-style: solid;
   border-color: rgb(228, 228, 228);
-  box-shadow: rgb(228, 228, 228);
+  box-shadow: 1px 3px 5px rgb(228, 228, 228);
   color: rgba(0, 0, 0, 0.87);
   background-color: #fafafa;
 }
@@ -528,7 +670,6 @@ li {
 
 .offer_confirmed {
   border-radius: 5px;
-  background-color: green;
 }
 
 .newUserServiceContainer {
