@@ -98,7 +98,10 @@ function FormDialog(props) {
         onClose={handleClose}
         aria-labelledby="form-dialog-title"
       >
-        <DialogTitle id="form-dialog-title">Select Service to Swap</DialogTitle>
+        <DialogTitle id="form-dialog-title">
+          You Chose {props.providerService.name}. <br />
+          Now Offer One Of Your Services To Share!
+        </DialogTitle>
         <DialogContent>
           <List>
             {props.services.length
