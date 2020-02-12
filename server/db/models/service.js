@@ -3,10 +3,13 @@ const db = require('../db')
 
 const Service = db.define('service', {
   name: {
-    type: Sequelize.STRING
+    type: Sequelize.STRING,
+    allowNull: false,
+    defaultValue: ''
   },
   description: {
-    type: Sequelize.TEXT
+    type: Sequelize.TEXT,
+    defaultValue: ''
   },
   proficiency: {
     type: Sequelize.INTEGER,
@@ -16,7 +19,8 @@ const Service = db.define('service', {
     }
   },
   remote: {
-    type: Sequelize.BOOLEAN
+    type: Sequelize.BOOLEAN,
+    defaultValue: false
   },
   imageUrl: {
     type: Sequelize.STRING,

@@ -7,60 +7,65 @@ module.exports = router
 
 router.get('/swap/:swapId', async (req, res, next) => {
   try {
-    let messages = await Message.findAll({
-      where: {
-        swapId: req.params.swapId
-      },
-      include: [
-        {
-          model: Swap,
-          attributes: ['id'],
-          include: [
-            {
-              model: Service,
-              as: 'responderService',
-              attributes: [
-                'id',
-                'name',
-                'serviceRating',
-                'reviewCount',
-                'description',
-                'imageUrl',
-                'reviewCount',
-                'proficiency'
-              ]
-            },
-            {
-              model: Service,
-              as: 'requesterService',
-              attributes: [
-                'id',
-                'name',
-                'serviceRating',
-                'reviewCount',
-                'description',
-                'imageUrl',
-                'reviewCount',
-                'proficiency'
-              ]
-            }
-          ]
+    const swap = await Swap.findByPk(+req.params.swapId)
+    if (swap.responderId === req.user.id || swap.requestorId === req.user.id) {
+      let messages = await Message.findAll({
+        where: {
+          swapId: req.params.swapId
         },
-        {
-          model: User,
-          as: 'responder',
-          attributes: ['id', 'firstName', 'lastName', 'email', 'photo']
-        },
-        {
-          model: User,
-          as: 'requester',
-          attributes: ['id', 'firstName', 'lastName', 'email', 'photo'],
-          include: [{model: Service}]
-        }
-      ],
-      order: [['id', 'ASC']]
-    })
-    res.json(messages)
+        include: [
+          {
+            model: Swap,
+            attributes: ['id'],
+            include: [
+              {
+                model: Service,
+                as: 'responderService',
+                attributes: [
+                  'id',
+                  'name',
+                  'serviceRating',
+                  'reviewCount',
+                  'description',
+                  'imageUrl',
+                  'reviewCount',
+                  'proficiency'
+                ]
+              },
+              {
+                model: Service,
+                as: 'requesterService',
+                attributes: [
+                  'id',
+                  'name',
+                  'serviceRating',
+                  'reviewCount',
+                  'description',
+                  'imageUrl',
+                  'reviewCount',
+                  'proficiency'
+                ]
+              }
+            ]
+          },
+          {
+            model: User,
+            as: 'responder',
+            attributes: ['id', 'firstName', 'lastName', 'email', 'photo']
+          },
+          {
+            model: User,
+            as: 'requester',
+            attributes: ['id', 'firstName', 'lastName', 'email', 'photo'],
+            include: [{model: Service}]
+          }
+        ],
+        order: [['id', 'ASC']]
+      })
+      res.json(messages)
+    } else {
+      res.sendStatus(403)
+    }
   } catch (err) {
     next(err)
   }

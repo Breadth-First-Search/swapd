@@ -792,3 +792,11 @@ li {
   left: 35%;
   transform: translate(-50%, -50%);
 }
+
+.messageMessage {
+  display: flex;
+  margin: 50px;
+  font-size: 30px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
