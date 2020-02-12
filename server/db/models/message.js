@@ -3,7 +3,8 @@ const db = require('../db')
 
 const Message = db.define('message', {
   text: {
-    type: Sequelize.TEXT
+    type: Sequelize.TEXT,
+    defaultValue: ''
   },
   requesterId: {
     type: Sequelize.INTEGER

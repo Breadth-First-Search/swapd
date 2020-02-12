@@ -20,25 +20,21 @@ class Review extends React.Component {
     this.handleChange = this.handleChange.bind(this)
   }
   componentDidMount() {
-    this.props
-      .getUnreviewedServices(this.props.serviceId)
-      .then(() =>
-        this.setState({
-          serviceId: this.props.serviceId,
-          rating: 0,
-          comment: '',
-          userId: this.props.service.user.id
-        })
-      )
+    this.props.getUnreviewedServices(this.props.serviceId).then(() =>
+      this.setState({
+        serviceId: this.props.serviceId,
+        rating: 0,
+        comment: '',
+        userId: this.props.service.user.id
+      })
+    )
   }
   handleChange(evt) {
-    console.log('hi', this.props.service.user.id)
     this.setState({[evt.target.name]: evt.target.value})
   }
 
   handleSubmit(evt) {
     evt.preventDefault()
-    console.log(evt.target.name)
     this.props.submitReview(this.state)
 
     //calls a thunk to update the swap review status and clears the review

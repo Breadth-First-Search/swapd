@@ -283,8 +283,6 @@ function userInterestsToSet(interests) {
 function getScoreFromInterestsObject(myInterSet, theirInter) {
   let intersection = 0
 
-  // console.log(`AJSFKDAJFDSKFJDKFKLFJDLSKJFKSFJKLSDJF ${myInterSet}`)
-  // console.log(theirInter)
   theirInter.forEach(interestObj => {
     intersection += myInterSet.has(interestObj.id) ? 1 : 0
   })
@@ -379,7 +377,6 @@ userValues.sort((userA, userB) => {
 // const mapVals = userValues.map(elem => {
 // 	return {interests: elem.interests, intersections: elem.intersections}
 // });
-// console.log(`After sorting: ${util.inspect(userValues, {showHidden: false, depth: null})}`);
 
 module.exports = {
   interestsList,

@@ -549,7 +549,7 @@ li {
 .reviewMaker label {
   display: block;
   cursor: pointer;
-  background: #ccc;
+  /* background: #ccc; */
 }
 
 .reviewMaker label:before {
@@ -557,16 +557,21 @@ li {
   font-family: fontAwesome;
   position: relative;
   display: block;
+  color: #101010;
 }
 
 .reviewMaker label:after {
   content: '\f005';
   font-family: fontAwesome;
-  position: absolute;
+  position: relative;
   display: block;
   color: #25665c;
-  top: 0;
   opacity: 0;
+  transition: 0.5s;
+}
+
+.reviewMaker label:hover:after {
+  opacity: 1;
 }
 
 #chatContainer {
