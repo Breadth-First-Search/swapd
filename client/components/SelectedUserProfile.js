@@ -45,6 +45,10 @@ class SelectedUserProfile extends React.Component {
 
   render() {
     const {selectedUser} = this.props
+    const starArr = []
+    for (let i = 0; i < Math.floor(selectedUser.overallRating); i++) {
+      starArr.push(i)
+    }
     return !this.state.isLoading ? (
       <div id="profileContainer">
         <div className="leftProfile">
@@ -53,7 +57,9 @@ class SelectedUserProfile extends React.Component {
           </div>
           <img src={selectedUser.photo} className="profilePhoto" />
           <div id="overallRating">
-            <StarRateIcon viewBox="0 0 24 24" />
+            {starArr.map(indx => (
+              <StarRateIcon key={indx} viewBox="0 0 24 24" />
+            ))}
             <span className="overallRating">
               {selectedUser.overallRating.toFixed(2)}
             </span>
