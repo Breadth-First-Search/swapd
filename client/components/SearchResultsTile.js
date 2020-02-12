@@ -18,12 +18,13 @@ export default class SearchResultsTile extends React.Component {
             {result.firstName} {result.lastName}
           </div>
           <div>
-            Overall Rating:{' '}
-            {`${result.overallRating.toFixed(2)} (${result.reviewCount})`}{' '}
+            {result.firstName}'s' Overall Rating:{' '}
+            {`${result.overallRating.toFixed(2)}`}{' '}
           </div>
 
           <div>
-            Service Rating: {result.services[0].serviceRating.toFixed(2)}
+            Rating for {result.services[0].name}:{' '}
+            {result.services[0].serviceRating.toFixed(2)}
           </div>
         </NavLink>
       </div>

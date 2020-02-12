@@ -43,7 +43,7 @@ class SearchResults extends React.Component {
         <div>
           {extraInfo && (
             <h3>
-              Showing results for "{extraInfo[0]}" for closest match to "{
+              Showing results for {extraInfo[0]} for closest match to "{
                 this.props.match.params.serviceName
               }"{' '}
             </h3>
