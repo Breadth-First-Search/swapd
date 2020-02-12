@@ -8,10 +8,7 @@ router.get('/:userId', async (req, res, next) => {
   try {
     const swaps = await Swap.findAll({
       where: {
-        [Op.or]: [
-          {requesterId: req.params.userId},
-          {responderId: req.params.userId}
-        ]
+        [Op.or]: [{requesterId: req.user.id}, {responderId: req.user.id}]
       },
       include: [
         {
@@ -31,13 +28,18 @@ router.get('/:userId', async (req, res, next) => {
 })
 
 router.post('/', async (req, res, next) => {
-  console.log(req.body)
   try {
-    const swaps = await Swap.findOrCreate({
-      where: req.body
-    })
-    console.log(swaps)
-    res.json(swaps)
+    if (req.user) {
+      if (req.user.id === req.body.requesterId) {
+        const swaps = await Swap.findOrCreate({
+          where: req.body
+        })
+        console.log(swaps)
+        res.json(swaps)
+      }
+    } else {
+      res.sendStatus(403)
+    }
   } catch (error) {
     next(error)
   }
@@ -47,14 +49,14 @@ router.post('/', async (req, res, next) => {
 router.put('/reviews/:swapId', async (req, res, next) => {
   try {
     const swapId = Number(req.params.swapId)
-    const {userId} = req.body
-    Number(userId)
+    // const {userId} = req.body
+    // Number(userId)
     const swap = await Swap.findByPk(swapId)
     console.log('swap in update review api', swap)
-    if (swap.requesterId !== userId) {
+    if (swap.responderId === req.user.id) {
       const updated = await swap.update({requesterServiceReviewed: true})
       res.json(updated)
-    } else {
+    } else if (swap.requesterId === req.user.id) {
       const updated = await swap.update({responderServiceReviewed: true})
       res.json(updated)
     }
@@ -67,12 +69,19 @@ router.put('/:swapId/services/:serviceId', async (req, res, next) => {
   try {
     const swapToUpdate = await Swap.findByPk(+req.params.swapId)
 
-    await swapToUpdate.update({
-      requesterServiceId: +req.params.serviceId,
-      swapStatus: 'Active'
-    })
-
-    res.json(swapToUpdate)
+    //if swap user id === req.user.id..
+    if (
+      swapToUpdate.responderId === req.user.id ||
+      swapToUpdate.requestorId === req.user.id
+    ) {
+      await swapToUpdate.update({
+        requesterServiceId: +req.params.serviceId,
+        swapStatus: 'Active'
+      })
+      res.json(swapToUpdate)
+    } else {
+      res.sendStatus(403)
+    }
   } catch (err) {
     next(err)
   }

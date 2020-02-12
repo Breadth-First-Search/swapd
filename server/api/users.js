@@ -24,6 +24,14 @@ router.get('/', async (req, res, next) => {
       // explicitly select only the id and email fields - even though
       // users' passwords are encrypted, it won't help if we just
       // send everything to anyone who asks!
+      attributes: [
+        'id',
+        'firstName',
+        'lastName',
+        'bio',
+        'overallRating',
+        'reviewCount'
+      ],
       include: [{model: Interest, as: 'interests', through: UserInterest}]
     })
     console.log(users)
@@ -41,7 +49,8 @@ router.get('/top', async (req, res, next) => {
         overallRating: {
           [Sequelize.Op.gte]: 3
         }
-      }
+      },
+      attributes: ['id', 'firstName', 'lastName', 'photo', 'overallRating']
     })
 
     const preference = {ratingWeight: 5, reviewCountWeight: 7}
@@ -73,10 +82,8 @@ router.get('/:userId', async (req, res, next) => {
         'id',
         'firstName',
         'lastName',
-        'phoneNumber',
         'bio',
         'photo',
-        'email',
         'overallRating',
         'latitude',
         'longitude',
@@ -120,12 +127,15 @@ router.get('/:userId', async (req, res, next) => {
 //change data in the user table
 router.put('/:userId', async (req, res, next) => {
   try {
-    console.log('userPut', req.body)
-
     const user = await User.findByPk(+req.params.userId)
-
-    const userEdit = await user.update(req.body)
-    res.json(userEdit)
+    if (req.user) {
+      if (req.user.id === user.id) {
+        const userEdit = await user.update(req.body)
+        res.json(userEdit)
+      }
+    } else {
+      res.sendStatus(403)
+    }
   } catch (err) {
     next(err)
   }
@@ -150,14 +160,19 @@ router.post('/:userId/services', async (req, res, next) => {
   try {
     const newService = req.body.service
     const description = req.body.description
+    if (req.user) {
+      if (req.user.id === +req.params.userId) {
+        const service = await Service.create({
+          name: newService,
+          userId: req.params.userId,
+          description: description
+        })
 
-    const service = await Service.create({
-      name: newService,
-      userId: req.params.userId,
-      description: description
-    })
-
-    res.json(service)
+        res.json(service)
+      }
+    } else {
+      res.sendStatus(403)
+    }
   } catch (err) {
     console.error(err)
   }

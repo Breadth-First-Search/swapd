@@ -17,8 +17,12 @@ router.get('/', async (req, res, next) => {
 //route to add interests
 router.post('/', async (req, res, next) => {
   try {
-    const newInterest = await Interest.create(req.body)
-    res.json(newInterest)
+    if (req.user) {
+      if (req.user.id === req.body.userId) {
+        const newInterest = await Interest.create(req.body)
+        res.json(newInterest)
+      }
+    }
   } catch (err) {
     next(err)
   }

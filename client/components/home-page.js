@@ -25,6 +25,18 @@ class HomePage extends React.Component {
     return this.props.reviews.length > 0 ? (
       <div>
         <Reviews />
+        <div className="homeImgContainer">
+          <div className="topHomeImg">Welcome to Swapd.</div>
+          <div className="middleHomeImg">
+            Match with others to trade helpful skills or services. Maybe even
+            make a friend along the way!
+          </div>
+          <div className="lowerHomeImg">Start your Search.</div>
+          <img
+            className="homeImg"
+            src="https://images.unsplash.com/photo-1555436169-38f939820724"
+          />
+        </div>
         <TopTen topUsers={this.state.topUsers} />
       </div>
     ) : (

@@ -5,17 +5,19 @@ const zipcodes = require('zipcodes')
 
 const User = db.define('user', {
   firstName: {
-    type: Sequelize.STRING
+    type: Sequelize.STRING,
+    allowNull: false
   },
   lastName: {
-    type: Sequelize.STRING
+    type: Sequelize.STRING,
+    allowNull: false
   },
   phoneNumber: {
     type: Sequelize.STRING
-    //we can be more specific about how we store this
   },
   bio: {
-    type: Sequelize.TEXT
+    type: Sequelize.TEXT,
+    defaultValue: ''
   },
   photo: {
     type: Sequelize.STRING,
@@ -25,7 +27,8 @@ const User = db.define('user', {
     type: Sequelize.INTEGER,
     validate: {
       len: [5]
-    }
+    },
+    allowNull: false
   },
   latitude: {
     type: Sequelize.FLOAT
@@ -39,15 +42,18 @@ const User = db.define('user', {
   },
   email: {
     type: Sequelize.STRING,
-    unique: true
+    unique: true,
+    allowNull: false
   },
   overallRating: {
     type: Sequelize.FLOAT,
-    defaultValue: 3.5
+    defaultValue: 3.5,
+    allowNull: false
   },
   reviewCount: {
     type: Sequelize.INTEGER,
-    defaultValue: 0
+    defaultValue: 0,
+    allowNull: false
   },
   password: {
     type: Sequelize.STRING,
@@ -55,7 +61,8 @@ const User = db.define('user', {
     // This is a hack to get around Sequelize's lack of a "private" option.
     get() {
       return () => this.getDataValue('password')
-    }
+    },
+    allowNull: false
   },
   salt: {
     type: Sequelize.STRING,

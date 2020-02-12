@@ -44,9 +44,8 @@ class SwapList extends React.Component {
 
   render() {
     const swaps = this.props.swaps
-    console.log(swaps)
 
-    return !this.state.isLoading ? (
+    return !this.state.isLoading && swaps.length > 1 ? (
       <div>
         {swaps.map(swap => {
           const otherUser =
@@ -73,7 +72,7 @@ class SwapList extends React.Component {
         })}
       </div>
     ) : (
-      <div />
+      <div className="messageMessage">Start a swap to begin messaging!</div>
     )
   }
 }
