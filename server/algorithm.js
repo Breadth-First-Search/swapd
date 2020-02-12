@@ -7,7 +7,6 @@ const interestsList = [
   'Comedy Clubs',
   'Skiing',
   'Talking',
-  'Shopping',
   'Myspace',
   'TikTok',
   'Owl Watching',

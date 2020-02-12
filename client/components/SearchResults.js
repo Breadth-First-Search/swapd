@@ -39,22 +39,30 @@ class SearchResults extends React.Component {
     let extraInfo = results.pop()
 
     return !this.state.isLoading ? (
-      <div className="searchResultsContainer">
-        {extraInfo && (
-          <h3>Showing results for closest match to: "{extraInfo[0]}"</h3>
-        )}
-        {extraInfo && (
-          <h4 onClick={() => this.loadResults(extraInfo[1])}>
-            Show results instead for: "{extraInfo[1]}"?
-          </h4>
-        )}
-        {results.length === 0 ? (
-          <h1>No Results</h1>
-        ) : (
-          results.map((result, i) => {
-            return <SearchResultsTile result={result} key={i} />
-          })
-        )}
+      <div>
+        <div>
+          {extraInfo && (
+            <h3>
+              Showing results for "{extraInfo[0]}" for closest match to "{
+                this.props.match.params.serviceName
+              }"{' '}
+            </h3>
+          )}
+          {extraInfo && (
+            <h4 onClick={() => this.loadResults(extraInfo[1])}>
+              Show results instead for: "{extraInfo[1]}"?
+            </h4>
+          )}
+        </div>
+        <div className="searchResultsContainer">
+          {results.length === 0 ? (
+            <h1>No Results</h1>
+          ) : (
+            results.map((result, i) => {
+              return <SearchResultsTile result={result} key={i} />
+            })
+          )}
+        </div>
       </div>
     ) : null
   }
