@@ -10,20 +10,35 @@ class Review extends React.Component {
   constructor() {
     super()
 
-    this.state = {}
+    this.state = {
+      rating: 0,
+      comment: '',
+      serviceId: '',
+      userId: ''
+    }
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleChange = this.handleChange.bind(this)
   }
   componentDidMount() {
-    this.setState({serviceId: this.props.serviceId, rating: '', comment: ''})
-    this.props.getUnreviewedServices(this.props.serviceId)
+    this.props
+      .getUnreviewedServices(this.props.serviceId)
+      .then(() =>
+        this.setState({
+          serviceId: this.props.serviceId,
+          rating: 0,
+          comment: '',
+          userId: this.props.service.user.id
+        })
+      )
   }
   handleChange(evt) {
+    console.log('hi', this.props.service.user.id)
     this.setState({[evt.target.name]: evt.target.value})
   }
 
   handleSubmit(evt) {
     evt.preventDefault()
+    console.log(evt.target.name)
     this.props.submitReview(this.state)
 
     //calls a thunk to update the swap review status and clears the review
@@ -74,6 +89,7 @@ class Review extends React.Component {
               name="rating"
               id="star1"
               value={1}
+              onChange={this.handleChange}
             />
             <label htmlFor="star1" />
             <input
@@ -82,6 +98,7 @@ class Review extends React.Component {
               name="rating"
               id="star2"
               value={2}
+              onChange={this.handleChange}
             />
             <label htmlFor="star2" />
             <input
@@ -90,6 +107,7 @@ class Review extends React.Component {
               name="rating"
               id="star3"
               value={3}
+              onChange={this.handleChange}
             />
             <label htmlFor="star3" />
             <input
@@ -98,6 +116,7 @@ class Review extends React.Component {
               name="rating"
               id="star4"
               value={4}
+              onChange={this.handleChange}
             />
             <label htmlFor="star4" />
             <input
@@ -106,6 +125,7 @@ class Review extends React.Component {
               name="rating"
               id="star5"
               value={5}
+              onChange={this.handleChange}
             />
             <label htmlFor="star5" />
             {/* <inpu5

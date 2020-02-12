@@ -6,11 +6,12 @@ module.exports = router
 
 router.post('/', async (req, res, next) => {
   try {
-    const {serviceId, rating, comment} = req.body
+    const {serviceId, rating, comment, userId} = req.body
     const newReview = await Review.create({
       serviceId: serviceId,
       rating: rating,
-      comment: comment
+      comment: comment,
+      userId: userId
     })
 
     res.json(newReview)
@@ -74,7 +75,7 @@ router.get('/unreviewedServices/:ServiceId', async (req, res, next) => {
       where: {
         id: +req.params.ServiceId
       },
-      include: [{model: User, attributes: ['firstName', 'lastName']}]
+      include: [{model: User, attributes: ['firstName', 'lastName', 'id']}]
     })
 
     res.json(unreviewedService)
