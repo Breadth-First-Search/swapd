@@ -4,6 +4,8 @@ import Button from '@material-ui/core/Button'
 import {getUserInterests} from '../store/interests'
 import {getUserServices} from '../store/services'
 import {Link} from 'react-router-dom'
+import StarRateIcon from '@material-ui/icons/StarRate'
+import Ratings from 'react-ratings-declarative'
 
 class UserProfile extends React.Component {
   componentDidMount() {
@@ -14,9 +16,7 @@ class UserProfile extends React.Component {
   render() {
     const {user, interests, services} = this.props
     return (
-
       <div className="newUserServiceContainer">
-
         <div className="leftProfile">
           <div style={{fontSize: '1.5em', fontWeight: 'bold'}}>
             Hi, {user.firstName}!
@@ -44,14 +44,52 @@ class UserProfile extends React.Component {
         </div>
 
         <div className="rightProfile">
-          <div className="profileServicesList">
-            <div style={{fontSize: '1.5em', fontWeight: 'bold'}}>
-              Services You're Offering:
-            </div>
+          <div style={{fontSize: '1.5em', fontWeight: 'bold'}}>
+            Services You're Offering
+          </div>
+          <div className="servicelistcontainer">
             {services.map(s => (
-              <div key={s.id}>
-                <li key={s.id}>{s.name}</li>
-                <div>{s.description}</div>
+              <div key={s.id} className="singleservice">
+                <div className="servicephotobox">
+                  <div className="servicename">{s.name}</div>
+                  <Link to={`/users/${user.id}/services/${s.id}`}>
+                    <img src={s.imageUrl} className="servicephoto" />
+                  </Link>
+                  <div className="servicerating">
+                    <StarRateIcon
+                      fontSize="small"
+                      viewBox="0 0 24 24"
+                      color="secondary"
+                    />
+                    <span>{s.serviceRating && s.serviceRating.toFixed(2)}</span>
+                    <span style={{color: '#25665C'}}>{` (${
+                      s.reviewCount
+                    } Reviews)`}</span>
+                  </div>
+                </div>
+                <div className="servicedescriptionbox">
+                  <div>
+                    <p>{s.description}</p>
+                  </div>
+                </div>
+                <div className="verticalline" />
+                <div className="servicerightside">
+                  <div>
+                    <div className="servicerightsidetitle">Skill Level</div>
+                    <Ratings
+                      rating={s.proficiency === null ? 1 : s.proficiency}
+                      widgetRatedColors="gold"
+                    >
+                      <Ratings.Widget widgetDimension="15px" />
+                      <Ratings.Widget widgetDimension="15px" />
+                      <Ratings.Widget widgetDimension="15px" />
+                    </Ratings>
+                  </div>
+                  <div>
+                    <div className="servicerightsidetitle">Remote</div>
+                    <div className="remote">{s.remote ? 'Yes' : 'No'}</div>
+                  </div>
+                </div>
               </div>
             ))}
           </div>
