@@ -68,7 +68,6 @@ class OfferForm extends React.Component {
 
     const requesterServices = this.props.offer.requester.services
 
-    console.log(this.props.offer)
 
     let toRender
 
