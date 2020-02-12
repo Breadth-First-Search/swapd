@@ -39,29 +39,23 @@ class Services extends React.Component {
 
   render() {
     const {serviceCategories, services, userServices} = this.props
-
+    console.log(services)
     return (
-      <div>
-        <h4>Your Offered Services:</h4>
+      <div className="editServices">
+        <div className="boldText">Your Offered Services:</div>
         {userServices.map(us => <li key={us.id}>{us.name}</li>)}
 
         <div>
-          Offer A New Service:
+          Add A New Service:
           <form onSubmit={this.handleSubmit}>
-            Service Category:
-            <input
-              type="text"
-              autoComplete="on"
-              name="serviceCategories"
-              list="serviceCategories"
-              onChange={this.handleChange}
-            />
             <datalist id="serviceCategories">
               {serviceCategories.map(sc => (
                 <option key={sc.id} value={sc.name} />
               ))}
             </datalist>
-            Service Name:
+            <label htmlFor="service">
+              <small>Service:</small>
+            </label>
             <input
               type="text"
               autoComplete="on"
@@ -70,10 +64,13 @@ class Services extends React.Component {
               onChange={this.handleChange}
             />
             <datalist id="service">
-              {services.map(s => <option key={s.id} value={s.name} />)}
+              {services.map((s, idx) => <option key={idx} value={s} />)}
             </datalist>
-            Description:
+            <label htmlFor="description">
+              <small>Description:</small>
+            </label>
             <input
+              className="editDescription"
               type="text"
               size="200"
               name="description"

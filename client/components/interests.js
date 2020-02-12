@@ -3,9 +3,7 @@ import {connect} from 'react-redux'
 import {
   getInterests,
   getUserInterests,
-  addUserInterest,
-  deleteUserInterest,
-  writeInterest
+  addUserInterest
 } from '../store/interests'
 
 class Interests extends React.Component {
@@ -40,7 +38,7 @@ class Interests extends React.Component {
     return (
       userInterests && (
         <div>
-          <h4>Your Interests:</h4>
+          <div className="boldText">Your Interests:</div>
           <div>{userInterests.map(ui => <li key={ui.id}>{ui.name}</li>)}</div>
           Add A New Interest:
           <div>

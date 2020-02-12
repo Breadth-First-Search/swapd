@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import {writeMessage, postNewMessage} from '../store/messages'
 import {connect} from 'react-redux'
+import SendRoundedIcon from '@material-ui/icons/SendRounded'
 
 class NewMessageEntry extends Component {
   constructor() {
@@ -24,28 +25,26 @@ class NewMessageEntry extends Component {
 
     const type = 'MESSAGE'
 
-    this.props.post({userId, text, swapId, type})
+    this.props
+      .post({userId, text, swapId, type})
+      .then(() => this.props.write(''))
   }
 
   render() {
     // console.log('why so many props issues?', this.props);
     return (
       <form id="new-message-form" onSubmit={this.handleSubmit}>
-        <div className="input-group input-group-lg">
-          <input
-            className="form-control"
-            type="text"
-            name="text"
-            value={this.props.newEntry}
-            onChange={this.changeHandler}
-            placeholder="Enter a message"
-          />
-          <span className="input-group-btn">
-            <button className="btn btn-default" type="submit">
-              Chat!
-            </button>
-          </span>
-        </div>
+        <input
+          className="form-control"
+          type="text"
+          name="text"
+          value={this.props.newEntry}
+          onChange={this.changeHandler}
+          placeholder="Enter a message..."
+        />
+        <button className="sendButton" type="submit">
+          <SendRoundedIcon />
+        </button>
       </form>
     )
   }

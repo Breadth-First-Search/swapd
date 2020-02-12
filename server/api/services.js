@@ -5,7 +5,15 @@ module.exports = router
 router.get('/', async (req, res, next) => {
   try {
     const services = await Service.findAll()
-    res.json(services)
+    const seenServices = new Set()
+    services.forEach(service => {
+      if (!seenServices.has(service.name)) seenServices.add(service.name)
+    })
+    res.json(
+      Array.from(seenServices).sort(function(a, b) {
+        return a.toLowerCase().localeCompare(b.toLowerCase())
+      })
+    )
   } catch (err) {
     console.error(err)
   }

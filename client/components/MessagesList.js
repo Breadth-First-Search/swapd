@@ -23,28 +23,46 @@ class MessagesList extends Component {
           <OfferForm offer={message} key={message.id} user={this.props.user} />
         )
       })
-    console.log(filteredMessages[filteredMessages.length - 1])
-    //   message => message.swapId === swapId
-    // );
-    // console.log(messages)
+
+    //find the other user's full name
+    let otherUserName = null
+    const user = this.props.user
+    if (this.props.messages.length && user.firstName) {
+      otherUserName =
+        user.id !== messages[0].requester.id
+          ? `${messages[0].requester.firstName} ${
+              messages[0].requester.firstName
+            }`
+          : `${messages[0].responder.firstName} ${
+              messages[0].responder.lastName
+            }`
+    }
+
     return (
-      <div className="messageList">
-        <ul className="media-list">
-          {messages.length &&
-            messages
-              .filter(message => message.type === 'MESSAGE')
-              .map(message => {
-                return (
-                  <Message
-                    className="message"
-                    message={message}
-                    key={message.id}
-                  />
-                )
-              })
-              .concat([filteredMessages[filteredMessages.length - 1]])}
-        </ul>
-        {messages.length && <NewMessageEntry swapId={swapId} />}
+      <div id="outerchatcontainer">
+        <div id="chatContainer">
+          <div className="message-list">
+            {otherUserName && (
+              <div id="chatTitle">Chatting with: {otherUserName}</div>
+            )}
+            {messages.length &&
+              messages
+                .filter(message => message.type === 'MESSAGE')
+                .map(message => {
+                  return (
+                    <Message
+                      className="message"
+                      message={message}
+                      key={message.id}
+                    />
+                  )
+                })
+            // .concat([filteredMessages[filteredMessages.length - 1]])
+            }
+          </div>
+          {messages.length && <NewMessageEntry swapId={swapId} />}
+        </div>
+        {filteredMessages}
       </div>
     )
   }

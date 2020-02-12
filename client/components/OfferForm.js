@@ -1,12 +1,13 @@
+/* eslint-disable complexity */
 import React from 'react'
 import {connect} from 'react-redux'
 import {postNewOffer} from '../store/messages'
+import {Link} from 'react-router-dom'
+import StarRateIcon from '@material-ui/icons/StarRate'
 
 class OfferForm extends React.Component {
   constructor() {
     super()
-    // console.log("fdfadsfadsf")
-
     this.state = {
       selectedService: {},
       selectedServiceId: 0
@@ -67,42 +68,66 @@ class OfferForm extends React.Component {
 
     const requesterServices = this.props.offer.requester.services
 
+
     let toRender
 
     if (you.id === responderId && this.props.offer.type === 'CURRENT_OFFER') {
       toRender = (
-        <div className="offer_current_responder">
-          <h4>Offer</h4>
-          {youWant && (
-            <p>
-              You want:{' '}
-              <form onSubmit={this.handleSubmit}>
-                <input
-                  type="text"
-                  autoComplete="on"
-                  list="services"
-                  onChange={this.handleChange}
+        <div className="offer_pending">
+          <div className="offer_listcontainer">
+            <div className="offer_title">Current Offer</div>
+            {youWant && (
+              <p>
+                Select a service to swap:{' '}
+                <form onSubmit={this.handleSubmit}>
+                  <input
+                    type="text"
+                    autoComplete="on"
+                    list="services"
+                    onChange={this.handleChange}
+                  />
+                  <datalist id="services">
+                    {requesterServices.map(service => {
+                      return (
+                        <option
+                          key={service.id}
+                          label={service.name}
+                          value={service.id}
+                        />
+                      )
+                    })}
+                  </datalist>
+                  <button type="submit">SEND</button>
+                </form>
+              </p>
+            )}
+          </div>
+          <div>
+            {theyWant && (
+              <p>
+                {' '}
+                {`${them.firstName} ${them.lastName}`} is requesting:{' '}
+                {theyWant.name}{' '}
+              </p>
+            )}
+          </div>
+          <div className="offer_details">
+            <Link to={`/users/${you.id}/services/${theyWant.id}`}>
+              <img src={theyWant.imageUrl} className="offer_photo" />
+              <div className="servicerating">
+                <StarRateIcon
+                  fontSize="small"
+                  viewBox="0 0 24 24"
+                  color="secondary"
                 />
-                <datalist id="services">
-                  {requesterServices.map(service => {
-                    return (
-                      <option
-                        key={service.id}
-                        label={service.name}
-                        value={service.id}
-                      />
-                    )
-                  })}
-                </datalist>
-                <button type="submit">SEND</button>
-              </form>
-            </p>
-          )}
-          {theyWant && (
-            <p>
-              {`${them.firstName} ${them.lastName}`} wants: {theyWant.name}
-            </p>
-          )}
+                <span>{theyWant.serviceRating.toFixed(2)}</span>
+                <span style={{color: '#25665C'}}>{` (${
+                  theyWant.reviewCount
+                } Reviews)`}</span>
+              </div>
+            </Link>
+            <div className="offer_description">{theyWant.description}</div>
+          </div>
         </div>
       )
     } else if (
@@ -110,14 +135,54 @@ class OfferForm extends React.Component {
       this.props.offer.type === 'CURRENT_OFFER'
     ) {
       toRender = (
-        <div className="offer_current_requester">
-          <h4>Offer</h4>
-          {youWant && <p>You want: {youWant.name}</p>}
-          {theyWant && (
-            <p>
-              {`${them.firstName} ${them.lastName}`} wants: {theyWant.name}
-            </p>
-          )}
+        <div className="offer_pending">
+          <div className="offer_title">Current Offer</div>
+          <div>{youWant && <p>You want: {youWant.name}</p>}</div>
+          <div className="offer_details">
+            <Link to={`/users/${them.id}/services/${youWant.id}`}>
+              <img src={youWant.imageUrl} className="offer_photo" />
+              <div className="servicerating">
+                <StarRateIcon
+                  fontSize="small"
+                  viewBox="0 0 24 24"
+                  color="secondary"
+                />
+                <span>{youWant.serviceRating.toFixed(2)}</span>
+                <span style={{color: '#25665C'}}>{` (${
+                  youWant.reviewCount
+                } Reviews)`}</span>
+              </div>
+            </Link>
+            <div>
+              <div className="offer_description">{youWant.description}</div>
+            </div>
+          </div>
+          <div>
+            {theyWant && (
+              <p>
+                {' '}
+                {`You are offering: ${theyWant.name}`}{' '}
+                {/* {`${them.firstName} ${them.lastName}`} is requesting: {theyWant.name}{' '} */}
+              </p>
+            )}
+          </div>
+          <div className="offer_details">
+            <Link to={`/users/${you.id}/services/${theyWant.id}`}>
+              <img src={theyWant.imageUrl} className="offer_photo" />
+              <div className="servicerating">
+                <StarRateIcon
+                  fontSize="small"
+                  viewBox="0 0 24 24"
+                  color="secondary"
+                />
+                <span>{theyWant.serviceRating.toFixed(2)}</span>
+                <span style={{color: '#25665C'}}>{` (${
+                  theyWant.reviewCount
+                } Reviews)`}</span>
+              </div>
+            </Link>
+            <div className="offer_description">{theyWant.description}</div>
+          </div>
         </div>
       )
     }
@@ -125,19 +190,83 @@ class OfferForm extends React.Component {
     if (this.props.offer.type === 'CONFIRMED_OFFER') {
       toRender = (
         <div className="offer_confirmed">
-          <h4>Confirmed Swap</h4>
-          {youWant && <p> You are getting: {youWant.name}</p>}
-          {theyWant && (
-            <p>
-              {' '}
-              {`${them.firstName} ${them.lastName}`} is getting: {theyWant.name}{' '}
-            </p>
-          )}
+          <div className="offer_title">Confirmed Swap!</div>
+          <svg
+            className="confirmedsvg"
+            version="1.1"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 130.2 130.2"
+          >
+            <circle
+              className="path circle"
+              fill="none"
+              stroke="#73AF55"
+              strokeWidth="6"
+              strokeMiterlimit="10"
+              cx="65.1"
+              cy="65.1"
+              r="62.1"
+            />
+            <polyline
+              className="path check"
+              fill="none"
+              stroke="#73AF55"
+              strokeWidth="6"
+              strokeLinecap="round"
+              strokeMiterlimit="10"
+              points="100.2,40.2 51.5,88.8 29.8,67.5 "
+            />
+          </svg>
+          <div>{youWant && <p>You want: {youWant.name}</p>}</div>
+          <div className="offer_details">
+            <Link to={`/users/${them.id}/services/${youWant.id}`}>
+              <img src={youWant.imageUrl} className="offer_photo" />
+              <div className="servicerating">
+                <StarRateIcon
+                  fontSize="small"
+                  viewBox="0 0 24 24"
+                  color="secondary"
+                />
+                <span>{youWant.serviceRating.toFixed(2)}</span>
+                <span style={{color: '#25665C'}}>{` (${
+                  youWant.reviewCount
+                } Reviews)`}</span>
+              </div>
+            </Link>
+            <div>
+              <div className="offer_description">{youWant.description}</div>
+            </div>
+          </div>
+          <div>
+            {theyWant && (
+              <p>
+                {`You are offering: ${theyWant.name}`}{' '}
+                {/* {`${them.firstName} ${them.lastName}`} is requesting: {theyWant.name}{' '} */}
+              </p>
+            )}
+          </div>
+          <div className="offer_details">
+            <Link to={`/users/${you.id}/services/${theyWant.id}`}>
+              <img src={theyWant.imageUrl} className="offer_photo" />
+              <div className="servicerating">
+                <StarRateIcon
+                  fontSize="small"
+                  viewBox="0 0 24 24"
+                  color="secondary"
+                />
+                <span>{theyWant.serviceRating.toFixed(2)}</span>
+                <span style={{color: '#25665C'}}>{` (${
+                  theyWant.reviewCount
+                } Reviews)`}</span>
+              </div>
+            </Link>
+            <div className="offer_description">{theyWant.description}</div>
+          </div>
         </div>
       )
     }
 
-    return <div>{toRender}</div>
+    return <div id="offer_Container">{toRender}</div>
   }
 }
 
