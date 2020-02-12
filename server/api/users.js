@@ -8,13 +8,11 @@ const {
   ServiceCategory
 } = require('../db/models')
 const {
-  interestsList,
   userInterestsToSet,
-  getScoreFromInterests,
   getScoreFromOverallRating,
   getScoreFromInterestsObject,
   getScoreFromSkillRating,
-  getScoreFromLocationm,
+
   prefs
 } = require('../algorithm')
 module.exports = router

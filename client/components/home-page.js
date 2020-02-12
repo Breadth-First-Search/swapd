@@ -1,6 +1,5 @@
 import React from 'react'
 import axios from 'axios'
-import {Link} from 'react-router-dom'
 import {getUnreviewedSwaps} from '../store/reviews'
 import {connect} from 'react-redux'
 import Reviews from './Reviews'
@@ -30,12 +29,23 @@ class HomePage extends React.Component {
       </div>
     ) : (
       <div>
+        <div className="homeImgContainer">
+          <div className="topHomeImg">Welcome to Swapd.</div>
+          <div className="middleHomeImg">
+            Match with others to trade helpful skills or services. Maybe even
+            make a friend along the way!
+          </div>
+          <div className="lowerHomeImg">Start your Search.</div>
+          <img
+            className="homeImg"
+            src="https://images.unsplash.com/photo-1555436169-38f939820724"
+          />
+        </div>
         <TopTen topUsers={this.state.topUsers} />
       </div>
     )
   }
 }
-
 const mapStateToProps = state => {
   return {reviews: state.reviews.unreviewedSwaps, user: state.user}
 }

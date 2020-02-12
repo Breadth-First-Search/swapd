@@ -750,3 +750,45 @@ li {
     stroke-dashoffset: 900;
   }
 }
+
+.homeImgContainer {
+  position: relative;
+  text-align: center;
+  color: white;
+}
+
+.homeImg {
+  height: 35%;
+  width: 100%;
+}
+
+.topHomeImg {
+  color: white;
+  font-size: 70px;
+  position: absolute;
+  top: 15%;
+  left: 35%;
+  transform: translate(-50%, -50%);
+}
+
+.middleHomeImg {
+  color: white;
+  font-size: 30px;
+  width: 63%;
+  position: absolute;
+  word-wrap: break-word;
+  top: 35%;
+  left: 35%;
+  transform: translate(-50%, -50%);
+}
+
+.lowerHomeImg {
+  color: white;
+  font-size: 30px;
+  width: 63%;
+  position: absolute;
+  word-wrap: break-word;
+  top: 55%;
+  left: 35%;
+  transform: translate(-50%, -50%);
+}

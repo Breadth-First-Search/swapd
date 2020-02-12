@@ -8,7 +8,6 @@ import EditProfile from './components/UserProfileEdit'
 import NewUserService from './components/NewUserService'
 import {
   Login,
-  UserHome,
   SearchResults,
   SelectedService,
   HomePage,
@@ -33,6 +32,7 @@ class Routes extends Component {
     return (
       <Switch>
         {/* Routes placed here are available to all visitors */}
+        <Route exact path="/" component={HomePage} />
         <Route exact path="/login" component={Login} />
         <Route exact path="/signup" component={SignUp} />
         <Route exact path="/auth/google" component={Oauth} />
