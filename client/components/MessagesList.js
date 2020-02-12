@@ -6,8 +6,23 @@ import {getMessagesFromServer} from '../store/messages'
 import OfferForm from './OfferForm'
 
 class MessagesList extends Component {
+  constructor() {
+    super()
+    this.mesRef = React.createRef()
+    this.scrollToBottom = this.scrollToBottom.bind(this)
+  }
+
   async componentDidMount() {
     await this.props.getMessagesFromServer(this.props.match.params.swapId)
+    this.scrollToBottom()
+  }
+
+  scrollToBottom() {
+    this.mesRef.current.scrollTop = this.mesRef.current.scrollHeight
+  }
+
+  componentDidUpdate() {
+    this.scrollToBottom()
   }
 
   render() {
@@ -41,7 +56,7 @@ class MessagesList extends Component {
     return (
       <div id="outerchatcontainer">
         <div id="chatContainer">
-          <div className="message-list">
+          <div className="message-list" ref={this.mesRef}>
             {otherUserName && (
               <div id="chatTitle">Chatting with: {otherUserName}</div>
             )}
@@ -60,7 +75,12 @@ class MessagesList extends Component {
             // .concat([filteredMessages[filteredMessages.length - 1]])
             }
           </div>
-          {messages.length && <NewMessageEntry swapId={swapId} />}
+          {messages.length && (
+            <NewMessageEntry
+              swapId={swapId}
+              scrollToBottom={this.scrollToBottom}
+            />
+          )}
         </div>
         {filteredMessages}
       </div>

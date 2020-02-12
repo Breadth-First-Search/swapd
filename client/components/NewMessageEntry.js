@@ -28,6 +28,7 @@ class NewMessageEntry extends Component {
     this.props
       .post({userId, text, swapId, type})
       .then(() => this.props.write(''))
+      .then(() => this.props.scrollToBottom())
   }
 
   render() {
