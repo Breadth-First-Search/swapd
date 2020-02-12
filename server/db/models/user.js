@@ -27,8 +27,7 @@ const User = db.define('user', {
     type: Sequelize.INTEGER,
     validate: {
       len: [5]
-    },
-    allowNull: false
+    }
   },
   latitude: {
     type: Sequelize.FLOAT
@@ -61,8 +60,7 @@ const User = db.define('user', {
     // This is a hack to get around Sequelize's lack of a "private" option.
     get() {
       return () => this.getDataValue('password')
-    },
-    allowNull: false
+    }
   },
   salt: {
     type: Sequelize.STRING,
