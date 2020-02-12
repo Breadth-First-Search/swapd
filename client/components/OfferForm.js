@@ -24,13 +24,11 @@ class OfferForm extends React.Component {
       selectedService: e.target.label,
       selectedServiceId: e.target.value
     })
-    console.log('SELECTED FROM DROPDOWN MENU ', this.state)
   }
 
   handleSubmit(e) {
     e.preventDefault()
 
-    console.log('SUBMITTING', this.state)
     this.props.post(
       {
         userId: this.props.user.id,
@@ -67,7 +65,6 @@ class OfferForm extends React.Component {
     }
 
     const requesterServices = this.props.offer.requester.services
-
 
     let toRender
 

@@ -71,9 +71,14 @@ class EditUserProfile extends React.Component {
                 name="distancePrefWeight"
                 value={this.state.distancePrefWeight}
                 onChange={this.handleChange}
-                type="text"
+                type="range"
+                min="0"
+                max="100"
                 size="4"
               />
+              <label htmlFor="distancePrefWeight">{`${
+                this.state.distancePrefWeight
+              } miles`}</label>
 
               <label htmlFor="zipcode">
                 <small>ZIP Code:</small>

@@ -160,7 +160,7 @@ async function seed() {
     userId: 3,
     name: 'Data Structures',
     description:
-      'Understand the basics of data structures before tackling algo problems.',
+      'Understand the basics of data structures before tackling algorithm problems.',
     proficiency: 1,
     remote: true,
     photo: 'algorithm.jpg',
@@ -170,8 +170,7 @@ async function seed() {
     serviceCategoryId: 2,
     userId: 4,
     name: 'Dad Hacks',
-    description:
-      'Learn the secrets of being a great and time efficient dad. The essential guide on how to survive coding bootcamp while taking care of your family.',
+    description: 'Learn the secrets of being a great and time efficient dad.',
     proficiency: 1,
     remote: true,
     photo: 'algorithm.jpg',

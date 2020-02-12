@@ -33,7 +33,7 @@ function Message(props) {
   }
 
   let time = formatAMPM(toFormat)
-
+  
   return props.message.userId !== props.user.id ? (
     <Link to={`/user-profile/${props.message.userId}`}>
       <div className="media-otheruser">

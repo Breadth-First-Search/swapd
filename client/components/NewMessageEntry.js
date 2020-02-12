@@ -32,7 +32,6 @@ class NewMessageEntry extends Component {
   }
 
   render() {
-    // console.log('why so many props issues?', this.props);
     return (
       <form id="new-message-form" onSubmit={this.handleSubmit}>
         <input
