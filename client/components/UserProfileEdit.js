@@ -40,6 +40,7 @@ class EditUserProfile extends React.Component {
         <div className="leftEditProfile">
           <div className="boldText">Hi, {user.firstName}</div>
           <img src={user.photo} className="profilePhoto" />
+
           <div>Overall Rating: {user.overallRating.toFixed(2)}</div>
           <div className="leftEditProfileInfo">
             <form onSubmit={this.handleSubmit}>
@@ -74,13 +75,18 @@ class EditUserProfile extends React.Component {
                   <small>"Maximum Travel Distance (mi):"</small>
                 </label>
                 <input
-                  className="editFields"
                   name="distancePrefWeight"
                   value={this.state.distancePrefWeight}
                   onChange={this.handleChange}
-                  type="text"
+                  type="range"
+                  min="0"
+                  max="100"
                   size="4"
-                />
+                 />
+                <label htmlFor="distancePrefWeight">
+                  {`${this.state.distancePrefWeight} miles`}
+                </label>
+
                 <br />
                 <br />
                 <label htmlFor="zipcode">

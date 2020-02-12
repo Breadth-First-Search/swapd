@@ -16,6 +16,7 @@ class SelectedService extends React.Component {
     }
 
     this.getData = this.getData.bind(this)
+    this.formatDate = this.formatDate.bind(this)
   }
 
   async getData() {
@@ -42,6 +43,30 @@ class SelectedService extends React.Component {
     }
   }
 
+  formatDate(date) {
+    const formatted = new Date(date)
+
+    const monthNames = [
+      'Jan',
+      'Feb',
+      'Mar',
+      'Apr',
+      'May',
+      'Jun',
+      'Jul',
+      'Aug',
+      'Sep',
+      'Oct',
+      'Nov',
+      'Dec'
+    ]
+
+    const monthIndex = formatted.getMonth()
+    const year = formatted.getFullYear()
+
+    return monthNames[monthIndex] + ' ' + year
+  }
+
   render() {
     let user = this.state.user
     let service = this.state.service
@@ -57,47 +82,43 @@ class SelectedService extends React.Component {
       rating = user.overallRating
     }
 
-    console.log(this.state.service)
-
     return (
       <div id="selectedServiceContainer">
         <div id="selectedserviceleftcontainer">
           <div className="selectedservicedetails">
             <div className="selectedservicetitle">{service.name}</div>
-            <div>
+            <div className="selectedserviceuser">
               <NavLink to={`/user-profile/${user.id}`}>
-                <div className="selectedserviceuser">
+                <div className="selectedserviceusername">
                   by {user.firstName} {user.lastName}
                 </div>
               </NavLink>
               <span>
-                <div className="skilllevelcontainer">
-                  <div className="skilllevelname">Level</div>
-                  <Ratings
-                    rating={service.proficiency}
-                    widgetRatedColors="gold"
-                  >
-                    <Ratings.Widget widgetDimension="15px" />
-                    <Ratings.Widget widgetDimension="15px" />
-                    <Ratings.Widget widgetDimension="15px" />
-                  </Ratings>
+                <div className="selectedserviceuserrating">
+                  <StarRateIcon fontSize="small" viewBox="0 0 24 24" />
+                  <span className="overallRating">
+                    {rating && rating.toFixed(2)}
+                  </span>
+                  <span>{` (${user.reviewCount} Reviews)`}</span>
                 </div>
-                {/* <div id="overallRating">
-                <StarRateIcon viewBox="0 0 24 24" />
-                <span className="overallRating">
-                  {rating && rating.toFixed(2)}
-                </span>
-                <span style={{color: '#25665C'}}>{` (${
-                  user.reviewCount
-                } Reviews)`}</span>
-              </div> */}
               </span>
+            </div>
+            <hr />
+            <div>
+              <div className="skilllevelcontainer">
+                <div className="skilllevelname">Level</div>
+                <Ratings rating={service.proficiency} widgetRatedColors="gold">
+                  <Ratings.Widget widgetDimension="15px" />
+                  <Ratings.Widget widgetDimension="15px" />
+                  <Ratings.Widget widgetDimension="15px" />
+                </Ratings>
+              </div>
             </div>
             <div>
               <img className="selectedservicephoto" src={service.imageUrl} />
             </div>
           </div>
-          <p style={{textAlign: 'left'}}>{service.description}</p>
+          <p className="selectedservicetext">{service.description}</p>
 
           <InitiateSwapButton providerUser={user} providerService={service} />
           {user.firstName ? (
@@ -133,13 +154,34 @@ class SelectedService extends React.Component {
           <div className="selectedservicereviewscontainer">
             {reviewsPerService &&
               reviewsPerService.map(review => (
-                <div id="review-details-container" key={review.id}>
+                <div className="review-details-container" key={review.id}>
                   <div className="review-user-photo">
                     <NavLink to={`/user-profile/${review.user.id}`}>
                       <img src={review.user.photo} />
                     </NavLink>
                   </div>
-                  <div>{review.comment}</div>
+                  <div className="review-user-details">
+                    <div>
+                      {`${review.user.firstName} ${review.user.lastName}`}
+                    </div>
+                    <div className="review-user-date">
+                      {this.formatDate(review.createdAt)}
+                    </div>
+                    <div>
+                      <Ratings
+                        rating={service.serviceRating}
+                        widgetRatedColors="#f50057"
+                        widgetSpacings="0px"
+                      >
+                        <Ratings.Widget widgetDimension="12px" />
+                        <Ratings.Widget widgetDimension="12px" />
+                        <Ratings.Widget widgetDimension="12px" />
+                        <Ratings.Widget widgetDimension="12px" />
+                        <Ratings.Widget widgetDimension="12px" />
+                      </Ratings>
+                    </div>
+                  </div>
+                  <div className="review-user-comment">{review.comment}</div>
                 </div>
               ))}
           </div>

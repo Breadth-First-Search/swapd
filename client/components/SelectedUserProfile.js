@@ -102,7 +102,7 @@ class SelectedUserProfile extends React.Component {
                         viewBox="0 0 24 24"
                         color="secondary"
                       />
-                      <span>{s.serviceRating.toFixed(2)}</span>
+                      <span>{s && s.serviceRating.toFixed(2)}</span>
                       <span style={{color: '#25665C'}}>{` (${
                         s.reviewCount
                       } Reviews)`}</span>

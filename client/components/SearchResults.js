@@ -30,7 +30,6 @@ class SearchResults extends React.Component {
   }
 
   async componentDidMount() {
-    // console.log(this.props.user.id)
     await this.loadResults()
   }
 
@@ -38,7 +37,6 @@ class SearchResults extends React.Component {
     let results = this.state.results
 
     let extraInfo = results.pop()
-    console.log(extraInfo)
 
     return !this.state.isLoading ? (
       <div className="searchResultsContainer">

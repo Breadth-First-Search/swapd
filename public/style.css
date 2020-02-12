@@ -381,16 +381,38 @@ li {
   box-shadow: rgb(228, 228, 228);
 }
 
-.selectedservicedetails {
+.selectedservicetext {
+  text-align: left;
+  padding-left: 10px;
 }
 
 .selectedservicetitle {
   font-size: 1.8em;
   font-weight: bold;
+  margin-bottom: 10px;
 }
 
 .selectedserviceuser {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-bottom: 15px;
+}
+
+.selectedserviceusername {
   padding: 2px;
+}
+
+.selectedserviceuserrating {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85em;
+}
+
+.selectedserviceuserrating span {
+  padding: 2px;
+  padding-left: 0px;
 }
 
 .selectedservicephoto {
@@ -402,6 +424,7 @@ li {
   display: flex;
   justify-content: center;
   padding: 5px;
+  margin-bottom: 10px;
 }
 
 .skilllevelname {
@@ -471,7 +494,7 @@ li {
 
 .selectedserviceratingvalue {
   padding-top: 8px;
-  padding-bottom: 8px;
+  padding-bottom: 20px;
 }
 
 .selectedserviceratingvalue span {
@@ -480,15 +503,14 @@ li {
   align-self: center;
 }
 
-#review-details-container {
+.review-details-container {
   display: flex;
   flex-direction: row;
   padding: 10px;
-  border: 1px;
-  border-radius: 1px;
+  border: 0px;
+  border-bottom: 1px;
   border-style: solid;
   border-color: rgb(228, 228, 228);
-  box-shadow: rgb(228, 228, 228);
 }
 
 .review-user-photo {
@@ -499,6 +521,31 @@ li {
 .review-user-photo img {
   width: 100%;
   border-radius: 50%;
+  align-self: center;
+}
+
+.review-user-details {
+  height: 100%;
+  padding-left: 20px;
+  width: 20%;
+}
+
+.review-user-date {
+  font-size: 0.9em;
+  color: grey;
+}
+
+.review-user-comment {
+  padding-left: 10px;
+  width: 100%;
+}
+
+.horizontal-line {
+  /* overflow: hidden; */
+  border: 0px;
+  border-bottom: 1px;
+  border-style: solid;
+  border-color: rgb(228, 228, 228);
 }
 
 .reviewContainer {
@@ -526,7 +573,7 @@ li {
 .reviewMaker label {
   display: block;
   cursor: pointer;
-  background: #ccc;
+  /* background: #ccc; */
 }
 
 .reviewMaker label:before {
@@ -534,16 +581,21 @@ li {
   font-family: fontAwesome;
   position: relative;
   display: block;
+  color: #101010;
 }
 
 .reviewMaker label:after {
   content: '\f005';
   font-family: fontAwesome;
-  position: absolute;
+  position: relative;
   display: block;
   color: #25665c;
-  top: 0;
   opacity: 0;
+  transition: 0.5s;
+}
+
+.reviewMaker label:hover:after {
+  opacity: 1;
 }
 
 #chatContainer {
@@ -964,4 +1016,12 @@ li {
   top: 55%;
   left: 35%;
   transform: translate(-50%, -50%);
+}
+
+.messageMessage {
+  display: flex;
+  margin: 50px;
+  font-size: 30px;
+  justify-content: center;
+  flex-wrap: wrap;
 }

@@ -9,26 +9,32 @@ const Swap = db.define('swap', {
   },
   swapDate: {
     type: Sequelize.DATE,
-    defaultValue: new Date()
+    defaultValue: new Date(),
+    allowNull: false
   },
   swapStatus: {
     type: Sequelize.ENUM,
     values: ['Pending', 'Completed', 'Active', 'Cancelled'],
-    defaultValue: 'Pending'
+    defaultValue: 'Pending',
+    allowNull: false
   },
   requesterServiceId: {
-    type: Sequelize.INTEGER
+    type: Sequelize.INTEGER,
+    allowNull: false
   },
   responderServiceId: {
-    type: Sequelize.INTEGER
+    type: Sequelize.INTEGER,
+    allowNull: false
   },
   requesterServiceReviewed: {
     type: Sequelize.BOOLEAN,
-    defaultValue: false
+    defaultValue: false,
+    allowNull: false
   },
   responderServiceReviewed: {
     type: Sequelize.BOOLEAN,
-    defaultValue: false
+    defaultValue: false,
+    allowNull: false
   },
   location: {
     type: Sequelize.STRING

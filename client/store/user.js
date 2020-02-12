@@ -41,7 +41,7 @@ export const editUser = (id, edits) => async dispatch => {
   try {
     const {data} = await axios.put(`/api/users/${id}`, edits)
     dispatch(getUser(data))
-    dispatch(getUserServices(this.props.user.id))
+    dispatch(getUserServices(data.id))
   } catch (err) {
     console.error(err)
   }
