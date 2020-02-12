@@ -4,18 +4,22 @@ const db = require('../db')
 const Message = db.define('message', {
   text: {
     type: Sequelize.TEXT,
-    defaultValue: ''
+    defaultValue: '',
+    allowNull: false
   },
   requesterId: {
-    type: Sequelize.INTEGER
+    type: Sequelize.INTEGER,
+    allowNull: false
   },
   responderId: {
-    type: Sequelize.INTEGER
+    type: Sequelize.INTEGER,
+    allowNull: false
   },
   type: {
     type: Sequelize.ENUM,
     values: ['MESSAGE', 'CURRENT_OFFER', 'OLD_OFFER', 'CONFIRMED_OFFER'],
-    defaultValue: 'MESSAGE'
+    defaultValue: 'MESSAGE',
+    allowNull: false
   }
 })
 
