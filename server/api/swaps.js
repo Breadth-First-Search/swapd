@@ -30,7 +30,7 @@ router.get('/:userId', async (req, res, next) => {
 router.post('/', async (req, res, next) => {
   try {
     if (req.user) {
-      if (req.user.id === req.body.userId) {
+      if (req.user.id === req.body.requesterId) {
         const swaps = await Swap.findOrCreate({
           where: req.body
         })

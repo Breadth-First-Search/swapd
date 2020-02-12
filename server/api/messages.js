@@ -8,7 +8,8 @@ module.exports = router
 router.get('/swap/:swapId', async (req, res, next) => {
   try {
     const swap = await Swap.findByPk(+req.params.swapId)
-    if (swap.responderId === req.user.id || swap.requestorId === req.user.id) {
+
+    if (swap.responderId === req.user.id || swap.requesterId === req.user.id) {
       let messages = await Message.findAll({
         where: {
           swapId: req.params.swapId
