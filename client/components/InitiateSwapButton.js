@@ -86,7 +86,7 @@ function FormDialog(props) {
   return props.services.length ? (
     <div>
       <Button
-        style={{color: 'white', backgroundColor: '#25665C'}}
+        style={{color: 'white', backgroundColor: '#25665C', width: '90%'}}
         variant="contained"
         color="primary"
         onClick={handleClickOpen}

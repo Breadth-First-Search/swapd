@@ -57,6 +57,8 @@ class SelectedService extends React.Component {
       rating = user.overallRating
     }
 
+    console.log(this.state.service)
+
     return (
       <div id="selectedServiceContainer">
         <div id="selectedserviceleftcontainer">
@@ -107,13 +109,38 @@ class SelectedService extends React.Component {
           ) : null}
         </div>
         <div id="selectedservicerightcontainer">
-          <div>
+          <div className="selectedserviceratingcontainer">
+            <div className="reviewtitle">Reviews ({service.reviewCount})</div>
+            <div className="selectedserviceratingvalue">
+              <span>
+                {service.serviceRating && service.serviceRating.toFixed(2)}
+              </span>
+              <span>
+                <Ratings
+                  rating={service.serviceRating}
+                  widgetRatedColors="#f50057"
+                  widgetSpacings="3px"
+                >
+                  <Ratings.Widget widgetDimension="24px" />
+                  <Ratings.Widget widgetDimension="24px" />
+                  <Ratings.Widget widgetDimension="24px" />
+                  <Ratings.Widget widgetDimension="24px" />
+                  <Ratings.Widget widgetDimension="24px" />
+                </Ratings>
+              </span>
+            </div>
+          </div>
+          <div className="selectedservicereviewscontainer">
             {reviewsPerService &&
               reviewsPerService.map(review => (
-                <li key={review.id}>
-                  <div>{review.rating}</div>
-                  <h3>{review.comment}</h3>
-                </li>
+                <div id="review-details-container" key={review.id}>
+                  <div className="review-user-photo">
+                    <NavLink to={`/user-profile/${review.user.id}`}>
+                      <img src={review.user.photo} />
+                    </NavLink>
+                  </div>
+                  <div>{review.comment}</div>
+                </div>
               ))}
           </div>
         </div>

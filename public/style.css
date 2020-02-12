@@ -361,7 +361,8 @@ li {
 }
 
 .selectedservicetitle {
-  font-size: 1.5em;
+  font-size: 1.8em;
+  font-weight: bold;
 }
 
 .selectedserviceuser {
@@ -419,19 +420,61 @@ li {
 
 #selectedservicerightcontainer {
   display: flex;
-  position: relative;
-  align-items: center;
+  /* align-items: center; */
   flex-direction: column;
   height: 100%;
   left: 20%;
-  padding: 15px;
+  /* padding: 15px; */
   margin: 30px;
   width: 45%;
+}
+
+.selectedserviceratingcontainer {
+  font-weight: bold;
+}
+
+.reviewtitle {
+  font-size: 1.8em;
+}
+
+.selectedservicereviewscontainer {
+  width: 100%;
+}
+
+.selectedserviceratingtitle {
+  font-size: 1.5em;
+}
+
+.selectedserviceratingvalue {
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+
+.selectedserviceratingvalue span {
+  padding-right: 5px;
+  font-size: 1.2em;
+  align-self: center;
+}
+
+#review-details-container {
+  display: flex;
+  flex-direction: row;
+  padding: 10px;
   border: 1px;
   border-radius: 1px;
   border-style: solid;
   border-color: rgb(228, 228, 228);
   box-shadow: rgb(228, 228, 228);
+}
+
+.review-user-photo {
+  width: 10%;
+  height: 10%;
+}
+
+.review-user-photo img {
+  width: 100%;
+  border-radius: 50%;
 }
 
 .reviewContainer {

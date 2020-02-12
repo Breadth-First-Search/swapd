@@ -10,10 +10,7 @@ const Service = db.define('service', {
   },
   proficiency: {
     type: Sequelize.INTEGER,
-    validate: {
-      min: 0,
-      max: 5
-    }
+    defaultValue: 1
   },
   remote: {
     type: Sequelize.BOOLEAN
