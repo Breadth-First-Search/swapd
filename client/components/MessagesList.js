@@ -2,7 +2,11 @@ import React, {Component} from 'react'
 import Message from './Message'
 import NewMessageEntry from './NewMessageEntry'
 import {connect} from 'react-redux'
-import {getMessagesFromServer} from '../store/messages'
+import {
+  getMessagesFromServer,
+  connectToRoom,
+  leaveRoom
+} from '../store/messages'
 import OfferForm from './OfferForm'
 
 class MessagesList extends Component {
@@ -15,6 +19,8 @@ class MessagesList extends Component {
   async componentDidMount() {
     await this.props.getMessagesFromServer(this.props.match.params.swapId)
     this.scrollToBottom()
+
+    connectToRoom(this.props.match.params.swapId)
   }
 
   scrollToBottom() {
@@ -23,6 +29,10 @@ class MessagesList extends Component {
 
   componentDidUpdate() {
     this.scrollToBottom()
+  }
+
+  componentWillUnmount() {
+    leaveRoom(this.props.match.params.swapId)
   }
 
   render() {

@@ -1,6 +1,17 @@
 import axios from 'axios'
 import socket from '../socket'
 
+// connect and disconnect from room functions
+
+export const connectToRoom = roomId => {
+  // room id is swapId
+  socket.emit('join-room', roomId)
+}
+
+export const leaveRoom = roomId => {
+  socket.emit('leave-room', roomId)
+}
+
 const initialState = {messages: [], newEntry: ''}
 
 //action types
