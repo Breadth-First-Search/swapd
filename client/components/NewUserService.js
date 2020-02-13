@@ -2,7 +2,6 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {addUserService, getServices} from '../store/services'
 import history from '../history'
-import {Link} from 'react-router-dom'
 
 class NewUserService extends React.Component {
   constructor() {

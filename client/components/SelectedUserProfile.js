@@ -1,7 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {getUserInterests} from '../store/interests'
-// import {getUserServices} from '../store/services'
 import {loadSelectedUser} from '../store/user'
 import StarRateIcon from '@material-ui/icons/StarRate'
 import {Link} from 'react-router-dom'
@@ -67,6 +66,8 @@ class SelectedUserProfile extends React.Component {
               selectedUser.reviewCount
             } Reviews)`}</span>
           </div>
+          <br />
+          <div>Bio: {selectedUser.bio}</div>
           <br />
           <div>Max Travel Distance: {selectedUser.distancePrefWeight} mi</div>
           <br />
