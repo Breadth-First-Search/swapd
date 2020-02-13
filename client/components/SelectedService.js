@@ -153,8 +153,8 @@ class SelectedService extends React.Component {
           </div>
           <div className="selectedservicereviewscontainer">
             {reviewsPerService &&
-              reviewsPerService.map(review => (
-                <div className="review-details-container" key={review.id}>
+              reviewsPerService.map((review, idx) => (
+                <div className="review-details-container" key={idx}>
                   <div className="review-user-photo">
                     <NavLink to={`/user-profile/${review.user.id}`}>
                       <img src={review.user.photo} />
