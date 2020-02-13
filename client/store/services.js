@@ -10,7 +10,7 @@ const WRITE_SERVICE = 'WRITE_SERVICE'
 const GOT_NEW_SERVICE_FROM_SERVER = 'GOT_NEW_SERVICE_FROM_SERVER'
 const GOT_SERVICE_CATEGORIES = 'GOT_SERVICE_CATEGORIES'
 const ADDED_USER_SERVICE = 'ADDED_USER_SERVICE'
-
+const GOT_ONE_CATEGORY = 'GOT_ONE_CATEGORY'
 /**
  * INITIAL STATE
  */
@@ -18,7 +18,8 @@ const defaultService = {
   all: [],
   newService: '',
   serviceCategories: [],
-  userServices: []
+  userServices: [],
+  selectedCategory: ''
 }
 
 /**
@@ -43,6 +44,11 @@ const gotServiceCategories = serviceCategories => ({
 const addedUserService = newUserService => ({
   type: ADDED_USER_SERVICE,
   newUserService
+})
+
+export const gotOneCategory = selectedCategory => ({
+  type: GOT_ONE_CATEGORY,
+  selectedCategory
 })
 
 export const writeService = input => {
@@ -112,6 +118,8 @@ export default function(state = defaultService, action) {
       }
     case GOT_NEW_SERVICE_FROM_SERVER:
       return {...state, all: [...state.all, action.service]}
+    case GOT_ONE_CATEGORY:
+      return {...state, selectedCategory: action.selectedCategory}
     case GOT_SERVICE_CATEGORIES:
       return {...state, serviceCategories: action.serviceCategories}
     case WRITE_SERVICE:

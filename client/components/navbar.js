@@ -12,6 +12,7 @@ import history from '../history'
 import Menu from '@material-ui/core/Menu'
 import MenuItem from '@material-ui/core/MenuItem'
 import Avatar from '@material-ui/core/Avatar'
+import {getServiceCategories, gotOneCategory} from '../store/services'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -101,6 +102,10 @@ const Navbar = props => {
 
   const handleClose = () => {
     setAnchorEl(null)
+  }
+
+  const handleSelect = evt => {
+    props.gotOneCategory(evt)
   }
 
   return (
@@ -204,6 +209,18 @@ const Navbar = props => {
             </div>
 
             <div className={classes.root}>
+              <datalist id="serviceCategories">
+                {serviceCategories.map(sc => (
+                  <Link
+                    key={sc.id}
+                    to="/selectedCategory"
+                    onClick={handleSelect}
+                  >
+                    <option value={sc.name} />
+                  </Link>
+                ))}
+              </datalist>
+
               <Button
                 // style={{backgroundColor: '#fff', outlineColor: '#25665C'}}
                 size="medium"
@@ -242,7 +259,8 @@ const Navbar = props => {
 const mapState = state => {
   return {
     isLoggedIn: !!state.user.id,
-    user: state.user
+    user: state.user,
+    serviceCategories: state.serviceCategories
   }
 }
 
@@ -250,7 +268,9 @@ const mapDispatch = dispatch => {
   return {
     handleClick() {
       dispatch(logout())
-    }
+    },
+    getServiceCategories: () => dispatch(getServiceCategories()),
+    gotOneCategory: () => dispatch(gotOneCategory())
   }
 }
 
@@ -261,5 +281,6 @@ export default connect(mapState, mapDispatch)(Navbar)
  */
 Navbar.propTypes = {
   handleClick: PropTypes.func.isRequired,
-  isLoggedIn: PropTypes.bool.isRequired
+  isLoggedIn: PropTypes.bool.isRequired,
+  handleSelect: PropTypes.func.isRequired
 }
