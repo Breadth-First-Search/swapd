@@ -2,6 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {addUserService, getServices} from '../store/services'
 import history from '../history'
+
 import {Link} from 'react-router-dom'
 import Rating from '@material-ui/lab/Rating'
 import Typography from '@material-ui/core/Typography'

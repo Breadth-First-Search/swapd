@@ -22,9 +22,15 @@ class UserProfile extends React.Component {
             Hi, {user.firstName}!
           </div>
           <img src={user.photo} className="profilePhoto" />
+          <br />
           <div>Overall Rating: {user.overallRating.toFixed(2)}</div>
+          <br />
           <div>Email: {user.email}</div>
+          <br />
           <div>Phone Number: {user.phoneNumber}</div>
+          <br />
+          <div>Bio: {user.bio}</div>
+          <br />
           <div>Maximum Travel Distance: {user.distancePrefWeight}mi</div>
           <div className="profileEditButton">
             <Button
