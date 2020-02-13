@@ -16,6 +16,7 @@ class OfferForm extends React.Component {
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
     // this.handleSubmit = this.throttler(this.handleSubmit, 3500).bind(this)
+    this.throttledSubmit = this.throttler()
   }
 
   componentDidMount() {}
@@ -96,7 +97,9 @@ class OfferForm extends React.Component {
               <p>
                 Select a service to swap:{' '}
                 <form
-                  onSubmit={e => this.throttler()(this.handleSubmit(e), 3500)}
+                  onSubmit={e =>
+                    this.throttledSubmit((this.handleSubmit(e), 3500))
+                  }
                 >
                   <input
                     type="text"
