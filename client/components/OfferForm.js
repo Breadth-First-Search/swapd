@@ -15,9 +15,28 @@ class OfferForm extends React.Component {
 
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
+    // this.handleSubmit = this.throttler(this.handleSubmit, 3500).bind(this)
   }
 
   componentDidMount() {}
+
+  throttler() {
+    let currTime = new Date().getTime()
+    let first = true
+
+    function throttle(func, time, e) {
+      let eventTime = new Date().getTime()
+      // console.log(eventTime-currTime);
+
+      if (eventTime - currTime > time || first) {
+        func()
+        currTime = eventTime
+        first = false
+      }
+    }
+
+    return throttle
+  }
 
   async handleChange(e) {
     await this.setState({
@@ -76,7 +95,9 @@ class OfferForm extends React.Component {
             {youWant && (
               <p>
                 Select a service to swap:{' '}
-                <form onSubmit={this.handleSubmit}>
+                <form
+                  onSubmit={e => this.throttler()(this.handleSubmit(e), 3500)}
+                >
                   <input
                     type="text"
                     autoComplete="on"
