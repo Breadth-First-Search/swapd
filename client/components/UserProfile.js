@@ -16,8 +16,8 @@ class UserProfile extends React.Component {
   render() {
     const {user, interests, services} = this.props
     return (
-      <div className="newUserServiceContainer">
-        <div className="leftProfile">
+      <div className="userprofilecontainer">
+        <div className="userleftProfile">
           <div style={{fontSize: '1.5em', fontWeight: 'bold'}}>
             Hi, {user.firstName}!
           </div>
