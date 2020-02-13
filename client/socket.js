@@ -4,7 +4,7 @@ import {gotNewInterestFromServer} from './store/interests'
 import {gotNewMessageFromServer} from './store/messages'
 // import {gotNewOfferFromServer} from './store/offers'
 
-const socket = io(window.location.origin)
+const socket = io(window.location.origin) //const socket = io('/test')
 
 socket.on('connect', () => {
   console.log('Connected!')
@@ -13,8 +13,6 @@ socket.on('connect', () => {
 socket.on('new-interest', interest => {
   store.dispatch(gotNewInterestFromServer(interest))
 })
-
-// send message
 
 // receive message
 socket.on('new-message', message => {

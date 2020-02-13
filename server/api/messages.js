@@ -2,9 +2,6 @@ const router = require('express').Router()
 const {Service, User, ServiceCategory, Message, Swap} = require('../db/models')
 module.exports = router
 
-// currently gets all messages and filters on front end
-// need to build a query that gets all messages for all swaps that a user is a part of
-
 router.get('/swap/:swapId', async (req, res, next) => {
   try {
     const swap = await Swap.findByPk(+req.params.swapId)
@@ -52,12 +49,12 @@ router.get('/swap/:swapId', async (req, res, next) => {
           {
             model: User,
             as: 'responder',
-            attributes: ['id', 'firstName', 'lastName', 'email', 'photo']
+            attributes: ['id', 'firstName', 'lastName', 'photo']
           },
           {
             model: User,
             as: 'requester',
-            attributes: ['id', 'firstName', 'lastName', 'email', 'photo'],
+            attributes: ['id', 'firstName', 'lastName', 'photo'],
             include: [{model: Service}]
           }
         ],
@@ -72,6 +69,7 @@ router.get('/swap/:swapId', async (req, res, next) => {
   }
 })
 
+//
 router.put('/:messageId', async (req, res, next) => {
   try {
     const offerToEdit = await Message.findByPk(+req.params.messageId)
@@ -102,42 +100,53 @@ router.post('/', async (req, res, next) => {
       responderId: swap.dataValues.responderId,
       requesterId: swap.dataValues.requesterId
     }
+    if (req.user) {
+      if (
+        req.user.id === message.responderId ||
+        req.user.id === message.requesterId
+      ) {
+        let newMessage = await Message.create(message)
 
-    let newMessage = await Message.create(message)
+        let newMessagePacked = await Message.findByPk(
+          newMessage.dataValues.id,
+          {
+            include: [
+              {
+                model: Swap,
+                attributes: ['id'],
+                include: [
+                  {
+                    model: Service,
+                    as: 'responderService',
+                    attributes: ['id', 'name', 'serviceRating', 'reviewCount']
+                  },
+                  {
+                    model: Service,
+                    as: 'requesterService',
+                    attributes: ['id', 'name', 'serviceRating', 'reviewCount']
+                  }
+                ]
+              },
+              {
+                model: User,
+                as: 'responder',
+                attributes: ['id', 'firstName', 'lastName', 'email', 'photo']
+              },
+              {
+                model: User,
+                as: 'requester',
+                attributes: ['id', 'firstName', 'lastName', 'email', 'photo'],
+                include: [{model: Service}]
+              }
+            ]
+          }
+        )
 
-    let newMessagePacked = await Message.findByPk(newMessage.dataValues.id, {
-      include: [
-        {
-          model: Swap,
-          attributes: ['id'],
-          include: [
-            {
-              model: Service,
-              as: 'responderService',
-              attributes: ['id', 'name', 'serviceRating', 'reviewCount']
-            },
-            {
-              model: Service,
-              as: 'requesterService',
-              attributes: ['id', 'name', 'serviceRating', 'reviewCount']
-            }
-          ]
-        },
-        {
-          model: User,
-          as: 'responder',
-          attributes: ['id', 'firstName', 'lastName', 'email', 'photo']
-        },
-        {
-          model: User,
-          as: 'requester',
-          attributes: ['id', 'firstName', 'lastName', 'email', 'photo'],
-          include: [{model: Service}]
-        }
-      ]
-    })
-
-    res.json(newMessagePacked)
+        res.json(newMessagePacked)
+      }
+    } else {
+      res.sendStatus(403)
+    }
   } catch (err) {
     next(err)
   }

@@ -17,13 +17,10 @@ const {
 } = require('../algorithm')
 module.exports = router
 
-// route we can use to get all users and their interests
+// route to get all users and their interests
 router.get('/', async (req, res, next) => {
   try {
     const users = await User.findAll({
-      // explicitly select only the id and email fields - even though
-      // users' passwords are encrypted, it won't help if we just
-      // send everything to anyone who asks!
       attributes: [
         'id',
         'firstName',
@@ -87,8 +84,6 @@ router.get('/:userId', async (req, res, next) => {
         'bio',
         'photo',
         'overallRating',
-        'latitude',
-        'longitude',
         'distancePrefWeight',
         'reviewCount'
       ],
@@ -126,7 +121,7 @@ router.get('/:userId', async (req, res, next) => {
   }
 })
 
-//change data in the user table
+//change data in the user table if logged-in user
 router.put('/:userId', async (req, res, next) => {
   try {
     const user = await User.findByPk(+req.params.userId)
@@ -157,17 +152,22 @@ router.get('/:userId/services', async (req, res, next) => {
   }
 })
 
-//post services by userId and service categories
+//post services by userId and service categories if logged-in user
 router.post('/:userId/services', async (req, res, next) => {
   try {
     const newService = req.body.service
     const description = req.body.description
+    const proficiency = req.body.proficiency
+    const remote = req.body.remote
+
     if (req.user) {
       if (req.user.id === +req.params.userId) {
         const service = await Service.create({
           name: newService,
           userId: req.params.userId,
-          description: description
+          description,
+          proficiency,
+          remote
         })
 
         res.json(service)
@@ -180,9 +180,153 @@ router.post('/:userId/services', async (req, res, next) => {
   }
 })
 
-// get all users who have a specified service, eager loading their interests
-// to be used in search page
+// get all of one user's interests
+router.get('/:userId/interests', async (req, res, next) => {
+  try {
+    const interests = await Interest.findAll({
+      attributes: ['name', 'id'],
+      include: [
+        {
+          attributes: ['id'],
+          model: User,
+          as: 'users',
+          through: UserInterest,
+          where: {
+            id: req.params.userId
+          }
+        }
+      ]
+    })
 
+    res.json(interests)
+  } catch (err) {
+    next(err)
+  }
+})
+
+//add interest for a user ..add interest id to userInterest for user id.
+router.post('/:userId/interests', async (req, res, next) => {
+  try {
+    const {name, userId} = req.body
+    const interest = await Interest.findOne({where: {name: name}})
+    if (req.user) {
+      if (req.user.id === userId) {
+        if (interest) {
+          await UserInterest.create({
+            userId: userId,
+            interestId: interest.id
+          })
+          res.json(interest)
+        } else {
+          const newInterest = await Interest.create({name: name})
+          await UserInterest.create({
+            userId: userId,
+            interestId: newInterest.id
+          })
+          res.json(newInterest)
+        }
+      }
+    } else {
+      res.sendStatus(403)
+    }
+  } catch (err) {
+    next(err)
+  }
+})
+
+router.get('/services/:serviceName/', async (req, res, next) => {
+  try {
+    // get all interest ids of the searching user
+    let searcherInterests = await UserInterest.findAll({
+      attributes: ['interestId'],
+      where: {
+        userId: Number(req.query.searcherId)
+      }
+    })
+
+    let searcherInterestsSet = userInterestsToSet(searcherInterests)
+
+    // get all users who have services that match the search and include their interest ids
+
+    const serviceNames = await Service.findAll({
+      attributes: [[Sequelize.fn('DISTINCT', Sequelize.col('name')), 'name']]
+
+      // [Sequelize.fn('DISTINCT', Sequelize.col('country')) ,'country'],
+    })
+
+    let result = bestMatch(serviceNames, req.params.serviceName)
+
+    let info = [result[0].dataValues.name, result[1].dataValues.name]
+
+    console.log(result[0].dataValues.name, result[2])
+    console.log(result[1].dataValues.name, result[3])
+
+    const users = await User.findAll({
+      attributes: [
+        'id',
+        'firstName',
+        'lastName',
+        'bio',
+        'photo',
+        'overallRating',
+        'distancePrefWeight',
+        'reviewCount'
+      ],
+      include: [
+        {
+          model: Service,
+          where: {
+            name: result[0].dataValues.name
+          }
+        },
+        {
+          model: Interest,
+          as: 'interests',
+          through: UserInterest
+        }
+      ]
+    })
+
+    users.sort((userA, userB) => {
+      userA = userA.dataValues
+      userB = userB.dataValues
+
+      let numIntersectionsA = getScoreFromInterestsObject(
+        searcherInterestsSet,
+        userA.interests
+      )
+      let numIntersectionsB = getScoreFromInterestsObject(
+        searcherInterestsSet,
+        userB.interests
+      )
+
+      let userAScore =
+        prefs.overallRating * getScoreFromOverallRating(userA.overallRating) +
+        prefs.skillRating *
+          getScoreFromSkillRating(userA.services[0].serviceRating) +
+        numIntersectionsA * prefs.interests
+
+      let userBScore =
+        prefs.overallRating * getScoreFromOverallRating(userB.overallRating) +
+        prefs.skillRating *
+          getScoreFromSkillRating(userB.services[0].serviceRating) +
+        numIntersectionsB * prefs.interests
+
+      // console.log(`${userA.firstName} ${userAScore}`)
+      // console.log(`${userB.firstName} ${userBScore}`)
+
+      return userBScore - userAScore
+    })
+
+    users.push(info)
+
+    res.json(users)
+  } catch (err) {
+    next(err)
+  }
+})
+
+// to be used in search page
 function customLCS_subseq(s1, s2) {
   let dp = [] /* .fill(Array(s2.length+1).fill(0)) */
 
@@ -299,134 +443,3 @@ function bestMatch(serviceNames, searchString) {
   })
   return [top, top2, max, max2]
 }
-
-router.get('/services/:serviceName/', async (req, res, next) => {
-  try {
-    // get all interest ids of the searching user
-    let searcherInterests = await UserInterest.findAll({
-      attributes: ['interestId'],
-      where: {
-        userId: Number(req.query.searcherId)
-      }
-    })
-
-    let searcherInterestsSet = userInterestsToSet(searcherInterests)
-
-    // get all users who have services that match the search and include their interest ids
-
-    const serviceNames = await Service.findAll({
-      attributes: [[Sequelize.fn('DISTINCT', Sequelize.col('name')), 'name']]
-
-      // [Sequelize.fn('DISTINCT', Sequelize.col('country')) ,'country'],
-    })
-
-    let result = bestMatch(serviceNames, req.params.serviceName)
-
-    let info = [result[0].dataValues.name, result[1].dataValues.name]
-
-    console.log(result[0].dataValues.name, result[2])
-    console.log(result[1].dataValues.name, result[3])
-
-    const users = await User.findAll({
-      include: [
-        {
-          model: Service,
-          where: {
-            name: result[0].dataValues.name
-          }
-        },
-        {
-          model: Interest,
-          as: 'interests',
-          through: UserInterest
-        }
-      ]
-    })
-
-    users.sort((userA, userB) => {
-      userA = userA.dataValues
-      userB = userB.dataValues
-
-      let numIntersectionsA = getScoreFromInterestsObject(
-        searcherInterestsSet,
-        userA.interests
-      )
-      let numIntersectionsB = getScoreFromInterestsObject(
-        searcherInterestsSet,
-        userB.interests
-      )
-
-      let userAScore =
-        prefs.overallRating * getScoreFromOverallRating(userA.overallRating) +
-        prefs.skillRating *
-          getScoreFromSkillRating(userA.services[0].serviceRating) +
-        numIntersectionsA * prefs.interests
-
-      let userBScore =
-        prefs.overallRating * getScoreFromOverallRating(userB.overallRating) +
-        prefs.skillRating *
-          getScoreFromSkillRating(userB.services[0].serviceRating) +
-        numIntersectionsB * prefs.interests
-
-      // console.log(`${userA.firstName} ${userAScore}`)
-      // console.log(`${userB.firstName} ${userBScore}`)
-
-      return userBScore - userAScore
-    })
-
-    users.push(info)
-
-    res.json(users)
-  } catch (err) {
-    next(err)
-  }
-})
-
-// get all of one user's interests
-router.get('/:userId/interests', async (req, res, next) => {
-  try {
-    const interests = await Interest.findAll({
-      attributes: ['name', 'id'],
-      include: [
-        {
-          attributes: ['id'],
-          model: User,
-          as: 'users',
-          through: UserInterest,
-          where: {
-            id: req.params.userId
-          }
-        }
-      ]
-    })
-
-    res.json(interests)
-  } catch (err) {
-    next(err)
-  }
-})
-
-//add interest for a user ..add interest id to userInterest for user id.
-router.post('/userInterests', async (req, res, next) => {
-  try {
-    const {name, userId} = req.body
-    const interest = await Interest.findOne({where: {name: name}})
-
-    if (interest) {
-      await UserInterest.create({
-        userId: userId,
-        interestId: interest.id
-      })
-      res.json(interest)
-    } else {
-      const newInterest = await Interest.create({name: name})
-      await UserInterest.create({
-        userId: userId,
-        interestId: newInterest.id
-      })
-      res.json(newInterest)
-    }
-  } catch (err) {
-    next(err)
-  }
-})
