@@ -11,8 +11,12 @@ const {
   Swap,
   Review
 } = require('../server/db/models')
-const {fakeUsers, fakeServices, fakeReviews} = require('./seedGenerator')
-const {interestsList} = require('../server/algorithm')
+const {
+  fakeUsers,
+  fakeServices,
+  fakeReviews,
+  interestsList
+} = require('./seedGenerator')
 
 //returns an array of objects to bulkCreate interests
 function interestHelper(interests) {
@@ -45,7 +49,6 @@ function interestJoinTableHelper(users) {
 }
 
 async function seed() {
-  //why is there another db force true here
   await db.sync({force: true})
   console.log('db synced!')
 
@@ -106,32 +109,31 @@ async function seed() {
 
   await Promise.all([
     ServiceCategory.create({
-      id: 1,
       name: 'Education'
     }),
     ServiceCategory.create({
-      id: 2,
       name: 'Performing Arts'
     }),
     ServiceCategory.create({
-      id: 3,
       name: 'Fashion'
     }),
     ServiceCategory.create({
-      id: 4,
       name: 'Health'
     }),
     ServiceCategory.create({
-      id: 5,
       name: 'Home'
     }),
     ServiceCategory.create({
-      id: 6,
       name: 'Sports'
     }),
     ServiceCategory.create({
-      id: 7,
       name: 'Creativity'
+    }),
+    ServiceCategory.create({
+      name: 'Career'
+    }),
+    ServiceCategory.create({
+      name: 'Lifestyle'
     })
   ])
 

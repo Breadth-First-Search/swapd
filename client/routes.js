@@ -17,6 +17,7 @@ import Oauth from './components/o-auth'
 import {me} from './store'
 import SwapList from './components/SwapList'
 import SignUp from './components/SignUp'
+import SelectedCategory from './components/SelectedCategory'
 
 /**
  * COMPONENT
@@ -36,6 +37,7 @@ class Routes extends Component {
         <Route exact path="/login" component={Login} />
         <Route exact path="/signup" component={SignUp} />
         <Route exact path="/auth/google" component={Oauth} />
+        <Route exact path="/selectedCategory" component={SelectedCategory} />
         {/* <Route exact path="/search/:serviceName" component={SearchResults} /> */}
         {isLoggedIn && (
           <Switch>
