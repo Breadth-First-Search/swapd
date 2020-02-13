@@ -32,7 +32,7 @@ module.exports = io => {
     })
 
     socket.on('new-offer', offer => {
-      socket.boardcast.emit('new-offer', offer)
+      socket.broadcast.emit('new-offer', offer)
     })
 
     socket.on('disconnect', () => {
