@@ -47,29 +47,41 @@ class SwapList extends React.Component {
 
     return !this.state.isLoading && swaps.length > 1 ? (
       <div>
-        {swaps.map(swap => {
-          const otherUser =
-            swap.requesterId === this.props.user.id ? 'responder' : 'requester'
-          const otherUserData = swap.messages[0][otherUser]
-          const newDate = this.formatDate(
-            swap.messages[swap.messages.length - 1].createdAt.slice(0, 10)
+        {swaps
+          .sort(
+            (a, b) =>
+              a.messages[a.messages.length - 1].createdAt -
+              b.messages[b.messages.length - 1].createdAt
           )
-          return (
-            <Link to={`/swaps/${swap.id}`} key={swap.id}>
-              <div className="swaplistcontainer">
-                <div className="swaplistdetails">
-                  <img className="swapListImage" src={otherUserData.photo} />
-                  <div>
-                    <div>{otherUserData.firstName}</div>
-                    <div>{newDate}</div>
+          .reverse()
+          .map(swap => {
+            const otherUser =
+              swap.requesterId === this.props.user.id
+                ? 'responder'
+                : 'requester'
+            const otherUserData = swap.messages[0][otherUser]
+            const newDate = this.formatDate(
+              swap.messages[swap.messages.length - 1].createdAt.slice(0, 10)
+            )
+            return (
+              <Link to={`/swaps/${swap.id}`} key={swap.id}>
+                <div className="swaplistcontainer">
+                  <div className="swaplistdetails">
+                    <img className="swapListImage" src={otherUserData.photo} />
+                    <div>
+                      <div>{otherUserData.firstName}</div>
+                      <div>{newDate}</div>
+                    </div>
+                    <div>{swap.messages[swap.messages.length - 1].text}</div>
+                    <div className={`${swap.swapStatus}`}>
+                      {swap.swapStatus}
+                    </div>
                   </div>
-                  <div>{swap.messages[swap.messages.length - 1].text}</div>
-                  <div>{swap.swapStatus}</div>
                 </div>
-              </div>
-            </Link>
-          )
-        })}
+              </Link>
+            )
+          })}
+        )
       </div>
     ) : (
       <div className="messageMessage">Start a swap to begin messaging!</div>

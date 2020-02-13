@@ -1025,3 +1025,13 @@ li {
   justify-content: center;
   flex-wrap: wrap;
 }
+
+.Completed {
+  color: black;
+}
+.Pending {
+  color: red;
+}
+.Active {
+  color: green;
+}
