@@ -43,6 +43,7 @@
   "dependencies": {
     "@material-ui/core": "^4.9.1",
     "@material-ui/icons": "^4.9.1",
+    "@material-ui/lab": "^4.0.0-alpha.42",
     "axios": "^0.19.2",
     "casual": "^1.6.2",
     "compression": "^1.7.3",
