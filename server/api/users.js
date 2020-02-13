@@ -154,12 +154,17 @@ router.post('/:userId/services', async (req, res, next) => {
   try {
     const newService = req.body.service
     const description = req.body.description
+    const proficiency = req.body.proficiency
+    const remote = req.body.remote
+
     if (req.user) {
       if (req.user.id === +req.params.userId) {
         const service = await Service.create({
           name: newService,
           userId: req.params.userId,
-          description: description
+          description,
+          proficiency,
+          remote
         })
 
         res.json(service)
