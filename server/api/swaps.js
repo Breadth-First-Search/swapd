@@ -4,6 +4,7 @@ const {Op} = require('sequelize')
 
 module.exports = router
 
+// get messages by swap when logged-in user is either requester or responder
 router.get('/:userId', async (req, res, next) => {
   try {
     const swaps = await Swap.findAll({
@@ -27,6 +28,7 @@ router.get('/:userId', async (req, res, next) => {
   }
 })
 
+//create new swap if user is logged-in
 router.post('/', async (req, res, next) => {
   try {
     if (req.user) {
@@ -45,14 +47,12 @@ router.post('/', async (req, res, next) => {
   }
 })
 
-//updtate review status
+//updtate review status if user is logged-in
 router.put('/reviews/:swapId', async (req, res, next) => {
   try {
     const swapId = Number(req.params.swapId)
-    // const {userId} = req.body
-    // Number(userId)
     const swap = await Swap.findByPk(swapId)
-    console.log('swap in update review api', swap)
+
     if (swap.responderId === req.user.id) {
       const updated = await swap.update({requesterServiceReviewed: true})
       res.json(updated)
@@ -65,15 +65,10 @@ router.put('/reviews/:swapId', async (req, res, next) => {
   }
 })
 
+//update swap status for logged-in user
 router.put('/:swapId/services/:serviceId', async (req, res, next) => {
   try {
     const swapToUpdate = await Swap.findByPk(+req.params.swapId)
-    console.log(
-      swapToUpdate.responderId,
-      req.user.id,
-      swapToUpdate.requesterId,
-      req.user.id
-    )
     if (
       swapToUpdate.responderId === req.user.id ||
       swapToUpdate.requesterId === req.user.id
@@ -82,7 +77,7 @@ router.put('/:swapId/services/:serviceId', async (req, res, next) => {
         requesterServiceId: +req.params.serviceId,
         swapStatus: 'Active'
       })
-      
+
       res.json(swapToUpdate)
     } else {
       res.sendStatus(403)

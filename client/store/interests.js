@@ -70,7 +70,10 @@ export const getUserInterests = id => async dispatch => {
 
 export const addUserInterest = userInterest => async dispatch => {
   try {
-    const {data} = await axios.post('/api/users/userInterests', userInterest)
+    const {data} = await axios.post(
+      `/api/users/${userInterest.userId}/interests`,
+      userInterest
+    )
     dispatch(addedUserInterest(data))
   } catch (err) {
     console.error(err)
