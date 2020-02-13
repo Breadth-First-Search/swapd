@@ -138,6 +138,19 @@ nav a {
   flex-wrap: wrap;
 }
 
+.userleftProfile {
+  height: 100%;
+  width: 25%;
+  text-align: -webkit-center;
+  border: 1px;
+  border-radius: 1px;
+  border-style: solid;
+  border-color: rgb(228, 228, 228);
+  padding: 15px;
+  margin: 45px;
+  box-shadow: rgb(228, 228, 228);
+}
+
 .leftProfile {
   height: 100%;
   width: 25%;
@@ -183,7 +196,7 @@ nav a {
   height: 100%;
   padding: 15px;
   margin: 45px;
-  width: 55%;
+  width: 50%;
   border: 1px;
   border-radius: 1px;
   border-style: solid;
@@ -746,6 +759,11 @@ li {
 
 .offer_confirmed {
   border-radius: 5px;
+}
+
+.userprofilecontainer {
+  display: flex;
+  justify-content: center;
 }
 
 .newUserServiceContainer {
