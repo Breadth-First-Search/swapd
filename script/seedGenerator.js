@@ -758,14 +758,15 @@ const interestsList = [
   'Non-matching socks'
 ]
 
-const numberOfServices = 154
+const numberOfServices = servicesWithCategoryImage.length
+
 function generateReviews() {
   const reviews = []
-  for (let i = 0; i < 1000; i++) {
+  for (let i = 0; i < 3000; i++) {
     reviews.push({
       rating: 2 + Math.ceil(Math.random() * 3) * 1.0,
       comment: reviewList[Math.floor(Math.random() * reviewList.length)],
-      serviceId: Math.ceil(Math.random() * numberOfServices),
+      serviceId: Math.ceil(Math.random() * (totalUsersToFake * 6 + 4)),
       userId: Math.ceil(Math.random() * (totalUsersToFake + 4))
     })
   }
@@ -793,7 +794,7 @@ function generateUsers(num) {
 
 function generateServices(num) {
   const services = []
-  for (let i = 5; i < num * 3 + 5; i++) {
+  for (let i = 5; i < num * 6 + 5; i++) {
     let serviceObj =
       servicesWithCategoryImage[
         Math.floor(Math.random() * servicesWithCategoryImage.length)
@@ -813,7 +814,7 @@ function generateServices(num) {
 
 const fakeUsers = generateUsers(totalUsersToFake)
 const fakeServices = generateServices(totalUsersToFake)
-const fakeReviews = generateReviews(numberOfServices)
+const fakeReviews = generateReviews()
 
 module.exports = {
   fakeUsers,

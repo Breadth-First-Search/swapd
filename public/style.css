@@ -197,17 +197,16 @@ nav a {
   padding: 15px;
   margin: 45px;
   width: 50%;
-  border: 1px;
+  /* border: 1px;
   border-radius: 1px;
   border-style: solid;
   border-color: rgb(228, 228, 228);
-  box-shadow: rgb(228, 228, 228);
+  box-shadow: rgb(228, 228, 228); */
 }
 .profileInterestsList {
   height: 100%;
   padding: 15px;
   margin: 45px;
-  /* width: 55%; */
   border: 1px;
   border-radius: 1px;
   border-style: solid;
@@ -264,7 +263,7 @@ nav a {
 
 .servicephotobox a {
   align-self: center;
-  width: 90%;
+  width: 85%;
 }
 
 .servicephoto {
