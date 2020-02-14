@@ -3969,7 +3969,10 @@ function (_React$Component) {
                 this.setState({
                   topUsers: data
                 });
-                this.props.getUnreviewedSwaps(this.props.user.id);
+
+                if (this.props.user.id) {
+                  this.props.getUnreviewedSwaps(this.props.user.id);
+                }
 
               case 6:
               case "end":
@@ -4526,8 +4529,8 @@ var Navbar = function Navbar(props) {
 var mapState = function mapState(state) {
   return {
     isLoggedIn: !!state.user.id,
-    user: state.user // serviceCategories: state.serviceCategories
-
+    user: state.user,
+    serviceCategories: state.serviceCategories
   };
 };
 
@@ -4535,9 +4538,13 @@ var mapDispatch = function mapDispatch(dispatch) {
   return {
     handleClick: function handleClick() {
       dispatch(Object(_store__WEBPACK_IMPORTED_MODULE_4__["logout"])());
-    } // getServiceCategories: () => dispatch(getServiceCategories()),
-    // gotOneCategory: () => dispatch(gotOneCategory())
-
+    },
+    getServiceCategories: function getServiceCategories() {
+      return dispatch(Object(_store_services__WEBPACK_IMPORTED_MODULE_14__["getServiceCategories"])());
+    },
+    gotOneCategory: function gotOneCategory() {
+      return dispatch(Object(_store_services__WEBPACK_IMPORTED_MODULE_14__["gotOneCategory"])());
+    }
   };
 };
 
@@ -4548,8 +4555,8 @@ var mapDispatch = function mapDispatch(dispatch) {
 
 Navbar.propTypes = {
   handleClick: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func.isRequired,
-  isLoggedIn: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.bool.isRequired,
-  handleSelect: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func.isRequired
+  isLoggedIn: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.bool.isRequired // handleSelect: PropTypes.func.isRequired
+
 };
 
 /***/ }),

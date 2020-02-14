@@ -2,62 +2,6 @@
 
 var casual = require('casual')
 var totalUsersToFake = 200
-const servicesWithCategory = {
-  'HTML Tutor': 1,
-  'CSS Tutor': 1,
-  'SQL Tutoring': 1,
-  'Python 3 Tutoring': 1,
-  'Java Tutoring': 1,
-  'Japanese Tutor': 1,
-  'Javascript Tutoring': 1,
-  'Algebra Tutoring': 1,
-  'SAT Tutoring': 1,
-  'ACT Tutoring': 1,
-  'Express.js Tutoring': 1,
-  'React.js Tutoring': 1,
-  'Cantonese Translator': 1,
-  'Node Tutoring': 1,
-  'Redux.js Tutoring': 1,
-  'Vocal Lessons': 2,
-  'Piano Lessons': 2,
-  'Jazz Lessons': 2,
-  'Guitar Lessons': 2,
-  'Music Production': 2,
-  'Hair-Cutting': 3,
-  'Tattoo Design': 3,
-  'Nail Technician': 3,
-  'Hair Stylist': 3,
-  'Make-up': 3,
-  'Personal Bartender': 3,
-  'Personal Stylist': 3,
-  Modeling: 3,
-  'Physical Therapy': 4,
-  'Psychological Therapy': 4,
-  'House Makeover': 5,
-  'Lawn Mowing': 5,
-  'Taking Out The Trash': 5,
-  'Window Cleaning': 5,
-  'House Keeping': 5,
-  'Doing The Dishes': 5,
-  Nanny: 5,
-  'Personal Chef': 5,
-  'Interior Design': 5,
-  'Basketball Lessons': 6,
-  'Personal Training': 6,
-  'Picture Taking': 7,
-  'Caricature Drawing': 7,
-  'Financial Analysis': 8,
-  'Photoshopping Any Image': 8,
-  'Meditation Practice': 9,
-  'Help Doing Taxes': 9,
-  'Personal Nutritionist': 9,
-  'Social Skill Tutor': 9,
-  'Personal Hype Man': 9,
-  'Life Makeover': 9,
-  'Travel Guide': 9
-}
-const servicesList = Object.keys(servicesWithCategory)
-// console.log(servicesList)
 
 const servicesWithCategoryImage = [
   {
@@ -599,44 +543,6 @@ const imageUrls = [
   'https://ca.slack-edge.com/T024FPYBQ-UF9LT8TT8-38d1d4fe5f12-512'
 ]
 
-const serviceImageUrl = [
-  'https://images.unsplash.com/photo-1521791136064-7986c2920216?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
-  'https://images.unsplash.com/photo-1572538249746-d2c1c26ba264?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60',
-  'https://images.unsplash.com/photo-1533227268428-f9ed0900fb3b?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60',
-  'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
-  'https://images.unsplash.com/photo-1508090262849-891361a906e0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
-  'https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60',
-  'https://images.unsplash.com/photo-1534447677768-be436bb09401?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
-  'https://images.unsplash.com/photo-1500917832468-298fa6292e2b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
-  'https://images.unsplash.com/photo-1463567517034-628c51048aa2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
-  'https://images.unsplash.com/photo-1556910103-1c02745aae4d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
-  'https://images.unsplash.com/photo-1551218371-bc055a9c1487?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
-  'https://images.unsplash.com/photo-1515516089376-88db1e26e9c0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
-  'https://images.unsplash.com/photo-1477039181047-efb4357d01bd?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
-  'https://images.unsplash.com/photo-1532619675605-1ede6c2ed2b0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
-  'https://images.unsplash.com/photo-1526948531399-320e7e40f0ca?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60',
-  'https://images.unsplash.com/photo-1514996937319-344454492b37?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
-  'https://images.unsplash.com/photo-1544847558-3ccacb31ee7f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
-  'https://images.unsplash.com/photo-1527248340554-4c41da8eff7d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
-  'https://images.unsplash.com/photo-1493711662062-fa541adb3fc8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
-  'https://images.unsplash.com/photo-1497470674350-dad852ead0eb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
-  'https://images.unsplash.com/photo-1555436169-20e93ea9a7ff?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
-  'https://images.unsplash.com/photo-1504836054726-3e36882ddaf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
-  'https://images.unsplash.com/photo-1503832725-c34828469568?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
-  'https://images.unsplash.com/photo-1511920922889-5c35bfd95a7f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
-  'https://images.unsplash.com/photo-1517677208171-0bc6725a3e60?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
-  'https://images.unsplash.com/photo-1562259929-b4e1fd3aef09?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
-  'https://images.unsplash.com/photo-1530124566582-a618bc2615dc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
-  'https://images.unsplash.com/photo-1537726235470-8504e3beef77?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
-  'https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
-  'https://images.unsplash.com/photo-1511379938547-c1f69419868d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
-  'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
-  'https://images.unsplash.com/photo-1516280440614-37939bbacd81?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
-  'https://images.unsplash.com/photo-1517400508447-f8dd518b86db?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
-  'https://images.unsplash.com/photo-1523225918988-00624e6d8fee?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
-  'https://images.unsplash.com/photo-1497190430210-ef621bd9955b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60'
-]
-
 const interestsList = [
   'Baseball',
   'Cooking',
@@ -887,20 +793,19 @@ function generateUsers(num) {
 
 function generateServices(num) {
   const services = []
-  console.log(servicesWithCategoryImage.length)
   for (let i = 5; i < num * 3 + 5; i++) {
-    // console.log(Math.floor(Math.random() * servicesWithCategoryImage.length))
-    // let serviceObj = servicesWithCategoryImage[Math.floor(Math.random() * servicesWithCategoryImage.length)]
-    let name = servicesList[Math.floor(Math.random() * servicesList.length)]
+    let serviceObj =
+      servicesWithCategoryImage[
+        Math.floor(Math.random() * servicesWithCategoryImage.length)
+      ]
     services.push({
       userId: 1 + Math.floor(Math.random() * (num + 4)),
-      name: name,
+      name: serviceObj.name,
       description: casual.text,
       proficiency: Math.ceil(Math.random() * 3),
       remote: casual.coin_flip,
-      serviceCategoryId: servicesWithCategory[name],
-      imageUrl:
-        serviceImageUrl[Math.floor(Math.random() * serviceImageUrl.length)]
+      serviceCategoryId: serviceObj.serviceCategoryId,
+      imageUrl: serviceObj.imageUrl
     })
   }
   return services

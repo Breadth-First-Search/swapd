@@ -18,7 +18,10 @@ class HomePage extends React.Component {
     this.setState({
       topUsers: data
     })
-    this.props.getUnreviewedSwaps(this.props.user.id)
+
+    if (this.props.user.id) {
+      this.props.getUnreviewedSwaps(this.props.user.id)
+    }
   }
 
   render() {
@@ -63,7 +66,9 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = dispatch => {
-  return {getUnreviewedSwaps: id => dispatch(getUnreviewedSwaps(id))}
+  return {
+    getUnreviewedSwaps: id => dispatch(getUnreviewedSwaps(id))
+  }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomePage)

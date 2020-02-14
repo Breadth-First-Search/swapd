@@ -259,8 +259,8 @@ const Navbar = props => {
 const mapState = state => {
   return {
     isLoggedIn: !!state.user.id,
-    user: state.user
-    // serviceCategories: state.serviceCategories
+    user: state.user,
+    serviceCategories: state.serviceCategories
   }
 }
 
@@ -268,9 +268,9 @@ const mapDispatch = dispatch => {
   return {
     handleClick() {
       dispatch(logout())
-    }
-    // getServiceCategories: () => dispatch(getServiceCategories()),
-    // gotOneCategory: () => dispatch(gotOneCategory())
+    },
+    getServiceCategories: () => dispatch(getServiceCategories()),
+    gotOneCategory: () => dispatch(gotOneCategory())
   }
 }
 
@@ -281,6 +281,6 @@ export default connect(mapState, mapDispatch)(Navbar)
  */
 Navbar.propTypes = {
   handleClick: PropTypes.func.isRequired,
-  isLoggedIn: PropTypes.bool.isRequired,
-  handleSelect: PropTypes.func.isRequired
+  isLoggedIn: PropTypes.bool.isRequired
+  // handleSelect: PropTypes.func.isRequired
 }

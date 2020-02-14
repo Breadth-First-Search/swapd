@@ -59,7 +59,7 @@ async function seed() {
       email: 'ming@email.com',
       phoneNumber: '742-829-2102',
       password: '123',
-      bio: 'Always be coding and dancing. Looking for a dance instructor.',
+      bio: 'Always be coding and dancing.',
       zipCode: 10013,
       // overallRating: Math.random() * 5,
       photo:
@@ -144,7 +144,8 @@ async function seed() {
     description: 'Learn the basics of dance over 2 hours.',
     proficiency: 1,
     remote: false,
-    photo: 'mingdance.png',
+    imageUrl:
+      'https://images.unsplash.com/photo-1508700929628-666bc8bd84ea?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60',
     serviceRating: Math.random() * 5
   })
   await Service.create({
@@ -154,7 +155,7 @@ async function seed() {
     description: 'Solve medium to hard algorithms over 3 hours.',
     proficiency: 3,
     remote: true,
-    photo: 'algorithm.jpg',
+    imageUrl: 'https://hackernoon.com/hn-images/1*CWM5omSsQVUpMREJwHQUzQ.jpeg',
     serviceRating: Math.random() * 5
   })
   await Service.create({
@@ -165,7 +166,8 @@ async function seed() {
       'Understand the basics of data structures before tackling algorithm problems.',
     proficiency: 1,
     remote: true,
-    photo: 'algorithm.jpg',
+    imageUrl:
+      'https://blog-c7ff.kxcdn.com/blog/wp-content/uploads/2019/11/Banner-Blog-1A-1.jpg',
     serviceRating: Math.random() * 5
   })
   await Service.create({
@@ -175,7 +177,8 @@ async function seed() {
     description: 'Learn the secrets of being a great and time efficient dad.',
     proficiency: 1,
     remote: true,
-    photo: 'algorithm.jpg',
+    imageUrl:
+      'https://www.scarymommy.com/wp-content/uploads/2017/06/dad-hacks.jpg',
     serviceRating: Math.random() * 5
   })
 
