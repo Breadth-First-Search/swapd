@@ -449,7 +449,7 @@ function customLCS_substr_weighted(s1, s2) {
 function aggregateSearchScore(serviceName, searchString) {
   let lcs = customLCS_substr_weighted(serviceName, searchString)
 
-  return lcs.length - KMPmatch(searchString, lcs)
+  return lcs.length - KMPmatch(searchString.toLowerCase(), lcs.toLowerCase())
 }
 
 function bestMatch(serviceNames, searchString) {
