@@ -209,7 +209,7 @@ const Navbar = props => {
             </div>
 
             <div className={classes.root}>
-              <datalist id="serviceCategories">
+              {/* <datalist id="serviceCategories">
                 {serviceCategories.map(sc => (
                   <Link
                     key={sc.id}
@@ -219,7 +219,7 @@ const Navbar = props => {
                     <option value={sc.name} />
                   </Link>
                 ))}
-              </datalist>
+              </datalist> */}
 
               <Button
                 // style={{backgroundColor: '#fff', outlineColor: '#25665C'}}
@@ -259,8 +259,8 @@ const Navbar = props => {
 const mapState = state => {
   return {
     isLoggedIn: !!state.user.id,
-    user: state.user,
-    serviceCategories: state.serviceCategories
+    user: state.user
+    // serviceCategories: state.serviceCategories
   }
 }
 
@@ -268,9 +268,9 @@ const mapDispatch = dispatch => {
   return {
     handleClick() {
       dispatch(logout())
-    },
-    getServiceCategories: () => dispatch(getServiceCategories()),
-    gotOneCategory: () => dispatch(gotOneCategory())
+    }
+    // getServiceCategories: () => dispatch(getServiceCategories()),
+    // gotOneCategory: () => dispatch(gotOneCategory())
   }
 }
 

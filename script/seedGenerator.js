@@ -57,179 +57,326 @@ const servicesWithCategory = {
   'Travel Guide': 9
 }
 const servicesList = Object.keys(servicesWithCategory)
+// console.log(servicesList)
 
-const servicesWithCategoryImage = {
-  'HTML Tutor': {
+const servicesWithCategoryImage = [
+  {
+    name: 'HTML Tutor',
     serviceCategoryId: 1,
     imageUrl:
       'https://images.unsplash.com/photo-1542831371-29b0f74f9713?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60'
   },
-  'CSS Tutor': {
+  {
+    name: 'CSS Tutor',
     serviceCategoryId: 1,
     imageUrl:
       'https://images.unsplash.com/photo-1523437113738-bbd3cc89fb19?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60'
   },
-  'SQL Tutoring': {
+  {
+    name: 'SQL Tutoring',
     serviceCategoryId: 1,
     imageUrl:
       'https://ittutorial.org/wp-content/uploads/2019/06/sql-express.png'
   },
-  'Python 3 Tutoring': {
+  {
+    name: 'Python 3 Tutoring',
     serviceCategoryId: 1,
     imageUrl:
       'https://ittutohttps://images.unsplash.com/photo-1515879218367-8466d910aaa4?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60rial.org/wp-content/uploads/2019/06/sql-express.png'
   },
-  'Java Tutoring': {
+  {
+    name: 'Java Tutoring',
     serviceCategoryId: 1,
     imageUrl:
       'https://lh3.googleusercontent.com/proxy/Xctw-MHSTTYicFqTjR40hXDsd1hk2o0KqeIipuVzG1GWqKS6_sJSlPPak64mQRLI4kJjOUSd_8X1uGGa6lptWnmvMBWzKyAnVVn68fF4S8MspMBtAuiMboqNuOmxWSWprQ-tJw'
   },
-  'Japanese Tutor': {
+  {
+    name: 'Japanese Tutor',
     serviceCategoryId: 1,
     imageUrl:
       'https://images.unsplash.com/photo-1543806087-9acdd318f37d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60'
   },
-  'Javascript Tutoring': {
+  {
+    name: 'Javascript Tutoring',
     serviceCategoryId: 1,
     imageUrl:
       'https://images.unsplash.com/photo-1485856407642-7f9ba0268b51?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80'
   },
-  'Algebra Tutoring': {
+  {
+    name: 'Algebra Tutoring',
     serviceCategoryId: 1,
     imageUrl:
       'https://images.unsplash.com/photo-1509228468518-180dd4864904?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60'
   },
-  'SAT Tutoring': {
+  {
+    name: 'SAT Tutoring',
     serviceCategoryId: 1,
     imageUrl:
       'https://cdn.vox-cdn.com/thumbor/t4Oh1OAhdnT1k7FkZrAb0ap-5mo=/0x80:4004x3083/1200x675/filters:focal(0x80:4004x3083)/cdn.vox-cdn.com/uploads/chorus_image/image/48517539/shutterstock_310990577.0.0.jpg'
   },
-  'ACT Tutoring': {
+  {
+    name: 'ACT Tutoring',
     serviceCategoryId: 1,
     imageUrl:
       'https://cdn.vox-cdn.com/thumbor/t4Oh1OAhdnT1k7FkZrAb0ap-5mo=/0x80:4004x3083/1200x675/filters:focal(0x80:4004x3083)/cdn.vox-cdn.com/uploads/chorus_image/image/48517539/shutterstock_310990577.0.0.jpg'
   },
-  'Express.js Tutoring': {
+  {
+    name: 'Express.js Tutoring',
     serviceCategoryId: 1,
     imageUrl: 'https://miro.medium.com/max/805/0*m1VOQP0FtcQufLgw.png'
   },
-  'React.js Tutoring': {
+  {
+    name: 'React.js Tutoring',
     serviceCategoryId: 1,
     imageUrl: 'https://reactjs.org/logo-og.png'
   },
-  'Cantonese Translator': {
+  {
+    name: 'Cantonese Translator',
     serviceCategoryId: 1,
     imageUrl:
       'https://images.unsplash.com/photo-1542695807939-063af86fa22f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60'
   },
-  'Node Tutoring': {
+  {
+    name: 'Node Tutoring',
     serviceCategoryId: 1,
     imageUrl:
       'https://colorlib.com/wp/wp-content/uploads/sites/2/nodejs-frameworks.png'
   },
-  'Redux.js Tutoring': {
+  {
+    name: 'Redux.js Tutoring',
     serviceCategoryId: 1,
     imageUrl:
       'https://habrastorage.org/getpro/habr/post_images/aad/f48/d2f/aadf48d2f864cef234b3b73d600dc8d1.jpg'
   },
-  'Vocal Lessons': {
+  {
+    name: 'Vocal Lessons',
     serviceCategoryId: 2,
     imageUrl:
       'https://images.unsplash.com/photo-1554446422-d05db23719d2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60'
   },
-  'Piano Lessons': {
+  {
+    name: 'Piano Lessons',
     serviceCategoryId: 2,
     imageUrl:
       'https://images.unsplash.com/photo-1522249210728-7cd95094022a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60'
   },
-  'Jazz Lessons': {
+  {
+    name: 'Jazz Lessons',
     serviceCategoryId: 2,
     imageUrl:
       'https://images.unsplash.com/photo-1512053459797-38c3a066cabd?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60'
   },
-  'Guitar Lessons': {
+  {
+    name: 'Guitar Lessons',
     serviceCategoryId: 2,
     imageUrl:
       'https://images.unsplash.com/photo-1421217336522-861978fdf33a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60'
   },
-  'Music Production': {
+  {
+    name: 'Music Production',
     serviceCategoryId: 2,
     imageUrl:
       'https://images.unsplash.com/photo-1578125769963-ef5edfa5b0fc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60'
   },
-  'Hair-Cutting': {
+  {
+    name: 'Hair-Cutting',
     serviceCategoryId: 3,
     imageUrl:
       'https://images.unsplash.com/photo-1565766046621-5548ffdf30af?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60'
   },
-  'Tattoo Design': {
+  {
+    name: 'Tattoo Design',
     serviceCategoryId: 3,
     imageUrl:
       'https://images.unsplash.com/photo-1552627019-947c3789ffb5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60'
   },
-  'Nail Technician': {
+  {
+    name: 'Nail Technician',
     serviceCategoryId: 3,
     imageUrl:
       'https://images.unsplash.com/photo-1457972729786-0411a3b2b626?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60'
   },
-  'Hair Stylist': {
+  {
+    name: 'Hair Stylist',
     serviceCategoryId: 3,
     imageUrl:
       'https://images.unsplash.com/photo-1562322140-8baeececf3df?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60'
   },
-  'Make-up': {
+  {
+    name: 'Make-up',
     serviceCategoryId: 3,
     imageUrl:
       'https://images.unsplash.com/photo-1516975080664-ed2fc6a32937?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60'
   },
-  'Personal Bartender': {
+  {
+    name: 'Personal Bartender',
     serviceCategoryId: 3,
     imageUrl:
       'https://images.unsplash.com/photo-1571463700378-d4fd84e47d5a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60'
   },
-  'Personal Stylist': {
+  {
+    name: 'Personal Stylist',
     serviceCategoryId: 3,
     imageUrl:
       'https://images.unsplash.com/flagged/photo-1574819521733-32f8678f8179?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60'
   },
-  Modeling: {
+  {
+    name: 'Modeling',
     serviceCategoryId: 3,
     imageUrl:
       'https://images.unsplash.com/photo-1502323777036-f29e3972d82f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60'
   },
-  'Physical Therapy': {
+  {
+    name: 'Physical Therapy',
     serviceCategoryId: 4,
     imageUrl:
       'https://images.unsplash.com/photo-1519824145371-296894a0daa9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60'
   },
-  'Psychological Therapy': {
+  {
+    name: 'Psychological Therapy',
     serviceCategoryId: 4,
     imageUrl:
       'https://images.unsplash.com/photo-1537726235470-8504e3beef77?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60'
   },
-  'House Makeover': 5,
-  'Lawn Mowing': 5,
-  'Taking Out The Trash': 5,
-  'Window Cleaning': 5,
-  'House Keeping': 5,
-  'Doing The Dishes': 5,
-  Nanny: 5,
-  'Personal Chef': 5,
-  'Interior Design': 5,
-  'Basketball Lessons': 6,
-  'Personal Training': 6,
-  'Picture Taking': 7,
-  'Caricature Drawing': 7,
-  'Financial Analysis': 8,
-  'Photoshopping Any Image': 8,
-  'Meditation Practice': 9,
-  'Help Doing Taxes': 9,
-  'Personal Nutritionist': 9,
-  'Social Skill Tutor': 9,
-  'Personal Hype Man': 9,
-  'Life Makeover': 9,
-  'Travel Guide': 9
-}
+  {
+    name: 'House Makeover',
+    serviceCategoryId: 5,
+    imageUrl:
+      'https://images.unsplash.com/photo-1537726235470-8504e3beef77?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60'
+  },
+  {
+    name: 'Lawn Mowing',
+    serviceCategoryId: 5,
+    imageUrl:
+      'https://images.unsplash.com/photo-1458245201577-fc8a130b8829?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60'
+  },
+  {
+    name: 'Taking Out The Trash',
+    serviceCategoryId: 5,
+    imageUrl:
+      'https://images.unsplash.com/photo-1503596476-1c12a8ba09a9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60'
+  },
+  {
+    name: 'Window Cleaning',
+    serviceCategoryId: 5,
+    imageUrl:
+      'https://images.unsplash.com/photo-1547629902-e919a264f160?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60'
+  },
+  {
+    name: 'House Keeping',
+    serviceCategoryId: 5,
+    imageUrl:
+      'https://mbm.ae/wp-content/uploads/2019/07/HOUSEKEEPING-banner.jpg'
+  },
+  {
+    name: 'Doing The Dishes',
+    serviceCategoryId: 5,
+    imageUrl:
+      'https://images.unsplash.com/photo-1484632152040-840235adc262?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60'
+  },
+  {
+    name: 'Nanny',
+    serviceCategoryId: 5,
+    imageUrl:
+      'https://images.unsplash.com/photo-1442458370899-ae20e367c5d8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60'
+  },
+  {
+    name: 'Personal Chef',
+    serviceCategoryId: 5,
+    imageUrl:
+      'https://images.unsplash.com/photo-1502364271109-0a9a75a2a9df?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60'
+  },
+  {
+    name: 'Interior Design',
+    serviceCategoryId: 5,
+    imageUrl:
+      'https://images.unsplash.com/photo-1521782462922-9318be1cfd04?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60'
+  },
+  {
+    name: 'Basketball Lessons',
+    serviceCategoryId: 6,
+    imageUrl:
+      'https://images.unsplash.com/photo-1519861531473-9200262188bf?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60'
+  },
+  {
+    name: 'Personal Training',
+    serviceCategoryId: 6,
+    imageUrl:
+      'https://images.unsplash.com/photo-1518459031867-a89b944bffe4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60'
+  },
+  {
+    name: 'Rock Climbing',
+    serviceCategoryId: 6,
+    imageUrl:
+      'https://images.unsplash.com/photo-1522079803432-e0b7649dc1de?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60'
+  },
+  {
+    name: 'Picture Taking',
+    serviceCategoryId: 7,
+    imageUrl:
+      'https://images.unsplash.com/photo-1566622589760-d01f64d3f9b5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60'
+  },
+  {
+    name: 'Caricature Drawing',
+    serviceCategoryId: 7,
+    imageUrl:
+      'https://images.unsplash.com/photo-1562169819-9f9031fedd3d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60'
+  },
+  {
+    name: 'Financial Analysis',
+    serviceCategoryId: 8,
+    imageUrl:
+      'https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60'
+  },
+  {
+    name: 'Photoshopping Any Image',
+    serviceCategoryId: 8,
+    imageUrl:
+      'https://images.unsplash.com/photo-1498550744921-75f79806b8a7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60'
+  },
+  {
+    name: 'Meditation Practice',
+    serviceCategoryId: 9,
+    imageUrl:
+      'https://images.unsplash.com/photo-1508672019048-805c876b67e2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60'
+  },
+  {
+    name: 'Help Doing Taxes',
+    serviceCategoryId: 9,
+    imageUrl:
+      'https://images.unsplash.com/photo-1554224155-3a58922a22c3?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60'
+  },
+  {
+    name: 'Personal Nutritionist',
+    serviceCategoryId: 9,
+    imageUrl:
+      'https://images.unsplash.com/photo-1548808957-e80207091212?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60'
+  },
+  {
+    name: 'Social Skill Tutor',
+    serviceCategoryId: 9,
+    imageUrl:
+      'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60'
+  },
+  {
+    name: 'Personal Hype Man',
+    serviceCategoryId: 9,
+    imageUrl:
+      'https://images.unsplash.com/photo-1533227268428-f9ed0900fb3b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60'
+  },
+  {
+    name: 'Life Makeover',
+    serviceCategoryId: 9,
+    imageUrl:
+      'https://images.unsplash.com/photo-1489533119213-66a5cd877091?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60'
+  },
+  {
+    name: 'Travel Guide',
+    serviceCategoryId: 9,
+    imageUrl:
+      'https://images.unsplash.com/photo-1528719953625-3e95efad84da?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60'
+  }
+]
 
 const reviewList = [
   'Trash',
@@ -733,8 +880,6 @@ function generateUsers(num) {
       bio: casual.sentences(2),
       zipCode: Number(casual.zip(5)),
       photo: imageUrls[Math.floor(Math.random() * imageUrls.length)]
-      // overallRating: 1 + 4 * Math.random(),
-      // reviewCount: 1
     })
   }
   return users
@@ -742,8 +887,11 @@ function generateUsers(num) {
 
 function generateServices(num) {
   const services = []
-  const name = servicesList[Math.floor(Math.random() * servicesList.length)]
+  console.log(servicesWithCategoryImage.length)
   for (let i = 5; i < num * 3 + 5; i++) {
+    // console.log(Math.floor(Math.random() * servicesWithCategoryImage.length))
+    // let serviceObj = servicesWithCategoryImage[Math.floor(Math.random() * servicesWithCategoryImage.length)]
+    let name = servicesList[Math.floor(Math.random() * servicesList.length)]
     services.push({
       userId: 1 + Math.floor(Math.random() * (num + 4)),
       name: name,
