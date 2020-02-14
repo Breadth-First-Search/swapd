@@ -210,7 +210,7 @@ const Navbar = props => {
 
             <div className={classes.root}>
               <datalist id="serviceCategories">
-                {serviceCategories.map(sc => (
+                {/*serviceCategories.map(sc => (
                   <Link
                     key={sc.id}
                     to="/selectedCategory"
@@ -218,7 +218,7 @@ const Navbar = props => {
                   >
                     <option value={sc.name} />
                   </Link>
-                ))}
+                ))*/}
               </datalist>
 
               <Button
@@ -281,6 +281,6 @@ export default connect(mapState, mapDispatch)(Navbar)
  */
 Navbar.propTypes = {
   handleClick: PropTypes.func.isRequired,
-  isLoggedIn: PropTypes.bool.isRequired,
-  handleSelect: PropTypes.func.isRequired
+  isLoggedIn: PropTypes.bool.isRequired
+  // handleSelect: PropTypes.func.isRequired
 }

@@ -422,6 +422,36 @@ function KMPmatch(s, p) {
   return -1
 }
 
+function customLCS_substr_weighted(s1, s2) {
+  let dp = []
+
+  for (let row = 0; row <= s1.length; row++) {
+    dp.push([])
+    for (let col = 0; col <= s2.length; col++) {
+      dp[row].push('')
+    }
+  }
+
+  let max = ''
+
+  for (let row = 1; row < dp.length; row++) {
+    for (let col = 1; col < dp[row].length; col++) {
+      if (s1[row - 1].toLowerCase() === s2[col - 1].toLowerCase()) {
+        dp[row][col] = dp[row - 1][col - 1] + s1[row - 1]
+        max = max.length < dp[row][col].length ? dp[row][col] : max
+      }
+    }
+  }
+
+  return max
+}
+
+function aggregateSearchScore(serviceName, searchString) {
+  let lcs = customLCS_substr_weighted(serviceName, searchString)
+
+  return lcs.length - KMPmatch(searchString, lcs)
+}
+
 function bestMatch(serviceNames, searchString) {
   let max = 0
   let max2 = 0
@@ -429,7 +459,7 @@ function bestMatch(serviceNames, searchString) {
   let top2 = serviceNames[1]
 
   serviceNames.forEach(serviceObj => {
-    const res = customLCS_substr(searchString, serviceObj.name)
+    const res = aggregateSearchScore(serviceObj.name, searchString) //customLCS_substr(searchString, serviceObj.name)
     if (res > max) {
       max2 = max
       top2 = top
@@ -441,5 +471,6 @@ function bestMatch(serviceNames, searchString) {
       top2 = serviceObj
     }
   })
+  console.log([top, top2, max, max2])
   return [top, top2, max, max2]
 }
