@@ -5,6 +5,9 @@ import {
   submitReview,
   updateReviewStatus
 } from '../store/reviews'
+import Rating from '@material-ui/lab/Rating'
+import Typography from '@material-ui/core/Typography'
+import Box from '@material-ui/core/Box'
 
 class Review extends React.Component {
   constructor() {
@@ -19,6 +22,7 @@ class Review extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleChange = this.handleChange.bind(this)
   }
+
   componentDidMount() {
     this.props.getUnreviewedServices(this.props.serviceId).then(() =>
       this.setState({
@@ -70,15 +74,29 @@ class Review extends React.Component {
     const formattedDate = this.formatDate(swapDate)
     return service.user && service.user.firstName ? (
       <div className="reviewContainer">
-        <div style={{fontSize: '1.5em', fontWeight: 'bold'}}>
-          Please Review your {service.name} from {service.user.firstName}{' '}
+        <div className="review-details">
+          How was your {service.name} experience from {service.user.firstName}{' '}
           {service.user.lastName} on {formattedDate}:
         </div>
-        <form onSubmit={this.handleSubmit}>
-          <div className="reviewMaker">
-            {/* <label htmlFor="rating"> */}
+        <form onSubmit={this.handleSubmit} className="review-form">
+          <div className="review-stars-container">
+            <Box
+              component="fieldset"
+              mb={5}
+              borderColor="transparent"
+              style={{margin: '0px'}}
+            >
+              <Typography component="legend">Rate Service from 1-5</Typography>
+              <Rating
+                name="rating"
+                max={5}
+                value={Number(this.state.rating)}
+                onChange={this.handleChange}
+              />
+            </Box>
+          </div>
+          {/* <div className="reviewMaker">
             <small>Rate The Service (0-5):</small>
-            {/* </label> */}
             <input
               className="star"
               type="radio"
@@ -123,8 +141,8 @@ class Review extends React.Component {
               value={5}
               onChange={this.handleChange}
             />
-            <label htmlFor="star5" />
-            {/* <inpu5
+            <label htmlFor="star5" /> */}
+          {/* <inpu5
               nam5="rating"
               val5e={this.state.rating}
               onChange={this.handleChange}
@@ -133,18 +151,21 @@ class Review extends React.Component {
               max="5"
               size="20"
             /> */}
-            {/* <label htmlFor="comment"> */}
+          {/* <label htmlFor="comment"> */}
+          {/* </div> */}
+          <div className="review-text">
             <small>Let Everyone Know More About It:</small>
-            {/* </label> */}
-            <input
+            <textarea
               name="comment"
               value={this.state.comment}
               onChange={this.handleChange}
               type="text"
-              size="100"
+              rows="5"
             />
           </div>
-          <button type="submit">SUBMIT REVIEW</button>
+          <button type="submit" className="review-submit">
+            SUBMIT REVIEW
+          </button>
         </form>
       </div>
     ) : (

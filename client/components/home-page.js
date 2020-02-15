@@ -23,7 +23,7 @@ class HomePage extends React.Component {
 
   render() {
     return this.props.reviews.length > 0 ? (
-      <div>
+      <div className="home-page-container">
         <div className="homeImgContainer">
           <div className="topHomeImg">Welcome to Swapd</div>
           <div className="middleHomeImg">
