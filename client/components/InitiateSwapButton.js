@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState} from 'react'
 import Button from '@material-ui/core/Button'
 import Snackbar from '@material-ui/core/Snackbar'
 import TextField from '@material-ui/core/TextField'
@@ -19,7 +19,7 @@ function FormDialog(props) {
   const [open, setOpen] = useState(false)
   const [message, setMessage] = useState('')
   const [selectedService, setSelectedService] = useState(null)
-  const [state, setState] = React.useState({
+  const [state, setState] = useState({
     openSnack: false,
     vertical: 'top',
     horizontal: 'center'
@@ -35,12 +35,12 @@ function FormDialog(props) {
     setOpen(false)
   }
 
-  const handleSnackClick = newState => () => {
-    setState({open: true, ...newState})
+  const handleSnackClick = newState => {
+    setState({openSnack: true, ...newState})
   }
 
   const handleSnackClose = () => {
-    setState({...state, open: false})
+    setState({...state, openSnack: false})
   }
 
   const handleServiceButtonClick = service => {
@@ -102,7 +102,7 @@ function FormDialog(props) {
           Now Offer One Of Your Services To Share!
         </DialogTitle>
         <DialogContent>
-          <List>
+          <List style={{maxHeight: 230, overflow: 'auto'}}>
             {props.services.length
               ? props.services.map(service => (
                   <ListItem
@@ -145,7 +145,7 @@ function FormDialog(props) {
         key={`${vertical},${horizontal}`}
         open={openSnack}
         onClose={handleSnackClose}
-        message="I love snacks"
+        message="Please select a skill to swap and enter a friendly message!"
       />
     </div>
   ) : null
