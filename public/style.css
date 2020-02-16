@@ -20,11 +20,6 @@ label {
   display: block;
 }
 
-nav {
-  /* position: fixed;
-  width: 100%; */
-}
-
 nav a {
   display: inline-block;
   margin: 1em;
@@ -90,22 +85,47 @@ nav a {
 }
 
 .swaplistcontainer {
-  justify-content: center;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
   padding-top: 15px;
   padding-bottom: 15px;
-  border-bottom: 1px solid grey;
 }
 
-.swaplistdetails {
+.singleswapcontainer {
   display: flex;
-  justify-content: space-evenly;
+  flex-direction: row;
+  justify-content: center;
   align-items: center;
+  width: 100%;
 }
 
-.swapListImage {
-  height: 104px;
-  width: 104px;
+.innersingleswapcontainer {
+  display: flex;
+  justify-content: center;
+  width: 70%;
+  border-bottom: 1px solid lightgray;
+  padding-bottom: 20px;
+  padding-top: 20 px;
+}
+
+.swaplistimagecontainer {
+  width: 10%;
+}
+
+.swaplistimage {
+  height: 64px;
+  width: 64px;
   border-radius: 50%;
+}
+
+.swaplistnamedate {
+  padding-left: 20px;
+  width: 20%;
+}
+
+.swaplistmessage {
+  width: 35%;
 }
 
 .searchResultsContainer {
@@ -116,6 +136,7 @@ nav a {
   text-align: center;
   flex: 0 auto;
 }
+
 .searchResultsImg {
   width: 256px;
   height: 256px;
@@ -1186,10 +1207,21 @@ li {
 
 .Completed {
   color: black;
+  width: 10%;
 }
 .Pending {
   color: red;
+  width: 10%;
 }
 .Active {
   color: green;
+  width: 10%;
+}
+
+.searchresultsservicerating {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1em;
+  padding: 3px;
 }

@@ -2,8 +2,6 @@ import React from 'react'
 import {connect} from 'react-redux'
 import axios from 'axios'
 import SearchResultsTile from './SearchResultsTile'
-import {NavLink} from 'react-router-dom'
-import history from '../history'
 
 class SearchResults extends React.Component {
   constructor() {
