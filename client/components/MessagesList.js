@@ -63,6 +63,8 @@ class MessagesList extends Component {
             }`
     }
 
+    console.log(filteredMessages)
+
     return (
       <div id="outerchatcontainer">
         <div id="chatContainer">
@@ -92,7 +94,7 @@ class MessagesList extends Component {
             />
           )}
         </div>
-        {filteredMessages}
+        {filteredMessages[filteredMessages.length - 1]}
       </div>
     )
   }

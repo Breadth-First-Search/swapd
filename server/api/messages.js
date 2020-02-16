@@ -118,12 +118,24 @@ router.post('/', async (req, res, next) => {
                   {
                     model: Service,
                     as: 'responderService',
-                    attributes: ['id', 'name', 'serviceRating', 'reviewCount']
+                    attributes: [
+                      'id',
+                      'name',
+                      'serviceRating',
+                      'reviewCount',
+                      'imageUrl'
+                    ]
                   },
                   {
                     model: Service,
                     as: 'requesterService',
-                    attributes: ['id', 'name', 'serviceRating', 'reviewCount']
+                    attributes: [
+                      'id',
+                      'name',
+                      'serviceRating',
+                      'reviewCount',
+                      'imageUrl'
+                    ]
                   }
                 ]
               },
