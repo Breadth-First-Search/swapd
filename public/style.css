@@ -106,7 +106,7 @@ nav a {
   width: 70%;
   border-bottom: 1px solid lightgray;
   padding-bottom: 20px;
-  padding-top: 20 px;
+  padding-top: 20px;
 }
 
 .swaplistimagecontainer {
@@ -227,8 +227,7 @@ nav a {
 .profileInterestsList {
   height: 100%;
   padding: 15px;
-  margin: 45px;
-  /* width: 55%; */
+  margin: 25px;
   border: 1px;
   border-radius: 1px;
   border-style: solid;
@@ -239,7 +238,6 @@ nav a {
   height: 100%;
   padding: 15px;
   margin: 45px;
-  /* width: 55%; */
   border: 1px;
   border-radius: 1px;
 }
@@ -264,11 +262,8 @@ nav a {
 }
 
 .singleinterest {
-  border-bottom-left-radius: 5% 50%;
-  border-bottom-right-radius: 5% 50%;
-  border-top-left-radius: 5% 50%;
-  border-top-right-radius: 5% 50%;
-  border-style: solid;
+  border-radius: 10px;
+  border: 2px solid;
   margin: 2px;
   padding: 5px;
   background: whitesmoke;
@@ -281,6 +276,7 @@ nav a {
   align-content: center;
   justify-content: center;
   width: 25%;
+  padding: 3px;
 }
 
 .servicephotobox a {
@@ -295,7 +291,7 @@ nav a {
 
 .servicename {
   text-align: center;
-  padding: 10px;
+  padding: 6px;
   font-weight: bold;
 }
 
@@ -385,8 +381,13 @@ li {
 }
 
 .matching {
-  color: #25665c;
-  font-weight: bold;
+  color: #fff;
+  border-radius: 10px;
+  border: 2px solid black;
+  margin: 2px;
+  padding: 5px;
+  background: #25665c;
+  display: inline-block;
 }
 
 .displayinterestscontainer {

@@ -21,7 +21,16 @@ const useStyles = makeStyles(theme => ({
     height: '40%'
   },
   icon: {
-    color: '#fff'
+    color: 'black',
+    padding: 4,
+    margin: 5,
+    backgroundColor: '#fff',
+    borderRadius: '50%'
+  },
+  subheader: {
+    textAlign: 'center',
+    fontSize: '2em',
+    margin: 20
   }
 }))
 
@@ -38,16 +47,17 @@ export default function TopTen(props) {
           rows={2}
           style={{height: 'auto'}}
         >
-          <ListSubheader component="div">Top Ten</ListSubheader>
+          <ListSubheader className={classes.subheader} component="div">
+            Top Ten Swappers
+          </ListSubheader>
         </GridListTile>
         {topUsers.map((user, index) => (
           <GridListTile key={user.id}>
             <img src={user.photo} alt={user.firstName} />
-
             <Link to={`/user-profile/${user.id}`}>
               <GridListTileBar
                 title={user.firstName}
-                actionIcon={<span className={classes.icon}>{index + 1}</span>}
+                actionIcon={<div className={classes.icon}>{index + 1}</div>}
               />
             </Link>
           </GridListTile>

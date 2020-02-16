@@ -84,12 +84,12 @@ const useStyles = makeStyles(theme => ({
 }))
 
 const Navbar = props => {
+  const classes = useStyles()
   const [search, setSearch] = useState('')
+  const [anchorEl, setAnchorEl] = useState(null)
+
   const isLoggedIn = props.isLoggedIn
   const handleClick = props.handleClick
-  const classes = useStyles()
-
-  const [anchorEl, setAnchorEl] = useState(null)
 
   const handleAvatarClick = event => {
     setAnchorEl(event.currentTarget)
@@ -98,6 +98,11 @@ const Navbar = props => {
   const handleProfile = () => {
     setAnchorEl(null)
     history.push('/user-profile')
+  }
+
+  const handleLogOut = () => {
+    setAnchorEl(null)
+    handleClick()
   }
 
   const handleClose = () => {
@@ -170,6 +175,9 @@ const Navbar = props => {
               <Menu
                 id="simple-menu"
                 anchorEl={anchorEl}
+                getContentAnchorEl={null}
+                anchorOrigin={{vertical: 'bottom', horizontal: 'center'}}
+                transformOrigin={{vertical: 'top', horizontal: 'center'}}
                 keepMounted
                 open={Boolean(anchorEl)}
                 onClose={handleClose}
@@ -177,7 +185,7 @@ const Navbar = props => {
                 <MenuItem style={{fontSize: '15px'}} onClick={handleProfile}>
                   Profile
                 </MenuItem>
-                <MenuItem style={{fontSize: '15px'}} onClick={handleClick}>
+                <MenuItem style={{fontSize: '15px'}} onClick={handleLogOut}>
                   Logout
                 </MenuItem>
               </Menu>
@@ -191,21 +199,6 @@ const Navbar = props => {
               <Link to="/">
                 <img id="swapdlogo" src="/swapd.png" />
               </Link>
-
-              {/*Guest should not be able to search */}
-              {/* <form
-                onSubmit={() =>
-                  history.push(`/search/${search}/?searcherId=${props.user.id}`)
-                }
-              >
-                <InputBase
-                  placeholder="Search…"
-                  className={classes.inputInput}
-                  inputProps={{'aria-label': 'search'}}
-                  value={search}
-                  onChange={() => setSearch(event.target.value)}
-                />
-              </form> */}
             </div>
 
             <div className={classes.root}>
@@ -221,11 +214,7 @@ const Navbar = props => {
                 ))}
               </datalist> */}
 
-              <Button
-                // style={{backgroundColor: '#fff', outlineColor: '#25665C'}}
-                size="medium"
-                color="primary"
-              >
+              <Button size="medium" color="primary">
                 <Link
                   style={{color: '#25665C', fontWeight: 'bold'}}
                   to="/login"
@@ -233,11 +222,7 @@ const Navbar = props => {
                   Login
                 </Link>
               </Button>
-              <Button
-                // style={{backgroundColor: '#fff', outlineColor: '#25665C'}}
-                size="medium"
-                color="primary"
-              >
+              <Button size="medium" color="primary">
                 <Link
                   style={{color: '#25665C', fontWeight: 'bold'}}
                   to="/signup"
