@@ -12,9 +12,8 @@ class SelectedService extends React.Component {
     super()
     this.state = {
       service: {},
-      user: {}
+      selectedUser: {}
     }
-
     this.getData = this.getData.bind(this)
     this.formatDate = this.formatDate.bind(this)
   }
@@ -27,7 +26,7 @@ class SelectedService extends React.Component {
       )
 
       this.setState({
-        user: user.data,
+        selectedUser: user.data,
         service: service.data
       })
     } catch (err) {
@@ -68,8 +67,9 @@ class SelectedService extends React.Component {
   }
 
   render() {
-    let user = this.state.user
+    let selectedUser = this.state.selectedUser
     let service = this.state.service
+    let user = this.props.user
     service.id = Number(this.props.match.params.serviceId)
 
     let reviewsPerService
@@ -78,9 +78,11 @@ class SelectedService extends React.Component {
     }
 
     let rating
-    if (user.hasOwnProperty('id')) {
-      rating = user.overallRating
+    if (selectedUser.hasOwnProperty('id')) {
+      rating = selectedUser.overallRating
     }
+
+    console.log(selectedUser, user, service)
 
     return (
       <div id="selectedServiceContainer">
@@ -88,9 +90,9 @@ class SelectedService extends React.Component {
           <div className="selectedservicedetails">
             <div className="selectedservicetitle">{service.name}</div>
             <div className="selectedserviceuser">
-              <NavLink to={`/user-profile/${user.id}`}>
+              <NavLink to={`/user-profile/${selectedUser.id}`}>
                 <div className="selectedserviceusername">
-                  by {user.firstName} {user.lastName}
+                  by {selectedUser.firstName} {selectedUser.lastName}
                 </div>
               </NavLink>
               <span>
@@ -99,7 +101,7 @@ class SelectedService extends React.Component {
                   <span className="overallRating">
                     {rating && rating.toFixed(2)}
                   </span>
-                  <span>{` (${user.reviewCount} Reviews)`}</span>
+                  <span>{` (${selectedUser.reviewCount} Reviews)`}</span>
                 </div>
               </span>
             </div>
@@ -120,10 +122,12 @@ class SelectedService extends React.Component {
           </div>
           <p className="selectedservicetext">{service.description}</p>
 
-          <InitiateSwapButton providerUser={user} providerService={service} />
-          {user.firstName ? (
+          {user.id !== selectedUser.id ? (
+            <InitiateSwapButton providerUser={user} providerService={service} />
+          ) : null}
+          {selectedUser.firstName ? (
             <SingleUserSnapshot
-              user={user}
+              user={selectedUser}
               getData={this.getData}
               service={service}
             />
@@ -196,7 +200,9 @@ const mapDispatchToProps = dispatch => {
 }
 
 const mapStateToProps = state => {
-  return {}
+  return {
+    user: state.user
+  }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(SelectedService)

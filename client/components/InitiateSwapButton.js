@@ -5,7 +5,6 @@ import TextField from '@material-ui/core/TextField'
 import Dialog from '@material-ui/core/Dialog'
 import DialogActions from '@material-ui/core/DialogActions'
 import DialogContent from '@material-ui/core/DialogContent'
-import DialogContentText from '@material-ui/core/DialogContentText'
 import DialogTitle from '@material-ui/core/DialogTitle'
 import {connect} from 'react-redux'
 import axios from 'axios'
@@ -98,9 +97,12 @@ function FormDialog(props) {
         aria-labelledby="form-dialog-title"
       >
         <DialogTitle id="form-dialog-title">
-          You Chose {props.providerService.name}. <br />
-          Now Offer One Of Your Services To Share!
+          You Chose{' '}
+          <span style={{color: '#25665c', fontWeight: 'bold'}}>
+            {props.providerService.name}
+          </span>. <br />
         </DialogTitle>
+        <div style={{textAlign: 'center'}}>Now Swap With One Of Yours!</div>
         <DialogContent>
           <List style={{maxHeight: 230, overflow: 'auto'}}>
             {props.services.length
@@ -117,15 +119,15 @@ function FormDialog(props) {
                 ))
               : null}
           </List>
-          <DialogContentText>
-            Curate your message and work out the details!
-          </DialogContentText>
           <TextField
             autoFocus
             margin="dense"
             id="name"
             label="Message"
             type="text"
+            variant="outlined"
+            multiline={true}
+            rows={2}
             value={message}
             onChange={() => setMessage(event.target.value)}
             fullWidth
