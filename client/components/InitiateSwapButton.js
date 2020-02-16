@@ -59,19 +59,18 @@ function FormDialog(props) {
       try {
         const swapRes = await axios.post('/api/swaps/', swapObj)
         if (!swapRes.data[1]) {
+          //if swap already exist, take them to the chat page
           handleSnackClick({vertical: 'bottom', horizontal: 'center'})
           history.push(`/swaps/${swapRes.data[0].id}`)
         } else {
-          const messageObj = {
+          const currentOffer = {
             swapId: swapRes.data[0].id,
             userId: props.user.id,
             requesterId: props.user.id,
-            responderId: props.providerUser.id,
-            text: message,
-            type: 'CURRENT_OFFER'
+            responderId: props.providerUser.id
           }
-          // const res = await axios.post('/api/messages/initiate', messageObj)
-          props.post(messageObj)
+          props.post({...currentOffer, type: 'CURRENT_OFFER'})
+          props.post({...currentOffer, text: message, type: 'MESSAGE'})
           setOpen(false)
           history.push(`/swaps/${swapRes.data[0].id}`)
         }

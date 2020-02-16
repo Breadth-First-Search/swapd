@@ -63,8 +63,6 @@ class MessagesList extends Component {
             }`
     }
 
-    console.log(filteredMessages)
-
     return (
       <div id="outerchatcontainer">
         <div id="chatContainer">

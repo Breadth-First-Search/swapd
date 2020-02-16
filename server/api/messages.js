@@ -123,7 +123,8 @@ router.post('/', async (req, res, next) => {
                       'name',
                       'serviceRating',
                       'reviewCount',
-                      'imageUrl'
+                      'imageUrl',
+                      'description'
                     ]
                   },
                   {
@@ -134,7 +135,8 @@ router.post('/', async (req, res, next) => {
                       'name',
                       'serviceRating',
                       'reviewCount',
-                      'imageUrl'
+                      'imageUrl',
+                      'description'
                     ]
                   }
                 ]
