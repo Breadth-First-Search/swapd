@@ -19,7 +19,6 @@ class SwapList extends React.Component {
 
   formatDate(date) {
     const formatted = new Date(date)
-
     const monthNames = [
       'Jan',
       'Feb',
@@ -44,10 +43,9 @@ class SwapList extends React.Component {
 
   render() {
     const swaps = this.props.swaps
-    console.log(swaps)
 
     return !this.state.isLoading && swaps.length >= 1 ? (
-      <div>
+      <div className="swaplistcontainer">
         {swaps
           .sort(
             (a, b) =>
@@ -65,24 +63,26 @@ class SwapList extends React.Component {
               swap.messages[swap.messages.length - 1].createdAt.slice(0, 10)
             )
             return (
-              <Link to={`/swaps/${swap.id}`} key={swap.id}>
-                <div className="swaplistcontainer">
-                  <div className="swaplistdetails">
-                    <img className="swapListImage" src={otherUserData.photo} />
-                    <div>
-                      <div>{otherUserData.firstName}</div>
-                      <div>{newDate}</div>
-                    </div>
-                    <div>{swap.messages[swap.messages.length - 1].text}</div>
-                    <div className={`${swap.swapStatus}`}>
-                      {swap.swapStatus}
-                    </div>
+              <div className="singleswapcontainer" key={swap.id}>
+                <Link
+                  to={`/swaps/${swap.id}`}
+                  className="innersingleswapcontainer"
+                >
+                  <div className="swaplistimagecontainer">
+                    <img className="swaplistimage" src={otherUserData.photo} />
                   </div>
-                </div>
-              </Link>
+                  <div className="swaplistnamedate">
+                    <div>{otherUserData.firstName}</div>
+                    <div>{newDate}</div>
+                  </div>
+                  <div className="swaplistmessage">
+                    {swap.messages[swap.messages.length - 1].text}
+                  </div>
+                  <div className={`${swap.swapStatus}`}>{swap.swapStatus}</div>
+                </Link>
+              </div>
             )
           })}
-        )
       </div>
     ) : (
       <div className="messageMessage">Start a swap to begin messaging!</div>

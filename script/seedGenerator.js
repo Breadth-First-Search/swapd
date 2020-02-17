@@ -26,7 +26,7 @@ const servicesWithCategoryImage = [
     name: 'Python 3 Tutoring',
     serviceCategoryId: 1,
     imageUrl:
-      'https://ittutohttps://images.unsplash.com/photo-1515879218367-8466d910aaa4?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60rial.org/wp-content/uploads/2019/06/sql-express.png'
+      'https://images.unsplash.com/photo-1515879218367-8466d910aaa4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60'
   },
   {
     name: 'Java Tutoring',
@@ -180,7 +180,7 @@ const servicesWithCategoryImage = [
     name: 'Psychological Therapy',
     serviceCategoryId: 4,
     imageUrl:
-      'https://images.unsplash.com/photo-1537726235470-8504e3beef77?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60'
+      'https://images.unsplash.com/photo-1499728603263-13726abce5fd?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60'
   },
   {
     name: 'House Makeover',

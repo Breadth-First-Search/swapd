@@ -36,7 +36,6 @@ router.post('/', async (req, res, next) => {
         const swaps = await Swap.findOrCreate({
           where: req.body
         })
-        console.log(swaps)
         res.json(swaps)
       }
     } else {

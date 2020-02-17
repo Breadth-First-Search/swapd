@@ -20,11 +20,6 @@ label {
   display: block;
 }
 
-nav {
-  /* position: fixed;
-  width: 100%; */
-}
-
 nav a {
   display: inline-block;
   margin: 1em;
@@ -90,22 +85,47 @@ nav a {
 }
 
 .swaplistcontainer {
-  justify-content: center;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
   padding-top: 15px;
   padding-bottom: 15px;
-  border-bottom: 1px solid grey;
 }
 
-.swaplistdetails {
+.singleswapcontainer {
   display: flex;
-  justify-content: space-evenly;
+  flex-direction: row;
+  justify-content: center;
   align-items: center;
+  width: 100%;
 }
 
-.swapListImage {
-  height: 104px;
-  width: 104px;
+.innersingleswapcontainer {
+  display: flex;
+  justify-content: center;
+  width: 70%;
+  border-bottom: 1px solid lightgray;
+  padding-bottom: 20px;
+  padding-top: 20px;
+}
+
+.swaplistimagecontainer {
+  width: 10%;
+}
+
+.swaplistimage {
+  height: 64px;
+  width: 64px;
   border-radius: 50%;
+}
+
+.swaplistnamedate {
+  padding-left: 20px;
+  width: 20%;
+}
+
+.swaplistmessage {
+  width: 35%;
 }
 
 .searchResultsContainer {
@@ -116,6 +136,7 @@ nav a {
   text-align: center;
   flex: 0 auto;
 }
+
 .searchResultsImg {
   width: 256px;
   height: 256px;
@@ -206,8 +227,7 @@ nav a {
 .profileInterestsList {
   height: 100%;
   padding: 15px;
-  margin: 45px;
-  /* width: 55%; */
+  margin: 25px;
   border: 1px;
   border-radius: 1px;
   border-style: solid;
@@ -218,7 +238,6 @@ nav a {
   height: 100%;
   padding: 15px;
   margin: 45px;
-  /* width: 55%; */
   border: 1px;
   border-radius: 1px;
 }
@@ -243,11 +262,8 @@ nav a {
 }
 
 .singleinterest {
-  border-bottom-left-radius: 5% 50%;
-  border-bottom-right-radius: 5% 50%;
-  border-top-left-radius: 5% 50%;
-  border-top-right-radius: 5% 50%;
-  border-style: solid;
+  border-radius: 10px;
+  border: 2px solid;
   margin: 2px;
   padding: 5px;
   background: whitesmoke;
@@ -260,6 +276,7 @@ nav a {
   align-content: center;
   justify-content: center;
   width: 25%;
+  padding: 3px;
 }
 
 .servicephotobox a {
@@ -274,7 +291,7 @@ nav a {
 
 .servicename {
   text-align: center;
-  padding: 10px;
+  padding: 6px;
   font-weight: bold;
 }
 
@@ -364,8 +381,13 @@ li {
 }
 
 .matching {
-  color: #25665c;
-  font-weight: bold;
+  color: #fff;
+  border-radius: 10px;
+  border: 2px solid black;
+  margin: 2px;
+  padding: 5px;
+  background: #25665c;
+  display: inline-block;
 }
 
 .displayinterestscontainer {
@@ -563,9 +585,9 @@ li {
 
 .reviewContainer {
   display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  width: 95%;
+  align-items: center;
+  flex-direction: column;
+  width: 50%;
   margin: 15px;
   border: 1px;
   border-radius: 10px;
@@ -574,11 +596,33 @@ li {
   box-shadow: rgb(228, 228, 228);
 }
 
-#reviewMaker {
+.review-details {
+  width: 90%;
+  font-weight: bold;
+  font-size: 1.2em;
+  padding: 10px;
 }
+
+.review-form {
+  display: flex;
+  flex-direction: column;
+  width: 95%;
+}
+
+.review-stars-container {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  height: 100%;
+  margin: 0px;
+}
+
 .reviewMaker {
   display: flex;
+  justify-content: center;
+  font-size: 1.2em;
 }
+
 .star {
   display: none;
 }
@@ -586,7 +630,6 @@ li {
 .reviewMaker label {
   display: block;
   cursor: pointer;
-  /* background: #ccc; */
 }
 
 .reviewMaker label:before {
@@ -609,6 +652,39 @@ li {
 
 .reviewMaker label:hover:after {
   opacity: 1;
+}
+
+.review-text {
+  width: 90%;
+  margin: 0px;
+  text-align: center;
+  align-self: center;
+}
+
+.review-text textarea {
+  resize: none;
+  width: 70%;
+  margin: 10px;
+  height: 50px;
+}
+
+.review-submit {
+  color: white;
+  align-self: center;
+  background-color: rgb(37, 102, 92);
+  width: 50%;
+  box-shadow: 0px 2px 2px 0px whitesmoke;
+  padding: 6px 16px;
+  margin: 10px;
+  font-size: 0.875rem;
+  min-width: 64px;
+  box-sizing: border-box;
+  font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
+  font-weight: 500;
+  line-height: 1.75;
+  border-radius: 4px;
+  letter-spacing: 0.02857em;
+  text-transform: uppercase;
 }
 
 #chatContainer {
@@ -1073,6 +1149,13 @@ li {
   }
 }
 
+.home-page-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 .homeImgContainer {
   position: relative;
   text-align: center;
@@ -1125,10 +1208,21 @@ li {
 
 .Completed {
   color: black;
+  width: 10%;
 }
 .Pending {
   color: red;
+  width: 10%;
 }
 .Active {
   color: green;
+  width: 10%;
+}
+
+.searchresultsservicerating {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1em;
+  padding: 3px;
 }

@@ -92,7 +92,7 @@ class MessagesList extends Component {
             />
           )}
         </div>
-        {filteredMessages}
+        {filteredMessages[filteredMessages.length - 1]}
       </div>
     )
   }

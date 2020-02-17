@@ -1,11 +1,10 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState} from 'react'
 import Button from '@material-ui/core/Button'
 import Snackbar from '@material-ui/core/Snackbar'
 import TextField from '@material-ui/core/TextField'
 import Dialog from '@material-ui/core/Dialog'
 import DialogActions from '@material-ui/core/DialogActions'
 import DialogContent from '@material-ui/core/DialogContent'
-import DialogContentText from '@material-ui/core/DialogContentText'
 import DialogTitle from '@material-ui/core/DialogTitle'
 import {connect} from 'react-redux'
 import axios from 'axios'
@@ -19,7 +18,7 @@ function FormDialog(props) {
   const [open, setOpen] = useState(false)
   const [message, setMessage] = useState('')
   const [selectedService, setSelectedService] = useState(null)
-  const [state, setState] = React.useState({
+  const [state, setState] = useState({
     openSnack: false,
     vertical: 'top',
     horizontal: 'center'
@@ -35,12 +34,12 @@ function FormDialog(props) {
     setOpen(false)
   }
 
-  const handleSnackClick = newState => () => {
-    setState({open: true, ...newState})
+  const handleSnackClick = newState => {
+    setState({openSnack: true, ...newState})
   }
 
   const handleSnackClose = () => {
-    setState({...state, open: false})
+    setState({...state, openSnack: false})
   }
 
   const handleServiceButtonClick = service => {
@@ -59,19 +58,18 @@ function FormDialog(props) {
       try {
         const swapRes = await axios.post('/api/swaps/', swapObj)
         if (!swapRes.data[1]) {
+          //if swap already exist, take them to the chat page
           handleSnackClick({vertical: 'bottom', horizontal: 'center'})
           history.push(`/swaps/${swapRes.data[0].id}`)
         } else {
-          const messageObj = {
+          const currentOffer = {
             swapId: swapRes.data[0].id,
             userId: props.user.id,
             requesterId: props.user.id,
-            responderId: props.providerUser.id,
-            text: message,
-            type: 'CURRENT_OFFER'
+            responderId: props.providerUser.id
           }
-          // const res = await axios.post('/api/messages/initiate', messageObj)
-          props.post(messageObj)
+          props.post({...currentOffer, type: 'CURRENT_OFFER'})
+          props.post({...currentOffer, text: message, type: 'MESSAGE'})
           setOpen(false)
           history.push(`/swaps/${swapRes.data[0].id}`)
         }
@@ -99,11 +97,14 @@ function FormDialog(props) {
         aria-labelledby="form-dialog-title"
       >
         <DialogTitle id="form-dialog-title">
-          You Chose {props.providerService.name}. <br />
-          Now Offer One Of Your Services To Share!
+          You Chose{' '}
+          <span style={{color: '#25665c', fontWeight: 'bold'}}>
+            {props.providerService.name}
+          </span>. <br />
         </DialogTitle>
+        <div style={{textAlign: 'center'}}>Now Swap With One Of Yours!</div>
         <DialogContent>
-          <List>
+          <List style={{maxHeight: 230, overflow: 'auto'}}>
             {props.services.length
               ? props.services.map(service => (
                   <ListItem
@@ -118,15 +119,15 @@ function FormDialog(props) {
                 ))
               : null}
           </List>
-          <DialogContentText>
-            Curate your message and work out the details!
-          </DialogContentText>
           <TextField
             autoFocus
             margin="dense"
             id="name"
             label="Message"
             type="text"
+            variant="outlined"
+            multiline={true}
+            rows={2}
             value={message}
             onChange={() => setMessage(event.target.value)}
             fullWidth
@@ -146,7 +147,7 @@ function FormDialog(props) {
         key={`${vertical},${horizontal}`}
         open={openSnack}
         onClose={handleSnackClose}
-        message="I love snacks"
+        message="Please select a skill to swap and enter a friendly message!"
       />
     </div>
   ) : null

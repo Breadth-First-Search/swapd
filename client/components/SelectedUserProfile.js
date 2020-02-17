@@ -17,14 +17,16 @@ class SelectedUserProfile extends React.Component {
   }
 
   getMatchingInterests() {
-    const selectedUsersInterests = new Set(this.props.selectedUser.interests)
     const matchingInterests = []
-    for (let userInterest of this.props.interests) {
-      if (userInterest in selectedUsersInterests) {
-        matchingInterests.push(userInterest)
+    if (this.props.user.id !== this.props.selectedUser.id) {
+      for (let userInterest of this.props.interests) {
+        for (let selectedUserInterest of this.props.selectedUser.interests) {
+          if (userInterest.name === selectedUserInterest.name) {
+            matchingInterests.push(selectedUserInterest)
+          }
+        }
       }
     }
-
     this.setState({isLoading: false, matchingInterests})
   }
 
@@ -75,9 +77,9 @@ class SelectedUserProfile extends React.Component {
             <div className="interests">Interests</div>
             <div className="interestswrapper">
               {selectedUser.interests.map(interest => {
-                if (this.state.matchingInterests.includes(interest.id)) {
+                if (this.state.matchingInterests.includes(interest)) {
                   return (
-                    <span className="matching singleinterest" key={interest.id}>
+                    <span className="matching" key={interest.id}>
                       {interest.name}
                     </span>
                   )

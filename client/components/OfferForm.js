@@ -206,9 +206,7 @@ class OfferForm extends React.Component {
           </div>
         </div>
       )
-    }
-
-    if (this.props.offer.type === 'CONFIRMED_OFFER') {
+    } else if (this.props.offer.type === 'CONFIRMED_OFFER') {
       toRender = (
         <div className="offer_confirmed">
           <div className="offer_title">Confirmed Swap!</div>
