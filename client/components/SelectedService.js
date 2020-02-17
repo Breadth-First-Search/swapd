@@ -123,7 +123,10 @@ class SelectedService extends React.Component {
           <p className="selectedservicetext">{service.description}</p>
 
           {user.id !== selectedUser.id ? (
-            <InitiateSwapButton providerUser={user} providerService={service} />
+            <InitiateSwapButton
+              providerUser={selectedUser}
+              providerService={service}
+            />
           ) : null}
           {selectedUser.firstName ? (
             <SingleUserSnapshot
