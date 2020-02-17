@@ -62,6 +62,7 @@ function FormDialog(props) {
           handleSnackClick({vertical: 'bottom', horizontal: 'center'})
           history.push(`/swaps/${swapRes.data[0].id}`)
         } else {
+          console.log(props)
           const currentOffer = {
             swapId: swapRes.data[0].id,
             userId: props.user.id,
@@ -80,6 +81,8 @@ function FormDialog(props) {
       handleSnackClick({vertical: 'bottom', horizontal: 'center'})
     }
   }
+
+  console.log(props)
 
   return props.services.length ? (
     <div>
